@@ -1,6 +1,6 @@
-# Keyboardio Model 01 Firmware
+# Dygma Raise Firmware
 
-The default firmware for the Keyboardio Model 01
+The default firmware for the Dygma Raise
 
 
 # Download and install
@@ -41,33 +41,33 @@ cd $HOME/Arduino
 mkdir -p hardware/keyboardio
 
 ## then clone the hardware definitions to make them available to the arduino environment
-git clone --recursive https://github.com/keyboardio/Arduino-Boards.git hardware/keyboardio/avr
+git clone --recursive https://github.com/shortcutgg/Arduino-Boards.git hardware/keyboardio/avr
 ````
 
 
 ## Download the Model 01 Firmware
 
 ```sh
-git clone https://github.com/keyboardio/Model01-Firmware.git
+git clone https://github.com/shortcutgg/Raise-Firmware.git
 ```
 
 # Build and flash the firmware
 
-Before you begin, make sure your Model 01 is connected to your computer.
+Before you begin, make sure your Raise is connected to your computer.
 
 ### Option 1: From the command line
 
 ```sh
-cd Model01-Firmware
+cd Raise-Firmware
 make flash
 ```
 
-When the builder tells you to hit Enter to continue, hold down "Prog" in the top left corner of your keyboard and hit Enter.
+#TODO When the builder tells you to hit Enter to continue, hold down "Prog" in the top left corner of your keyboard and hit Enter.
 
 ### Option 2: From the Arduino IDE
 
 
-Open the sketch you wish to flash (for example, `Model01-Firmware.ino`).
+Open the sketch you wish to flash (for example, `Raise-Firmware.ino`).
 
 Click the Upload button or press `Ctrl-U`.
 
@@ -75,6 +75,7 @@ Hold down the "Prog" key in the top left corner of your keyboard, until the comp
 
 # Thanks!
 
-<3 jesse
+<3 jesse & Matt
 
-[![Build Status](https://travis-ci.org/keyboardio/Model01-Firmware.svg?branch=master)](https://travis-ci.org/keyboardio/Model01-Firmware)
+[![Build
+Status](https://travis-ci.org/shortcutgg/Raise-Firmware.svg?branch=master)](https://travis-ci.org/shortcutgg/Raise-Firmware)
