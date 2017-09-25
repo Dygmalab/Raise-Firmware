@@ -45,7 +45,7 @@ git clone --recursive https://github.com/shortcutgg/Arduino-Boards.git hardware/
 ````
 
 
-## Download the Model 01 Firmware
+## Download the Raise Firmware
 
 ```sh
 git clone https://github.com/shortcutgg/Raise-Firmware.git
