@@ -38,7 +38,7 @@
   Key_LeftControl, Key_LeftArrow, Key_DownArrow, Key_RightArrow, Key_F, Key_G,               Key_H, Key_J, Key_K, Key_L, Key_L, Key_M, Key_Enter, \
   Key_LeftShift, Key_B, Key_Z, Key_X, Key_C, Key_V, Key_B,          Key_N, Key_M, Key_Semicolon, Key_Comma, Key_Minus, Key_RightShift, \
   Key_LeftControl, Key_CapsLock, ___, Key_Keymap1, Key_Spacebar,    Key_Spacebar, Key_RightAlt, Key_Keymap1, ___, Key_RightControl, Key_1,  \
-                       Key_Backspace, Key_Enter,            Key_Backspace, Key_Keymap1)                      
+                       Key_Backspace, Key_Enter,            Key_Backspace, Key_Keymap1)
 
 #define QWERTY KEYMAP_60 ( \
 Key_Escape, Key_1, Key_2, Key_3, Key_4, Key_5, Key_6,                     Key_7, Key_8, Key_9, Key_0, Key_Minus, Key_Equals, Key_Delete, \
@@ -46,7 +46,7 @@ Key_Tab, Key_Q, Key_W, Key_E, Key_R, Key_T,                               Key_Y,
 Key_CapsLock, Key_A, Key_S, Key_D, Key_F, Key_G,                           Key_H, Key_J, Key_K, Key_L, Key_Semicolon, Key_Quote, Key_Enter, \
 Key_LeftShift, Key_Period, Key_Z, Key_X, Key_C, Key_V, Key_B,             Key_N, Key_M, Key_Comma, Key_Period, Key_Slash, Key_RightShift,\
 Key_LeftControl,Key_LeftGui, Key_LeftAlt,Key_Keymap1, Key_Spacebar,  Key_Spacebar, Key_RightAlt, Key_RightGui, Key_Menu, Key_RightControl, Key_1,\
-                     Key_LEDEffectNext, Key_Enter,                  Key_Backspace, Key_Keymap1)                      
+                     Key_LEDEffectNext, Key_Enter,                  Key_Backspace, Key_Keymap1)
 
 const Key keymaps[][ROWS][COLS] PROGMEM = {
   QWERTY,
