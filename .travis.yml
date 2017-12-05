@@ -3,7 +3,7 @@ sudo: false
 os:
   - linux
 install:
-  - git clone --depth 1 --recurse-submodules https://github.com/shortcutgg/Arduino-Boards hardware/keyboardio/avr
+  - git clone --depth 1 --recurse-submodules https://github.com/dygmalab/Arduino-Boards hardware/keyboardio/avr
 script:
   - make travis-test BOARD_HARDWARE_PATH=$(pwd)/hardware
 notifications:
