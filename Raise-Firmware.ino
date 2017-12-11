@@ -241,6 +241,7 @@ static Key getKey(uint8_t layer, byte row, byte col) {
 
 void setup() {
   // First, call Kaleidoscope's internal setup function
+  Serial.begin(9600);
   Kaleidoscope.setup();
 
   // Next, tell Kaleidoscope which plugins you want to use.
@@ -286,7 +287,6 @@ void setup() {
 
     // The numlock plugin is responsible for lighting up the 'numpad' mode
     // with a custom LED effect
-    &NumLock,
 
     // The macros plugin adds support for macros
     &Macros,
@@ -318,6 +318,8 @@ void setup() {
   EEPROMSettings.seal();
 
   // Tell the keyboard to listen for Focus events that Chrysalis will send
+  Focus.addHook(FOCUS_HOOK_HELP);
+  Focus.addHook(FOCUS_HOOK_VERSION);
   Focus.addHook(FOCUS_HOOK_KEYMAP);
   Focus.addHook(FOCUS_HOOK_KEYMAP_LAYER);
   Focus.addHook(FOCUS_HOOK_LEDPALETTETHEME);
@@ -334,7 +336,6 @@ void setup() {
 
   // While we hope to improve this in the future, the NumLock plugin
   // needs to be explicitly told which keymap layer is your numpad layer
-  NumLock.numPadLayer = NUMPAD;
 
   // We configure the AlphaSquare effect to use RED letters
   AlphaSquare.color = { 255, 0, 0 };
