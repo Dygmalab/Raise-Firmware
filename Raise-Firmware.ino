@@ -34,7 +34,7 @@
 #define NUMPAD_KEYMAP 2
 
 enum { QWERTY, _LAYER_MAX }; // layers
-
+// *INDENT-OFF*
 const Key keymaps[][ROWS][COLS] PROGMEM = {
   [QWERTY] = KEYMAP_60(\
   Key_Escape, Key_1, Key_2, Key_3, Key_4, Key_5, Key_6,               Key_7, Key_8, Key_9, Key_0, Key_Minus, Key_Equals, Key_Delete, \
@@ -53,7 +53,7 @@ const Key keymaps[][ROWS][COLS] PROGMEM = {
                        Key_Backspace, Key_Enter,                     Key_Backspace, Key_Keymap1)
                        */
 };
-
+// *INDENT-ON*
 static kaleidoscope::LEDSolidColor solidRed(255, 0, 0);
 
 
