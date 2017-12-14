@@ -63,6 +63,7 @@
 #include "Kaleidoscope-EEPROM-Settings.h"
 #include "Kaleidoscope-EEPROM-Keymap.h"
 #include "Kaleidoscope-Colormap.h"
+#include "Kaleidoscope-LED-Palette-Theme.h"
 
 
 /** This 'enum' is a list of all the macros used by the Model 01's firmware
@@ -324,6 +325,7 @@ void setup() {
   Focus.addHook(FOCUS_HOOK_KEYMAP_LAYER);
   Focus.addHook(FOCUS_HOOK_LEDPALETTETHEME);
   Focus.addHook(FOCUS_HOOK_COLORMAP);
+  Focus.addHook(FOCUS_HOOK_COLORMAP_LAYER);
 
   // If the settings have changed, re-transfer the keymap to EEPROM
   if (EEPROMSettings.version() != CHRYSALIS_EEPROM_VERSION) {
