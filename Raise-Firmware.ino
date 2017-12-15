@@ -242,7 +242,6 @@ static Key getKey(uint8_t layer, byte row, byte col) {
 
 void setup() {
   // First, call Kaleidoscope's internal setup function
-  Serial.begin(9600);
   Kaleidoscope.setup();
 
   // Next, tell Kaleidoscope which plugins you want to use.
