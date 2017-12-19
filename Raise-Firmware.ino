@@ -278,10 +278,6 @@ void setup() {
     // The breathe effect slowly pulses all of the LEDs on your keyboard
     &LEDBreatheEffect,
 
-    // The AlphaSquare effect prints each character you type, using your
-    // keyboard's LEDs as a display
-    &AlphaSquareEffect,
-
     // The stalker effect lights up the keys you've pressed recently
     &StalkerEffect,
 
@@ -307,10 +303,10 @@ void setup() {
   );
 
   // Reserve space in the keyboard's EEPROM for the keymaps
-  EEPROMKeymap.max_layers(5);
+  EEPROMKeymap.max_layers(3);
 
   // Reserve space for the number of Colormap layers we will use
-  ColormapEffect.max_layers(5);
+  ColormapEffect.max_layers(3);
 
   // If you want to add more plugins using EEPROM, add their config steps here
 
@@ -335,11 +331,6 @@ void setup() {
   // Use the EEPROM keymap that Chrysalis modifies
   Layer.getKey = getKey;
 
-  // While we hope to improve this in the future, the NumLock plugin
-  // needs to be explicitly told which keymap layer is your numpad layer
-
-  // We configure the AlphaSquare effect to use RED letters
-  AlphaSquare.color = { 255, 0, 0 };
 
   // We set the brightness of the rainbow effects to 150 (on a scale of 0-255)
   // This draws more than 500mA, but looks much nicer than a dimmer effect
