@@ -18,7 +18,7 @@
 #include "Kaleidoscope.h"
 
 // Support for keys that move the mouse
-#include "Kaleidoscope-MouseKeys.h"
+//#include "Kaleidoscope-MouseKeys.h"
 
 // Support for macros
 #include "Kaleidoscope-Macros.h"
@@ -60,10 +60,10 @@
 // Support for setting the key layout and LEDs over the Serial port
 // This is what allows Chrysalis to work
 #include "Kaleidoscope-Focus.h"
-#include "Kaleidoscope-EEPROM-Settings.h"
-#include "Kaleidoscope-EEPROM-Keymap.h"
-#include "Kaleidoscope-Colormap.h"
-#include "Kaleidoscope-LED-Palette-Theme.h"
+//#include "Kaleidoscope-EEPROM-Settings.h"
+//#include "Kaleidoscope-EEPROM-Keymap.h"
+//#include "Kaleidoscope-Colormap.h"
+//#include "Kaleidoscope-LED-Palette-Theme.h"
 
 
 /** This 'enum' is a list of all the macros used by the Model 01's firmware
@@ -227,13 +227,14 @@ static kaleidoscope::LEDSolidColor solidBlue(0, 70, 130);
 static kaleidoscope::LEDSolidColor solidIndigo(0, 0, 170);
 static kaleidoscope::LEDSolidColor solidViolet(130, 0, 120);
 
-
+/*
 static Key getKey(uint8_t layer, byte row, byte col) {
   if (layer >= _LAYER_MAX) {
     return EEPROMKeymap.getKey(layer, row, col);
   }
   return EEPROMKeymap.getKeyOverride(layer, row, col);
 }
+*/
 
 /** The 'setup' function is one of the two standard Arduino sketch functions.
   * It's called when your keyboard first powers up. This is where you set up
@@ -288,14 +289,14 @@ void setup() {
     &Macros,
 
     // The MouseKeys plugin lets you add keys to your keymap which move the mouse.
-    &MouseKeys,
+//    &MouseKeys,
 
     // The EEPROM Keymap lets the key layout be read from EEPROM, which is where
     // Chrysalis will write your keymap to
-    &EEPROMKeymap,
+//    &EEPROMKeymap,
 
     // The Colormap LED effect is the effect that you control view Chrysalis
-    &ColormapEffect,
+//    &ColormapEffect,
 
     // The Focus plugin is what allows the keyboard to communicate with Chrysalis and
     // make the above two plugins work
@@ -303,33 +304,35 @@ void setup() {
   );
 
   // Reserve space in the keyboard's EEPROM for the keymaps
-  EEPROMKeymap.max_layers(3);
+//  EEPROMKeymap.max_layers(3);
 
   // Reserve space for the number of Colormap layers we will use
-  ColormapEffect.max_layers(3);
+//  ColormapEffect.max_layers(3);
 
   // If you want to add more plugins using EEPROM, add their config steps here
 
   // Let the keyboard know we're done with adding EEPROM plugins
-  EEPROMSettings.seal();
+//  EEPROMSettings.seal();
 
   // Tell the keyboard to listen for Focus events that Chrysalis will send
   Focus.addHook(FOCUS_HOOK_HELP);
   Focus.addHook(FOCUS_HOOK_VERSION);
-  Focus.addHook(FOCUS_HOOK_KEYMAP);
-  Focus.addHook(FOCUS_HOOK_KEYMAP_LAYER);
-  Focus.addHook(FOCUS_HOOK_LEDPALETTETHEME);
-  Focus.addHook(FOCUS_HOOK_COLORMAP);
-  Focus.addHook(FOCUS_HOOK_COLORMAP_LAYER);
+//  Focus.addHook(FOCUS_HOOK_KEYMAP);
+//  Focus.addHook(FOCUS_HOOK_KEYMAP_LAYER);
+//  Focus.addHook(FOCUS_HOOK_LEDPALETTETHEME);
+//  Focus.addHook(FOCUS_HOOK_COLORMAP);
+//  Focus.addHook(FOCUS_HOOK_COLORMAP_LAYER);
 
+/*
   // If the settings have changed, re-transfer the keymap to EEPROM
   if (EEPROMSettings.version() != CHRYSALIS_EEPROM_VERSION) {
     EEPROMKeymap.focusKeymapTransfer("keymap.transfer");
     EEPROMSettings.version(CHRYSALIS_EEPROM_VERSION);
   }
+  */
 
   // Use the EEPROM keymap that Chrysalis modifies
-  Layer.getKey = getKey;
+//  Layer.getKey = getKey;
 
 
   // We set the brightness of the rainbow effects to 150 (on a scale of 0-255)
