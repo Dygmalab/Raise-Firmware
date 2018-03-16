@@ -77,5 +77,5 @@ Hold down the "Prog" key in the top left corner of your keyboard, until the comp
 
 <3 jesse & Matt
 
-[![Build
-Status](https://travis-ci.org/shortcutgg/Raise-Firmware.svg?branch=master)](https://travis-ci.org/shortcutgg/Raise-Firmware)
+[![Build Status](https://api.travis-ci.org/Dygmalab/Raise-Firmware.svg?branch=raisev4.2-arm-eeprom)](https://travis-ci.org/dygmalab/Raise-Firmware)
+
