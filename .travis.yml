@@ -8,8 +8,6 @@ before_install:
   - git clone --recursive https://github.com/Dygmalab/ArduinoCore-samd ~/Arduino/hardware/dygma/samd
 install:
   - arduino --install-boards arduino:samd
-  - arduino --board esp8266:esp8266:generic --save-prefs
-  - arduino --pref "compiler.warning_level=all" --save-prefs
 script:
   - "echo $PWD"
   - "echo $HOME"
