@@ -4,7 +4,7 @@ before_install:
   - tar xf arduino-1.8.2-linux64.tar.xz
   - sudo mv arduino-1.8.2 /usr/local/share/arduino
   - sudo ln -s /usr/local/share/arduino/arduino /usr/local/bin/arduino
-  - mkdir ~/Arduino/hardware/dygma
+  - mkdir -p ~/Arduino/hardware/dygma
   - git clone --recursive https://github.com/Dygmalab/ArduinoCore-samd ~/Arduino/hardware/dygma/samd
 install:
   - arduino --install-boards arduino:samd
