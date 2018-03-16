@@ -5,7 +5,7 @@ before_install:
   - sudo mv arduino-1.8.2 /usr/local/share/arduino
   - sudo ln -s /usr/local/share/arduino/arduino /usr/local/bin/arduino
   - mkdir ~/Arduino/hardware/dygma
-  - git clone https://github.com/Dygmalab/ArduinoCore-samd ~/Arduino/hardware/dygma/samd
+  - git clone --recursive https://github.com/Dygmalab/ArduinoCore-samd ~/Arduino/hardware/dygma/samd
 install:
   - arduino --install-boards arduino:samd
   - arduino --board esp8266:esp8266:generic --save-prefs
