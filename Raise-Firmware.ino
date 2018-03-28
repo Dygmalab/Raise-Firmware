@@ -318,7 +318,6 @@ void setup() {
   Focus.addHook(FOCUS_HOOK_VERSION);
   Focus.addHook(FOCUS_HOOK_KEYMAP);
   Focus.addHook(FOCUS_HOOK_KEYMAP_LAYER);
-  Focus.addHook(FOCUS_HOOK_KEYMAP_LAYER);
   Focus.addHook(FOCUS_HOOK_EEPROM);
   Focus.addHook(FOCUS_HOOK_SETTINGS);
 //  Focus.addHook(FOCUS_HOOK_LEDPALETTETHEME);
