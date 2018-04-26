@@ -27,8 +27,14 @@ build:
 flash:
 	${ARDUINO_PATH}/arduino --pref build.path=${BUILD_PATH} --preserve-temp-files --upload --board dygma:samd:raise_native ${FIRMWARE} --port ${DEVICE_PORT}
 
+flash-ice:
+	openocd -f ${ICECFG} -c "telnet_port disabled; init; halt; at91samd bootloader 0; program {{${BUILD_PATH}/${FIRMWARE}.hex}} verify reset; shutdown"
+
 debug:
 	openocd -f ${ICECFG}
 
 gdb:
 	arm-none-eabi-gdb ${BUILD_PATH}/${FIRMWARE}.elf
+
+clean:
+	rm -rf ${BUILD_PATH}/*
