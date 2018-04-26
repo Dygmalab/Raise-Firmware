@@ -226,6 +226,7 @@ static kaleidoscope::LEDSolidColor solidGreen(0, 160, 0);
 static kaleidoscope::LEDSolidColor solidBlue(0, 70, 130);
 static kaleidoscope::LEDSolidColor solidIndigo(0, 0, 170);
 static kaleidoscope::LEDSolidColor solidViolet(130, 0, 120);
+static kaleidoscope::LEDSolidColor solidWhite(255, 255, 255);
 
 static Key getKey(uint8_t layer, byte row, byte col) {
   if (layer >= _LAYER_MAX) {
@@ -273,7 +274,7 @@ void setup() {
     &LEDChaseEffect,
 
     // These static effects turn your keyboard's LEDs a variety of colors
-    &solidRed, &solidOrange, &solidYellow, &solidGreen, &solidBlue, &solidIndigo, &solidViolet,
+    &solidRed, &solidOrange, &solidYellow, &solidGreen, &solidBlue, &solidIndigo, &solidViolet, &solidWhite,
 
     // The breathe effect slowly pulses all of the LEDs on your keyboard
     &LEDBreatheEffect,
@@ -349,7 +350,9 @@ void setup() {
   // We want to make sure that the firmware starts with LED effects off
   // This avoids over-taxing devices that don't have a lot of power to share
   // with USB devices
-  LEDRainbowWaveEffect.activate();
+  //LEDRainbowWaveEffect.activate();
+  //LEDOff.activate();
+  StalkerEffect.activate();
 }
 
 /** loop is the second of the standard Arduino sketch functions.
