@@ -219,10 +219,10 @@ const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
 // Keyboardio Model 01.
 
 
-static kaleidoscope::LEDSolidColor solidRed(160, 0, 0);
+static kaleidoscope::LEDSolidColor solidRed(255, 0, 0);
 static kaleidoscope::LEDSolidColor solidOrange(140, 70, 0);
 static kaleidoscope::LEDSolidColor solidYellow(130, 100, 0);
-static kaleidoscope::LEDSolidColor solidGreen(0, 160, 0);
+static kaleidoscope::LEDSolidColor solidGreen(0, 255, 0);
 static kaleidoscope::LEDSolidColor solidBlue(0, 70, 130);
 static kaleidoscope::LEDSolidColor solidIndigo(0, 0, 170);
 static kaleidoscope::LEDSolidColor solidViolet(130, 0, 120);
@@ -339,8 +339,8 @@ void setup() {
 
   // We set the brightness of the rainbow effects to 150 (on a scale of 0-255)
   // This draws more than 500mA, but looks much nicer than a dimmer effect
-  LEDRainbowEffect.brightness(250);
-  LEDRainbowWaveEffect.brightness(150);
+  LEDRainbowEffect.brightness(255);
+  LEDRainbowWaveEffect.brightness(255);
 
   // The LED Stalker mode has a few effects. The one we like is
   // called 'BlazingTrail'. For details on other options,
@@ -350,9 +350,9 @@ void setup() {
   // We want to make sure that the firmware starts with LED effects off
   // This avoids over-taxing devices that don't have a lot of power to share
   // with USB devices
-  //LEDRainbowWaveEffect.activate();
+  LEDRainbowWaveEffect.activate();
   //LEDOff.activate();
-  StalkerEffect.activate();
+  //StalkerEffect.activate();
 }
 
 /** loop is the second of the standard Arduino sketch functions.
