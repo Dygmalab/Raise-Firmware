@@ -220,12 +220,8 @@ const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
 
 
 static kaleidoscope::LEDSolidColor solidRed(255, 0, 0);
-static kaleidoscope::LEDSolidColor solidOrange(140, 70, 0);
-static kaleidoscope::LEDSolidColor solidYellow(130, 100, 0);
 static kaleidoscope::LEDSolidColor solidGreen(0, 255, 0);
-static kaleidoscope::LEDSolidColor solidBlue(0, 70, 130);
-static kaleidoscope::LEDSolidColor solidIndigo(0, 0, 170);
-static kaleidoscope::LEDSolidColor solidViolet(130, 0, 120);
+static kaleidoscope::LEDSolidColor solidBlue(0, 0, 255);
 static kaleidoscope::LEDSolidColor solidWhite(255, 255, 255);
 
 static Key getKey(uint8_t layer, byte row, byte col) {
@@ -234,6 +230,7 @@ static Key getKey(uint8_t layer, byte row, byte col) {
   }
   return EEPROMKeymap.getKeyOverride(layer, row, col);
 }
+
 
 /** The 'setup' function is one of the two standard Arduino sketch functions.
   * It's called when your keyboard first powers up. This is where you set up
@@ -274,7 +271,7 @@ void setup() {
     &LEDChaseEffect,
 
     // These static effects turn your keyboard's LEDs a variety of colors
-    &solidRed, &solidOrange, &solidYellow, &solidGreen, &solidBlue, &solidIndigo, &solidViolet, &solidWhite,
+    &solidRed, &solidGreen, &solidBlue, &solidWhite,
 
     // The breathe effect slowly pulses all of the LEDs on your keyboard
     &LEDBreatheEffect,
@@ -350,7 +347,8 @@ void setup() {
   // We want to make sure that the firmware starts with LED effects off
   // This avoids over-taxing devices that don't have a lot of power to share
   // with USB devices
-  LEDRainbowWaveEffect.activate();
+  //LEDRainbowWaveEffect.activate();
+  solidGreen.activate();
   //LEDOff.activate();
   //StalkerEffect.activate();
 }
