@@ -16,6 +16,14 @@ read-fuse:
 	${EDBG} -b -c 48000 -t atmel_cm0p -F r,6:4
 	# default should read Fuses: 0x7 (7), after saving flash for eeprom emulation - 0x4
 
+read-all-fuse:
+	${EDBG} -b -c 48000 -t atmel_cm0p -F r,31:0
+	${EDBG} -b -c 48000 -t atmel_cm0p -F r,63:32
+
+reset-all-fuse:
+	${EDBG} -b -c 48000 -t atmel_cm0p -F w,31:0,0xD8E0C7FF
+	${EDBG} -b -c 48000 -t atmel_cm0p -F w,63:32,0xFFFFFC5D
+
 fuse:
 	${EDBG} -b -c 48000 -t atmel_cm0p -F w,6:4,0x04
 
@@ -23,7 +31,7 @@ bootloader:
 	openocd -f ${ICECFG} -c "telnet_port disabled; init; halt; at91samd bootloader 0; program {{${BOOTLOADER}}} verify reset; shutdown"
 
 build:
-	${ARDUINO_PATH}/arduino  --pref build.path=${BUILD_PATH} --preserve-temp-files --verify --board dygma:samd:raise_native ${FIRMWARE} 
+	${ARDUINO_PATH}/arduino  --pref build.path=${BUILD_PATH} --preserve-temp-files --verbose --verify --board dygma:samd:raise_native ${FIRMWARE} 
 
 flash: clean
 	${ARDUINO_PATH}/arduino --pref build.path=${BUILD_PATH} --preserve-temp-files --upload --board dygma:samd:raise_native ${FIRMWARE} --port ${DEVICE_PORT}
@@ -39,6 +47,10 @@ backup:
 
 restore:
 	${BACKUP} --restore --port ${DEVICE_PORT}
+
+size:
+	arm-none-eabi-size ${BUILD_PATH}/${FIRMWARE}.elf
+
 
 debug:
 	openocd -f ${ICECFG}
