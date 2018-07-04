@@ -64,6 +64,7 @@
 #include "Kaleidoscope-EEPROM-Keymap.h"
 //#include "Kaleidoscope-Colormap.h"
 //#include "Kaleidoscope-LED-Palette-Theme.h"
+#include "Kaleidoscope-AdjustableLatencyJitter.h"
 
 
 /** This 'enum' is a list of all the macros used by the Model 01's firmware
@@ -291,6 +292,7 @@ void setup() {
     // The EEPROM Keymap lets the key layout be read from EEPROM, which is where
     // Chrysalis will write your keymap to
     &EEPROMKeymap,
+    &AdjustableLatencyJitter,
 
     // The Colormap LED effect is the effect that you control view Chrysalis
 //    &ColormapEffect,
@@ -318,6 +320,8 @@ void setup() {
   Focus.addHook(FOCUS_HOOK_KEYMAP_LAYER);
   Focus.addHook(FOCUS_HOOK_EEPROM);
   Focus.addHook(FOCUS_HOOK_SETTINGS);
+
+  Focus.addHook(FOCUS_HOOK_ADJUSTABLELATENCYJITTER);
 //  Focus.addHook(FOCUS_HOOK_LEDPALETTETHEME);
 //  Focus.addHook(FOCUS_HOOK_COLORMAP);
 //  Focus.addHook(FOCUS_HOOK_COLORMAP_LAYER);
