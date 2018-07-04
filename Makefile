@@ -27,14 +27,18 @@ reset-all-fuse:
 fuse:
 	${EDBG} -b -c 48000 -t atmel_cm0p -F w,6:4,0x04
 
+fuse-openocd:
+	at91samd nvmuserrow 0xFFFFFC5DD8E0C7FF
+
 bootloader:
 	openocd -f ${ICECFG} -c "telnet_port disabled; init; halt; at91samd bootloader 0; program {{${BOOTLOADER}}} verify reset; shutdown"
 
 build:
 	${ARDUINO_PATH}/arduino  --pref build.path=${BUILD_PATH} --preserve-temp-files --verbose --verify --board dygma:samd:raise_native ${FIRMWARE} 
 
-flash: clean
-	${ARDUINO_PATH}/arduino --pref build.path=${BUILD_PATH} --preserve-temp-files --upload --board dygma:samd:raise_native ${FIRMWARE} --port ${DEVICE_PORT}
+
+flash: 
+	/home/matt/.arduino15/packages/arduino/tools/bossac/1.7.0/bossac -i -d --port=/dev/ttyACM0 -e -w ${BUILD_PATH}/${FIRMWARE}.bin -R
 	# wait for device to settle
 	sleep 10
 	${BACKUP} --restore --port ${DEVICE_PORT}
