@@ -1,5 +1,7 @@
 # Dygma Raise Firmware
 
+[![Build Status](https://api.travis-ci.org/Dygmalab/Raise-Firmware.svg?branch=raisev4.2-arm-eeprom)](https://travis-ci.org/Dygmalab/Raise-Firmware)
+
 The default firmware for the Dygma Raise
 
 
@@ -77,5 +79,4 @@ Hold down the "Prog" key in the top left corner of your keyboard, until the comp
 
 <3 jesse & Matt
 
-[![Build Status](https://api.travis-ci.org/Dygmalab/Raise-Firmware.svg?branch=raisev4.2-arm-eeprom)](https://travis-ci.org/dygmalab/Raise-Firmware)
 
