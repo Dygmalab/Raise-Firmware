@@ -38,10 +38,10 @@ build:
 
 
 flash: 
-	/home/matt/.arduino15/packages/arduino/tools/bossac/1.7.0/bossac -i -d --port=/dev/ttyACM0 -e -w ${BUILD_PATH}/${FIRMWARE}.bin -R
+	/home/matt/.arduino15/packages/arduino/tools/bossac/1.7.0/bossac -i -d --port=${DEVICE_PORT} -e -w ${BUILD_PATH}/${FIRMWARE}.bin -R
 	# wait for device to settle
-	sleep 10
-	${BACKUP} --restore --port ${DEVICE_PORT}
+#	sleep 10
+#	${BACKUP} --restore --port ${DEVICE_PORT}
 
 flash-ice:
 	openocd -f ${ICECFG} -c "telnet_port disabled; init; halt; at91samd bootloader 0; program {{${BUILD_PATH}/${FIRMWARE}.hex}} verify reset; shutdown"
