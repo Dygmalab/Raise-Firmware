@@ -44,7 +44,7 @@ flash:
 #	${BACKUP} --restore --port ${DEVICE_PORT}
 
 flash-ice:
-	openocd -f ${ICECFG} -c "telnet_port disabled; init; halt; at91samd bootloader 0; program {{${BUILD_PATH}/${FIRMWARE}.hex}} verify reset; shutdown"
+	openocd -f ${ICECFG} -c "telnet_port disabled; init; halt; program {{${BUILD_PATH}/${FIRMWARE}.hex}} verify reset; shutdown"
 
 backup:
 	${BACKUP} --backup --port ${DEVICE_PORT}
