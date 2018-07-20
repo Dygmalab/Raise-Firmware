@@ -276,6 +276,7 @@ void setup() {
   Focus.addHook(FOCUS_HOOK_KEYMAP_LAYER);
   Focus.addHook(FOCUS_HOOK_EEPROM);
   Focus.addHook(FOCUS_HOOK_SETTINGS);
+  Focus.addHook(FOCUS_HOOK_HARDWARE);
 
   Focus.addHook(FOCUS_HOOK_ADJUSTABLELATENCYJITTER);
 //  Focus.addHook(FOCUS_HOOK_LEDPALETTETHEME);
