@@ -278,6 +278,7 @@ void setup() {
   Focus.addHook(FOCUS_HOOK_SETTINGS);
 
   Focus.addHook(FOCUS_HOOK_ADJUSTABLELATENCYJITTER);
+  Focus.addHook(FOCUS_HOOK_HARDWARE);
 //  Focus.addHook(FOCUS_HOOK_LEDPALETTETHEME);
 //  Focus.addHook(FOCUS_HOOK_COLORMAP);
 //  Focus.addHook(FOCUS_HOOK_COLORMAP_LAYER);
