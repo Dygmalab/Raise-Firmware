@@ -1,4 +1,4 @@
-DEVICE_PORT=/dev/ttyACM0
+DEVICE_PORT=/dev/ttyACM2
 ARDUINO_PATH=~/work/shortcut/arm/arduino-1.8.2
 DYGMADIR=/home/matt/Arduino/hardware/dygma/samd
 BACKUP=${DYGMADIR}/libraries/Kaleidoscope-Focus/extras/backup.py
@@ -34,7 +34,7 @@ flash-ice:
 	openocd -f ${ICECFG} -c "telnet_port disabled; init; halt; at91samd bootloader 0; program {{${BUILD_PATH}/${FIRMWARE}.hex}} verify reset; shutdown"
 
 focus:
-	${FOCUS} -d ${DEVICE_PORT}
+	${FOCUS} --port ${DEVICE_PORT}
 
 backup:
 	${BACKUP} --backup --port ${DEVICE_PORT}
