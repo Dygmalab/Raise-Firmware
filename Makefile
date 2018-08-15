@@ -28,7 +28,7 @@ flash:
 	# wait for device to settle
 	sleep 1.5
 	${BACKUP} --restore --port ${DEVICE_PORT}
-	echo hardware.keyscan 25 | ${FOCUS}
+	echo hardware.keyscan 25 | ${FOCUS} --port ${DEVICE_PORT}
 
 flash-ice:
 	openocd -f ${ICECFG} -c "telnet_port disabled; init; halt; at91samd bootloader 0; program {{${BUILD_PATH}/${FIRMWARE}.hex}} verify reset; shutdown"
