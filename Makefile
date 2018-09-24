@@ -1,4 +1,4 @@
-DEVICE_PORT=/dev/ttyACM2
+DEVICE_PORT=/dev/ttyACM0
 ARDUINO_PATH=~/work/shortcut/arm/arduino-1.8.2
 DYGMADIR=/home/matt/Arduino/hardware/dygma/samd
 BACKUP=${DYGMADIR}/libraries/Kaleidoscope-Focus/extras/backup.py
@@ -16,7 +16,7 @@ fuse-openocd:
 	openocd -f ${ICECFG} -c "telnet_port disabled; init; halt; at91samd nvmuserrow; at91samd nvmuserrow 0xFFFFFC5DD8E0C7FF; shutdown"
 
 bootloader:
-	openocd -f ${ICECFG} -c "telnet_port disabled; init; halt; at91samd bootloader 0; program {{${BOOTLOADER}}} verify reset; shutdown"
+	openocd -f ${ICECFG} -c "telnet_port disabled; init; halt; at91samd bootloader 0; program {${BOOTLOADER}} verify reset; shutdown"
 
 build:
 	${ARDUINO_PATH}/arduino  --pref build.path=${BUILD_PATH} --preserve-temp-files --verbose --verify --board dygma:samd:raise_native ${FIRMWARE} 
@@ -31,7 +31,7 @@ flash:
 	echo hardware.keyscan 25 | ${FOCUS} --port ${DEVICE_PORT}
 
 flash-ice:
-	openocd -f ${ICECFG} -c "telnet_port disabled; init; halt; at91samd bootloader 0; program {{${BUILD_PATH}/${FIRMWARE}.hex}} verify reset; shutdown"
+	openocd -f ${ICECFG} -c "telnet_port disabled; init; halt; at91samd bootloader 0; program {${BUILD_PATH}/${FIRMWARE}.hex} verify reset; shutdown"
 
 focus:
 	${FOCUS} --port ${DEVICE_PORT}
