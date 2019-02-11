@@ -1,5 +1,5 @@
-DEVICE_PORT=/dev/ttyACM0
-ARDUINO_PATH=~/work/shortcut/arm/arduino-1.8.2
+DEVICE_PORT=/dev/ttyACM1
+ARDUINO_PATH=../arduino-1.8.8
 DYGMADIR=/home/matt/Arduino/hardware/dygma/samd
 BACKUP=${DYGMADIR}/libraries/Kaleidoscope-Focus/extras/backup.py
 FOCUS=${DYGMADIR}/libraries/Kaleidoscope-Focus/extras/kaleidoscope-focus.py
@@ -7,6 +7,7 @@ BOOTLOADER=${DYGMADIR}/bootloaders/zero/samd21_sam_ba.bin
 ICECFG=${DYGMADIR}/variants/arduino_zero/openocd_scripts/arduino_zero.cfg
 LAST_PROG=$(shell \ls /tmp/arduino_*/*.ino.hex --sort=time  | head -1)
 BUILD_PATH=./output
+#BUILD_PATH=./output-matt-2018-11-01
 FIRMWARE=Raise-Firmware.ino
 
 # arduino command line arguments
@@ -26,9 +27,9 @@ flash:
 	sleep 2
 	/home/matt/.arduino15/packages/arduino/tools/bossac/1.7.0/bossac -i -d --port=${DEVICE_PORT} -e -w ${BUILD_PATH}/${FIRMWARE}.bin -R
 	# wait for device to settle
-	sleep 1.5
-	${BACKUP} --restore --port ${DEVICE_PORT}
-	echo hardware.keyscan 25 | ${FOCUS} --port ${DEVICE_PORT}
+#	sleep 1.5
+#	${BACKUP} --restore --port ${DEVICE_PORT}
+#	echo hardware.keyscan 25 | ${FOCUS} --port ${DEVICE_PORT}
 
 flash-ice:
 	openocd -f ${ICECFG} -c "telnet_port disabled; init; halt; at91samd bootloader 0; program {${BUILD_PATH}/${FIRMWARE}.hex} verify reset; shutdown"

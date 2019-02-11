@@ -34,7 +34,7 @@
 
 // Support for the "Boot greeting" effect, which pulses the 'LED' button for 10s
 // when the keyboard is connected to a computer (or that computer is powered on)
-#include "Kaleidoscope-LEDEffect-BootGreeting.h"
+//#include "Kaleidoscope-LEDEffect-BootGreeting.h"
 
 // Support for LED modes that set all LEDs to a single color
 #include "Kaleidoscope-LEDEffect-SolidColor.h"
@@ -137,20 +137,20 @@ enum { QWERTY, NUMPAD, _LAYER_MAX }; // layers
 
 const Key keymaps[][ROWS][COLS] PROGMEM = {
 [QWERTY] = KEYMAP_60 
-( Key_Escape, Key_1, Key_2, Key_3, Key_4, Key_5, Key_6,                     Key_LEDEffectNext, Key_LEDEffectNext, Key_9, Key_0, Key_Minus, Key_Equals, Key_Delete, 
-  Key_Tab, Key_Q, Key_W, Key_E, Key_R, Key_T,                               Key_Y, Key_U, Key_I, Key_O, Key_P, Key_LeftBracket, Key_Backspace, Key_1, 
-  Key_CapsLock, Key_LEDEffectNext , Key_S, Key_D, Key_F, Key_G,                           Key_H, Key_J, Key_K, Key_L, Key_Semicolon, Key_Quote, Key_Enter, 
-  Key_LeftShift, ___, Key_Z, Key_X, Key_C, Key_V, Key_B,                    Key_N, Key_M, Key_Comma, Key_Period, Key_Slash, Key_RightShift,
-  Key_LeftControl,Key_LeftGui, Key_LeftAlt,Key_Keymap1, Key_Spacebar,       Key_Spacebar, Key_RightAlt, Key_RightGui, Key_Menu, Key_RightControl, Key_1,
-                     Key_LEDEffectNext, Key_Enter,                          Key_A, Key_B),
+( Key_Escape, Key_1, Key_2, Key_3, Key_4, Key_5, Key_6,                     Key_7, Key_8, Key_9, Key_0, Key_Minus, Key_Equals, Key_Backspace, 
+  Key_Tab, Key_Q, Key_W, Key_E, Key_R, Key_T,                               Key_Y, Key_U, Key_I, Key_O, Key_P, Key_LeftBracket, Key_RightBracket, Key_Keymap1, 
+  Key_CapsLock, Key_A , Key_S, Key_D, Key_F, Key_G,                            Key_H, Key_J, Key_K, Key_L, Key_Semicolon, Key_Quote, Key_Enter, 
+  ___, Key_LeftShift, Key_Z, Key_X, Key_C, Key_V, Key_B,                    Key_N, Key_M, Key_Comma, Key_Period, Key_Slash, Key_RightShift,
+  Key_LeftControl,Key_LEDEffectNext, Key_LeftAlt,Key_Enter, Key_Spacebar,   Key_Spacebar, Key_RightShift, Key_RightAlt, Key_LEDEffectNext, Key_Menu, Key_RightControl,
+                     Key_Backspace, Key_Delete,                             Key_LeftArrow, Key_RightArrow),
 
 [NUMPAD] = KEYMAP_60 
-( Key_Escape, Key_1, Key_2, Key_3, Key_4, Key_5, Key_6,                     Key_7, Key_8, Key_9, Key_0, Key_A, Key_A, Key_Delete, 
-  Key_Tab, Key_Q, Key_UpArrow, Key_E, Key_R, Key_T,                         Key_Y, Key_U, Key_I, Key_O, Key_P, Key_M, Key_Backspace, Key_1, 
-  Key_LeftControl, Key_LeftArrow, Key_DownArrow, Key_RightArrow, Key_F, Key_G,               Key_H, Key_J, Key_K, Key_L, Key_L, Key_M, Key_Enter, 
-  Key_LeftShift, ___, Key_Z, Key_X, Key_C, Key_V, Key_B,                    Key_N, Key_M, Key_Semicolon, Key_Comma, Key_Minus, Key_RightShift, 
-  Key_LeftControl, Key_CapsLock, ___, Key_Keymap1, Key_Spacebar,            Key_Spacebar, Key_RightAlt, Key_Keymap1, ___, Key_RightControl, Key_1,  
-                       Key_Backspace, Key_Enter,                            Key_Backspace, Key_Keymap1)
+( Key_Escape, Key_1, Key_2, Key_3, Key_4, Key_5, Key_6,                     Key_7, Key_8, Key_9, Key_Equals, XXX, XXX, ___, 
+  Key_Tab, Key_7, Key_8, Key_9, Key_0, Key_Period,                          Key_4, Key_5, Key_6, Key_KeypadAdd, Key_KeypadMultiply, XXX, XXX, ___, 
+  Key_Enter, Key_A, Key_S, Key_V, Key_UpArrow, Key_Comma,                   Key_1, Key_2, Key_3, Key_KeypadSubtract, Key_KeypadDivide, XXX, ___, 
+  XXX, Key_LeftShift, Key_Z, Key_X, Key_LeftArrow, Key_DownArrow, Key_RightArrow,                    Key_0, XXX, XXX, XXX, Key_UpArrow, Key_RightShift, 
+  ___, ___, ___, ___, ___,                                                  XXX, XXX, Key_LeftArrow, Key_DownArrow, Key_RightArrow, ___,  
+                       ___, ___,                                            Key_Period, Key_Comma)
 };
 
 
@@ -240,13 +240,12 @@ static Key getKey(uint8_t layer, byte row, byte col) {
   */
 
 KALEIDOSCOPE_INIT_PLUGINS(
-    BootGreetingEffect,
+    //BootGreetingEffect,
     LEDControl,
     LEDOff,
-    LEDRainbowEffect,
     LEDJointEffect,
+    LEDRainbowEffect,
     LEDRainbowWaveEffect,
-    LEDChaseEffect,
     solidRed, solidGreen, solidBlue, solidWhite,
     LEDBreatheEffect,
     StalkerEffect,
@@ -278,6 +277,7 @@ void setup() {
   Focus.addHook(FOCUS_HOOK_KEYMAP_LAYER);
   Focus.addHook(FOCUS_HOOK_EEPROM);
   Focus.addHook(FOCUS_HOOK_SETTINGS);
+  Focus.addHook(FOCUS_HOOK_LEDCONTROL);
 
   Focus.addHook(FOCUS_HOOK_ADJUSTABLELATENCYJITTER);
   Focus.addHook(FOCUS_HOOK_HARDWARE);
