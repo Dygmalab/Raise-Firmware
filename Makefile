@@ -14,7 +14,7 @@ FIRMWARE=Raise-Firmware.ino
 # https://github.com/arduino/Arduino/blob/master/build/shared/manpage.adoc
 
 fuse-openocd:
-	openocd -f ${ICECFG} -c "telnet_port disabled; init; halt; at91samd nvmuserrow; at91samd nvmuserrow 0xFFFFFC5DD8E0C7FF; shutdown"
+	openocd -f ${ICECFG} -c "telnet_port disabled; init; halt; at91samd nvmuserrow; at91samd nvmuserrow 0xFFFFFC5DD8E0C78A; shutdown"
 
 bootloader:
 	openocd -f ${ICECFG} -c "telnet_port disabled; init; halt; at91samd bootloader 0; program {${BOOTLOADER}} verify reset; shutdown"
