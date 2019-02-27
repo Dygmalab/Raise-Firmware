@@ -138,17 +138,17 @@ enum { QWERTY, NUMPAD, _LAYER_MAX }; // layers
 const Key keymaps[][ROWS][COLS] PROGMEM = {
 [QWERTY] = KEYMAP_60 
 ( Key_Escape, Key_1, Key_2, Key_3, Key_4, Key_5, Key_6,                     Key_7, Key_8, Key_9, Key_0, Key_Minus, Key_Equals, Key_Backspace, 
-  Key_Tab, Key_Q, Key_W, Key_E, Key_R, Key_T,                               Key_Y, Key_U, Key_I, Key_O, Key_P, Key_LeftBracket, Key_RightBracket, Key_Keymap1, 
-  Key_CapsLock, Key_A , Key_S, Key_D, Key_F, Key_G,                            Key_H, Key_J, Key_K, Key_L, Key_Semicolon, Key_Quote, Key_Enter, 
-  ___, Key_LeftShift, Key_Z, Key_X, Key_C, Key_V, Key_B,                    Key_N, Key_M, Key_Comma, Key_Period, Key_Slash, Key_RightShift,
+  Key_Tab, Key_Q, Key_W, Key_E, Key_R, Key_T,                               Key_Y, Key_U, Key_I, Key_O, Key_P, Key_LeftBracket, Key_RightBracket, Key_Enter, 
+  Key_CapsLock, Key_A , Key_S, Key_D, Key_F, Key_G,                            Key_H, Key_J, Key_K, Key_L, Key_Semicolon, Key_Quote, Key_NonUsPound, 
+  Key_LeftShift, Key_Keymap1, Key_Z, Key_X, Key_C, Key_V, Key_B,                    Key_N, Key_M, Key_Comma, Key_Period, Key_Slash, Key_RightShift,
   Key_LeftControl,Key_LEDEffectNext, Key_LeftAlt,Key_Enter, Key_Spacebar,   Key_Spacebar, Key_RightShift, Key_RightAlt, Key_LEDEffectNext, Key_Menu, Key_RightControl,
                      Key_Backspace, Key_Delete,                             Key_LeftArrow, Key_RightArrow),
 
 [NUMPAD] = KEYMAP_60 
 ( Key_Escape, Key_1, Key_2, Key_3, Key_4, Key_5, Key_6,                     Key_7, Key_8, Key_9, Key_Equals, XXX, XXX, ___, 
   Key_Tab, Key_7, Key_8, Key_9, Key_0, Key_Period,                          Key_4, Key_5, Key_6, Key_KeypadAdd, Key_KeypadMultiply, XXX, XXX, ___, 
-  Key_Enter, Key_A, Key_S, Key_V, Key_UpArrow, Key_Comma,                   Key_1, Key_2, Key_3, Key_KeypadSubtract, Key_KeypadDivide, XXX, ___, 
-  XXX, Key_LeftShift, Key_Z, Key_X, Key_LeftArrow, Key_DownArrow, Key_RightArrow,                    Key_0, XXX, XXX, XXX, Key_UpArrow, Key_RightShift, 
+  Key_Enter, ___, Key_S, Key_V, Key_UpArrow, Key_Comma,                   Key_1, Key_2, Key_3, Key_KeypadSubtract, Key_KeypadDivide, XXX, ___, 
+  Key_LeftShift, ___, Key_Z, Key_X, Key_LeftArrow, Key_DownArrow, Key_RightArrow,                    Key_0, XXX, XXX, XXX, Key_UpArrow, Key_RightShift, 
   ___, ___, ___, ___, ___,                                                  XXX, XXX, Key_LeftArrow, Key_DownArrow, Key_RightArrow, ___,  
                        ___, ___,                                            Key_Period, Key_Comma)
 };
