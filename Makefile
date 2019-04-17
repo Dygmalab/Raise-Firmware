@@ -23,8 +23,6 @@ build:
 	${ARDUINO_PATH}/arduino  --pref build.path=${BUILD_PATH} --preserve-temp-files --verbose --verify --board dygma:samd:raise_native ${FIRMWARE} 
 
 flash: 
-	../reset.py ${DEVICE_PORT}
-	sleep 2
 	/home/matt/.arduino15/packages/arduino/tools/bossac/1.7.0/bossac -i -d --port=${DEVICE_PORT} -e -w ${BUILD_PATH}/${FIRMWARE}.bin -R
 	# wait for device to settle
 #	sleep 1.5
