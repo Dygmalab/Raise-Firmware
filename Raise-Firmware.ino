@@ -66,6 +66,7 @@
 //#include "Kaleidoscope-Colormap.h"
 //#include "Kaleidoscope-LED-Palette-Theme.h"
 #include "Kaleidoscope-AdjustableLatencyJitter.h"
+#include <Kaleidoscope-MagicCombo.h>
 
 
 /** This 'enum' is a list of all the macros used by the Model 01's firmware
@@ -158,17 +159,17 @@ const Key keymaps[][ROWS][COLS] PROGMEM = {
 /* Re-enable astyle's indent enforcement */
 // *INDENT-ON*
 
-/** versionInfoMacro handles the 'firmware version info' macro
- *  When a key bound to the macro is pressed, this macro
- *  prints out the firmware build information as virtual keystrokes
- */
+enum { RESET_COMBO };
 
-static void versionInfoMacro(uint8_t keyState) {
-  if (keyToggledOn(keyState)) {
-    Macros.type(PSTR("Keyboardio Model 01 - Kaleidoscope "));
-    Macros.type(PSTR(BUILD_INFORMATION));
-  }
+void reset_combo(uint8_t combo_index) {
+    NVIC_SystemReset();
 }
+
+USE_MAGIC_COMBOS(
+[RESET_COMBO] = {
+  .action = reset_combo,
+  .keys = {65, 66, 74, 73} // all low profiles
+});
 
 /** anyKeyMacro is used to provide the functionality of the 'Any' key.
  *
@@ -202,10 +203,6 @@ static void anyKeyMacro(uint8_t keyState) {
 
 const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
   switch (macroIndex) {
-
-  case MACRO_VERSION_INFO:
-    versionInfoMacro(keyState);
-    break;
 
   case MACRO_ANY:
     anyKeyMacro(keyState);
@@ -249,7 +246,9 @@ KALEIDOSCOPE_INIT_PLUGINS(
     solidRed, solidGreen, solidBlue, solidWhite,
     LEDBreatheEffect,
     StalkerEffect,
+    LEDChaseEffect,
     Macros,
+    MagicCombo,
     EEPROMKeymap,
     AdjustableLatencyJitter,
     Focus
@@ -324,20 +323,14 @@ void setup() {
   * call Kaleidoscope.loop(); and not do anything custom here.
   */
 
-bool done = false;
+unsigned long last_print = 0;
 void loop() {
   Kaleidoscope.loop();
-  /*
-  if(millis() > 20000 && done == false)
+/*  
+  if(millis() - last_print > 1000)
   {
-    USBDevice.detach();
-    delay(1000);
-    USBDevice.attach();
-    delay(1000);
-    done = true;
-    SerialUSB.begin(9600);
-    Serial.println("done");
+    last_print = millis();
   }
-  */
+*/
 
 }
