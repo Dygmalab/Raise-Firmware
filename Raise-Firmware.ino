@@ -159,6 +159,8 @@ const Key keymaps[][ROWS][COLS] PROGMEM = {
 /* Re-enable astyle's indent enforcement */
 // *INDENT-ON*
 
+// reset combo
+/*
 enum { RESET_COMBO };
 
 void reset_combo(uint8_t combo_index) {
@@ -170,6 +172,7 @@ USE_MAGIC_COMBOS(
   .action = reset_combo,
   .keys = {65, 66, 74, 73} // all low profiles
 });
+*/
 
 /** anyKeyMacro is used to provide the functionality of the 'Any' key.
  *
@@ -248,7 +251,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
     StalkerEffect,
     LEDChaseEffect,
     Macros,
-    MagicCombo,
+  //  MagicCombo,
     EEPROMKeymap,
     AdjustableLatencyJitter,
     Focus
