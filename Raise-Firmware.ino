@@ -6,7 +6,7 @@
 #define BUILD_INFORMATION "locally built"
 #endif
 
-#define CHRYSALIS_EEPROM_VERSION 0xa1
+//#define CHRYSALIS_EEPROM_VERSION 0xa1
 
 /**
  * These #include directives pull in the Kaleidoscope firmware core,
@@ -26,45 +26,14 @@
 // Support for controlling the keyboard's LEDs
 #include "Kaleidoscope-LEDControl.h"
 
-// Support for "Numlock" mode, which is mostly just the Numlock specific LED mode
-#include "Kaleidoscope-Numlock.h"
-
-// Support for an "LED off mode"
-#include "LED-Off.h"
-
-// Support for the "Boot greeting" effect, which pulses the 'LED' button for 10s
-// when the keyboard is connected to a computer (or that computer is powered on)
-#include "Kaleidoscope-LEDEffect-BootGreeting.h"
-
-// Support for LED modes that set all LEDs to a single color
-#include "Kaleidoscope-LEDEffect-SolidColor.h"
-
-// Support for an LED mode that makes all the LEDs 'breathe'
-#include "Kaleidoscope-LEDEffect-Breathe.h"
-
-// Support for an LED mode that makes a red pixel chase a blue pixel across the keyboard
-#include "Kaleidoscope-LEDEffect-Chase.h"
-
-// Support for LED modes that pulse the keyboard's LED in a rainbow pattern
-#include "Kaleidoscope-LEDEffect-Rainbow.h"
-
-// Support for an LED mode that lights up the keys as you press them
-#include "Kaleidoscope-LED-Stalker.h"
-
-// Support for an LED mode that prints the keys you press in letters 4px high
-#include "Kaleidoscope-LED-AlphaSquare.h"
-
-// Support for Keyboardio's internal keyboard testing mode
-//#include "Kaleidoscope-Model01-TestMode.h"
-
 // Support for setting the key layout and LEDs over the Serial port
 // This is what allows Chrysalis to work
-#include "Kaleidoscope-Focus.h"
+#include "Kaleidoscope-FocusSerial.h"
 #include "Kaleidoscope-EEPROM-Settings.h"
 #include "Kaleidoscope-EEPROM-Keymap.h"
 //#include "Kaleidoscope-Colormap.h"
 //#include "Kaleidoscope-LED-Palette-Theme.h"
-#include "Kaleidoscope-AdjustableLatencyJitter.h"
+//#include "Kaleidoscope-AdjustableLatencyJitter.h"
 
 
 /** This 'enum' is a list of all the macros used by the Model 01's firmware
@@ -135,20 +104,20 @@ enum { QWERTY, NUMPAD, _LAYER_MAX }; // layers
 // *INDENT-OFF*
 
 const Key keymaps[][ROWS][COLS] PROGMEM = {
-[QWERTY] = KEYMAP_60 
-( Key_Escape, Key_1, Key_2, Key_3, Key_4, Key_5, Key_6,                     Key_LEDEffectNext, Key_8, Key_9, Key_0, Key_Minus, Key_Equals, Key_Delete, 
-  Key_Tab, Key_Q, Key_W, Key_E, Key_R, Key_T,                               Key_Y, Key_U, Key_I, Key_O, Key_P, Key_LeftBracket, Key_Backspace, Key_1, 
-  Key_CapsLock, Key_LEDEffectNext , Key_S, Key_D, Key_F, Key_G,                           Key_H, Key_J, Key_K, Key_L, Key_Semicolon, Key_Quote, Key_Enter, 
+[QWERTY] = KEYMAP_60
+( Key_Escape, Key_1, Key_2, Key_3, Key_4, Key_5, Key_6,                     Key_LEDEffectNext, Key_8, Key_9, Key_0, Key_Minus, Key_Equals, Key_Delete,
+  Key_Tab, Key_Q, Key_W, Key_E, Key_R, Key_T,                               Key_Y, Key_U, Key_I, Key_O, Key_P, Key_LeftBracket, Key_Backspace, Key_1,
+  Key_CapsLock, Key_LEDEffectNext , Key_S, Key_D, Key_F, Key_G,                           Key_H, Key_J, Key_K, Key_L, Key_Semicolon, Key_Quote, Key_Enter,
   Key_LeftShift, Key_Z, Key_X, Key_C, Key_V, Key_B,             Key_N, Key_M, Key_Comma, Key_Period, Key_Slash, Key_RightShift,
   Key_LeftControl,Key_LeftGui, Key_LeftAlt,Key_Keymap1, Key_Spacebar,  Key_Spacebar, Key_RightAlt, Key_RightGui, Key_Menu, Key_RightControl, Key_1,
                      Key_LEDEffectNext, Key_Enter,                  Key_A, Key_B),
 
-[NUMPAD] = KEYMAP_60 
-( Key_Escape, Key_1, Key_2, Key_3, Key_4, Key_5, Key_6,             Key_7, Key_8, Key_9, Key_0, Key_A, Key_A, Key_Delete, 
-  Key_Tab, Key_Q, Key_UpArrow, Key_E, Key_R, Key_T,                       Key_Y, Key_U, Key_I, Key_O, Key_P, Key_M, Key_Backspace, Key_1, 
-  Key_LeftControl, Key_LeftArrow, Key_DownArrow, Key_RightArrow, Key_F, Key_G,               Key_H, Key_J, Key_K, Key_L, Key_L, Key_M, Key_Enter, 
-  Key_LeftShift, Key_Z, Key_X, Key_C, Key_V, Key_B,          Key_N, Key_M, Key_Semicolon, Key_Comma, Key_Minus, Key_RightShift, 
-  Key_LeftControl, Key_CapsLock, ___, Key_Keymap1, Key_Spacebar,    Key_Spacebar, Key_RightAlt, Key_Keymap1, ___, Key_RightControl, Key_1,  
+[NUMPAD] = KEYMAP_60
+( Key_Escape, Key_1, Key_2, Key_3, Key_4, Key_5, Key_6,             Key_7, Key_8, Key_9, Key_0, Key_A, Key_A, Key_Delete,
+  Key_Tab, Key_Q, Key_UpArrow, Key_E, Key_R, Key_T,                       Key_Y, Key_U, Key_I, Key_O, Key_P, Key_M, Key_Backspace, Key_1,
+  Key_LeftControl, Key_LeftArrow, Key_DownArrow, Key_RightArrow, Key_F, Key_G,               Key_H, Key_J, Key_K, Key_L, Key_L, Key_M, Key_Enter,
+  Key_LeftShift, Key_Z, Key_X, Key_C, Key_V, Key_B,          Key_N, Key_M, Key_Semicolon, Key_Comma, Key_Minus, Key_RightShift,
+  Key_LeftControl, Key_CapsLock, ___, Key_Keymap1, Key_Spacebar,    Key_Spacebar, Key_RightAlt, Key_Keymap1, ___, Key_RightControl, Key_1,
                        Key_Backspace, Key_Enter,            Key_Backspace, Key_Keymap1)
 };
 
@@ -215,60 +184,34 @@ const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
 
 
 
-// These 'solid' color effect definitions define a rainbow of
-// LED color modes calibrated to draw 500mA or less on the
-// Keyboardio Model 01.
-
-
-static kaleidoscope::LEDSolidColor solidRed(255, 0, 0);
-static kaleidoscope::LEDSolidColor solidGreen(0, 255, 0);
-static kaleidoscope::LEDSolidColor solidBlue(0, 0, 255);
-static kaleidoscope::LEDSolidColor solidWhite(255, 255, 255);
-
-static Key getKey(uint8_t layer, byte row, byte col) {
-  if (layer >= _LAYER_MAX) {
-    return EEPROMKeymap.getKey(layer, row, col);
-  }
-  return EEPROMKeymap.getKeyOverride(layer, row, col);
-}
-
-
 /** The 'setup' function is one of the two standard Arduino sketch functions.
   * It's called when your keyboard first powers up. This is where you set up
   * Kaleidoscope and any plugins.
   */
 
 KALEIDOSCOPE_INIT_PLUGINS(
-    BootGreetingEffect,
     LEDControl,
     LEDOff,
-    LEDRainbowEffect,
-    LEDRainbowWaveEffect,
-    LEDChaseEffect,
-    solidRed, solidGreen, solidBlue, solidWhite,
-    LEDBreatheEffect,
-    StalkerEffect,
     Macros,
+    EEPROMSettings,
     EEPROMKeymap,
-    AdjustableLatencyJitter,
+    //AdjustableLatencyJitter,
     Focus
   );
 void setup() {
   // First, call Kaleidoscope's internal setup function
-  SerialUSB.begin(9600);
+  Serial.begin(9600);
   Kaleidoscope.setup();
 
   // Reserve space in the keyboard's EEPROM for the keymaps
-  EEPROMKeymap.max_layers(3);
+  EEPROMKeymap.max_layers(5);
 
   // Reserve space for the number of Colormap layers we will use
 //  ColormapEffect.max_layers(3);
 
   // If you want to add more plugins using EEPROM, add their config steps here
 
-  // Let the keyboard know we're done with adding EEPROM plugins
-  EEPROMSettings.seal();
-
+#if 0
   // Tell the keyboard to listen for Focus events that Chrysalis will send
   Focus.addHook(FOCUS_HOOK_HELP);
   Focus.addHook(FOCUS_HOOK_VERSION);
@@ -283,6 +226,8 @@ void setup() {
 //  Focus.addHook(FOCUS_HOOK_COLORMAP);
 //  Focus.addHook(FOCUS_HOOK_COLORMAP_LAYER);
 
+#endif
+
 /*
   // If the settings have changed, re-transfer the keymap to EEPROM
   if (EEPROMSettings.version() != CHRYSALIS_EEPROM_VERSION) {
@@ -290,28 +235,6 @@ void setup() {
     EEPROMSettings.version(CHRYSALIS_EEPROM_VERSION);
   }
   */
-
-  // Use the EEPROM keymap that Chrysalis modifies
-  Layer.getKey = getKey;
-
-
-  // We set the brightness of the rainbow effects to 150 (on a scale of 0-255)
-  // This draws more than 500mA, but looks much nicer than a dimmer effect
-  LEDRainbowEffect.brightness(255);
-  LEDRainbowWaveEffect.brightness(255);
-
-  // The LED Stalker mode has a few effects. The one we like is
-  // called 'BlazingTrail'. For details on other options,
-  // see https://github.com/keyboardio/Kaleidoscope-LED-Stalker
-  StalkerEffect.variant = STALKER(BlazingTrail);
-
-  // We want to make sure that the firmware starts with LED effects off
-  // This avoids over-taxing devices that don't have a lot of power to share
-  // with USB devices
-  //LEDRainbowWaveEffect.activate();
-  solidGreen.activate();
-  //LEDOff.activate();
-  //StalkerEffect.activate();
 }
 
 /** loop is the second of the standard Arduino sketch functions.
@@ -321,20 +244,6 @@ void setup() {
   * call Kaleidoscope.loop(); and not do anything custom here.
   */
 
-bool done = false;
 void loop() {
   Kaleidoscope.loop();
-  /*
-  if(millis() > 20000 && done == false)
-  {
-    USBDevice.detach();
-    delay(1000);
-    USBDevice.attach();
-    delay(1000);
-    done = true;
-    SerialUSB.begin(9600);
-    Serial.println("done");
-  }
-  */
-
 }
