@@ -190,21 +190,21 @@ const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
   */
 
 KALEIDOSCOPE_INIT_PLUGINS(
-    LEDControl,
-    LEDOff,
     Macros,
     EEPROMSettings,
     EEPROMKeymap,
-    //AdjustableLatencyJitter,
-    Focus
+    Focus,
+      FocusSettingsCommand,
+  FocusEEPROMCommand
+
   );
 void setup() {
   // First, call Kaleidoscope's internal setup function
-  Serial.begin(9600);
+  SerialUSB.begin(9600);
   Kaleidoscope.setup();
 
   // Reserve space in the keyboard's EEPROM for the keymaps
-  EEPROMKeymap.max_layers(5);
+  EEPROMKeymap.setup(5);
 
   // Reserve space for the number of Colormap layers we will use
 //  ColormapEffect.max_layers(3);
