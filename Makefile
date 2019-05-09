@@ -1,5 +1,5 @@
 DEVICE_PORT=/dev/ttyACM0
-ARDUINO_PATH=~/work/shortcut/arm/arduino-1.8.2
+ARDUINO_PATH=~/arduino-1.8.8
 DYGMADIR=/home/matt/Arduino/hardware/dygma/samd
 BACKUP=${DYGMADIR}/libraries/Kaleidoscope-Focus/extras/backup.py
 FOCUS=${DYGMADIR}/libraries/Kaleidoscope-Focus/extras/kaleidoscope-focus.py
@@ -19,21 +19,20 @@ bootloader:
 	openocd -f ${ICECFG} -c "telnet_port disabled; init; halt; at91samd bootloader 0; program {{${BOOTLOADER}}} verify reset; shutdown"
 
 build:
-	${ARDUINO_PATH}/arduino  --pref build.path=${BUILD_PATH} --preserve-temp-files --verbose --verify --board dygma:samd:raise_native ${FIRMWARE} 
+	#${ARDUINO_PATH}/arduino  --pref build.path=${BUILD_PATH} --preserve-temp-files --verbose --verify --board dygma:samd:raise_native ${FIRMWARE} 
+	${ARDUINO_PATH}/arduino  --pref build.path=${BUILD_PATH} --preserve-temp-files --verbose --verify --board keyboardio:samd:raise_native ${FIRMWARE}
 
 flash: 
-	../reset.py ${DEVICE_PORT}
-	sleep 2
+	echo "hold esc or delete on Raise"
+#	python ./reset.py ${DEVICE_PORT}
 	/home/matt/.arduino15/packages/arduino/tools/bossac/1.7.0/bossac -i -d --port=${DEVICE_PORT} -e -w ${BUILD_PATH}/${FIRMWARE}.bin -R
 	# wait for device to settle
-	sleep 1.5
-	${BACKUP} --restore --port ${DEVICE_PORT}
 
 flash-ice:
 	openocd -f ${ICECFG} -c "telnet_port disabled; init; halt; at91samd bootloader 0; program {{${BUILD_PATH}/${FIRMWARE}.hex}} verify reset; shutdown"
 
 focus:
-	${FOCUS} -d ${DEVICE_PORT}
+	${FOCUS} --port ${DEVICE_PORT}
 
 backup:
 	${BACKUP} --backup --port ${DEVICE_PORT}

@@ -31,8 +31,10 @@
 #include "Kaleidoscope-FocusSerial.h"
 #include "Kaleidoscope-EEPROM-Settings.h"
 #include "Kaleidoscope-EEPROM-Keymap.h"
-//#include "Kaleidoscope-Colormap.h"
-//#include "Kaleidoscope-LED-Palette-Theme.h"
+#include "Kaleidoscope-Colormap.h"
+#include "Kaleidoscope-LED-Palette-Theme.h"
+#include "Kaleidoscope-LEDEffect-SolidColor.h"
+#include "Kaleidoscope-LEDEffect-Rainbow.h"
 //#include "Kaleidoscope-AdjustableLatencyJitter.h"
 
 
@@ -104,21 +106,21 @@ enum { QWERTY, NUMPAD, _LAYER_MAX }; // layers
 // *INDENT-OFF*
 
 const Key keymaps[][ROWS][COLS] PROGMEM = {
-[QWERTY] = KEYMAP_60
-( Key_Escape, Key_1, Key_2, Key_3, Key_4, Key_5, Key_6,                     Key_LEDEffectNext, Key_8, Key_9, Key_0, Key_Minus, Key_Equals, Key_Delete,
-  Key_Tab, Key_Q, Key_W, Key_E, Key_R, Key_T,                               Key_Y, Key_U, Key_I, Key_O, Key_P, Key_LeftBracket, Key_Backspace, Key_1,
-  Key_CapsLock, Key_LEDEffectNext , Key_S, Key_D, Key_F, Key_G,                           Key_H, Key_J, Key_K, Key_L, Key_Semicolon, Key_Quote, Key_Enter,
-  Key_LeftShift, Key_Z, Key_X, Key_C, Key_V, Key_B,             Key_N, Key_M, Key_Comma, Key_Period, Key_Slash, Key_RightShift,
-  Key_LeftControl,Key_LeftGui, Key_LeftAlt,Key_Keymap1, Key_Spacebar,  Key_Spacebar, Key_RightAlt, Key_RightGui, Key_Menu, Key_RightControl, Key_1,
-                     Key_LEDEffectNext, Key_Enter,                  Key_A, Key_B),
+[QWERTY] = KEYMAP_60 
+( Key_Escape, Key_1, Key_2, Key_3, Key_4, Key_5, Key_6,                     Key_7, Key_8, Key_9, Key_0, Key_Minus, Key_Equals, Key_Backspace, 
+  Key_Tab, Key_Q, Key_W, Key_E, Key_R, Key_T,                               Key_Y, Key_U, Key_I, Key_O, Key_P, Key_LeftBracket, Key_RightBracket, Key_Enter, 
+  Key_CapsLock, Key_A , Key_S, Key_D, Key_F, Key_G,                            Key_H, Key_J, Key_K, Key_L, Key_Semicolon, Key_Quote, Key_NonUsPound, 
+  Key_LeftShift, Key_Keymap1, Key_Z, Key_X, Key_C, Key_V, Key_B,                    Key_N, Key_M, Key_Comma, Key_Period, Key_Slash, Key_RightShift,
+  Key_LeftControl,Key_LEDEffectNext, Key_LeftAlt,Key_Enter, Key_Spacebar,   Key_Spacebar, Key_RightShift, Key_RightAlt, Key_LEDEffectNext, Key_Menu, Key_RightControl,
+                     Key_Backspace, Key_Delete,                             Key_LeftArrow, Key_RightArrow),
 
-[NUMPAD] = KEYMAP_60
-( Key_Escape, Key_1, Key_2, Key_3, Key_4, Key_5, Key_6,             Key_7, Key_8, Key_9, Key_0, Key_A, Key_A, Key_Delete,
-  Key_Tab, Key_Q, Key_UpArrow, Key_E, Key_R, Key_T,                       Key_Y, Key_U, Key_I, Key_O, Key_P, Key_M, Key_Backspace, Key_1,
-  Key_LeftControl, Key_LeftArrow, Key_DownArrow, Key_RightArrow, Key_F, Key_G,               Key_H, Key_J, Key_K, Key_L, Key_L, Key_M, Key_Enter,
-  Key_LeftShift, Key_Z, Key_X, Key_C, Key_V, Key_B,          Key_N, Key_M, Key_Semicolon, Key_Comma, Key_Minus, Key_RightShift,
-  Key_LeftControl, Key_CapsLock, ___, Key_Keymap1, Key_Spacebar,    Key_Spacebar, Key_RightAlt, Key_Keymap1, ___, Key_RightControl, Key_1,
-                       Key_Backspace, Key_Enter,            Key_Backspace, Key_Keymap1)
+[NUMPAD] = KEYMAP_60 
+( Key_Escape, Key_1, Key_2, Key_3, Key_4, Key_5, Key_6,                     Key_7, Key_8, Key_9, Key_Equals, XXX, XXX, ___, 
+  Key_Tab, Key_7, Key_8, Key_9, Key_0, Key_Period,                          Key_4, Key_5, Key_6, Key_KeypadAdd, Key_KeypadMultiply, XXX, XXX, ___, 
+  Key_Enter, ___, Key_S, Key_V, Key_UpArrow, Key_Comma,                   Key_1, Key_2, Key_3, Key_KeypadSubtract, Key_KeypadDivide, XXX, ___, 
+  Key_LeftShift, ___, Key_Z, Key_X, Key_LeftArrow, Key_DownArrow, Key_RightArrow,                    Key_0, XXX, XXX, XXX, Key_UpArrow, Key_RightShift, 
+  ___, ___, ___, ___, ___,                                                  XXX, XXX, Key_LeftArrow, Key_DownArrow, Key_RightArrow, ___,  
+                       ___, ___,                                            Key_Period, Key_Comma)
 };
 
 
@@ -182,7 +184,7 @@ const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
   return MACRO_NONE;
 }
 
-
+static kaleidoscope::plugin::LEDSolidColor solidRed(255, 0, 0);
 
 /** The 'setup' function is one of the two standard Arduino sketch functions.
   * It's called when your keyboard first powers up. This is where you set up
@@ -190,13 +192,17 @@ const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
   */
 
 KALEIDOSCOPE_INIT_PLUGINS(
-    Macros,
-    EEPROMSettings,
-    EEPROMKeymap,
-    Focus,
-      FocusSettingsCommand,
-  FocusEEPROMCommand
-
+  Macros,
+  EEPROMSettings,
+  EEPROMKeymap,
+  FocusSettingsCommand,
+  FocusEEPROMCommand,
+  LEDControl,
+  LEDPaletteTheme,
+  ColormapEffect,
+  solidRed,
+  LEDRainbowEffect,
+  Focus
   );
 void setup() {
   // First, call Kaleidoscope's internal setup function
@@ -204,10 +210,14 @@ void setup() {
   Kaleidoscope.setup();
 
   // Reserve space in the keyboard's EEPROM for the keymaps
-  EEPROMKeymap.setup(5);
+  EEPROMKeymap.setup(3);
 
   // Reserve space for the number of Colormap layers we will use
-//  ColormapEffect.max_layers(3);
+  ColormapEffect.max_layers(3);
+  LEDRainbowEffect.brightness(255);
+  LEDRainbowWaveEffect.brightness(255);
+  //solidRed.activate();
+  LEDRainbowEffect.activate();
 
   // If you want to add more plugins using EEPROM, add their config steps here
 
@@ -244,6 +254,12 @@ void setup() {
   * call Kaleidoscope.loop(); and not do anything custom here.
   */
 
+unsigned long last_print = 0;
 void loop() {
   Kaleidoscope.loop();
+  if(millis() > last_print + 1000)
+  {
+      //SerialUSB.println(LEDControl.paused);
+      last_print = millis();
+  }
 }
