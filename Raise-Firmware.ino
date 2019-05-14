@@ -35,6 +35,7 @@
 #include "Kaleidoscope-LED-Palette-Theme.h"
 #include "Kaleidoscope-LEDEffect-SolidColor.h"
 #include "Kaleidoscope-LEDEffect-Rainbow.h"
+#include "Raise-Focus.h"
 //#include "Kaleidoscope-AdjustableLatencyJitter.h"
 
 
@@ -202,6 +203,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
   ColormapEffect,
   solidRed,
   LEDRainbowEffect,
+  RaiseFocus,
   Focus
   );
 void setup() {
