@@ -205,7 +205,6 @@ KALEIDOSCOPE_INIT_PLUGINS(
   LEDPaletteTheme,
   ColormapEffect,
   solidRed, solidGreen, solidWhite,
-  StalkerEffect,
   LEDRainbowEffect,
   StalkerEffect,
   RaiseFocus,
@@ -224,9 +223,7 @@ void setup() {
   LEDRainbowEffect.brightness(255);
   LEDRainbowWaveEffect.brightness(255);
   StalkerEffect.variant = STALKER(BlazingTrail);
-  //solidRed.activate();
-   //  LEDRainbowEffect.activate();
-  //StalkerEffect.activate();
+
   solidGreen.activate();
 
   // If you want to add more plugins using EEPROM, add their config steps here
