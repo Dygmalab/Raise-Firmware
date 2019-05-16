@@ -25,12 +25,11 @@ build:
 flash: 
 	echo "hold esc or delete on Raise"
 	python ./reset.py ${DEVICE_PORT}
-	sleep 2
+	sleep 3
 	/home/matt/.arduino15/packages/arduino/tools/bossac/1.7.0/bossac -i -d --port=${DEVICE_PORT} -e -w ${BUILD_PATH}/${FIRMWARE}.bin -R
 	# wait for device to settle
 	sleep 3
-	${BACKUP} --restore --port ${DEVICE_PORT}
-	${BACKUP} --custom --port ${DEVICE_PORT}
+	${BACKUP} --filename matt --restore --port ${DEVICE_PORT}
 
 flash-ice:
 	openocd -f ${ICECFG} -c "telnet_port disabled; init; halt; at91samd bootloader 0; program {{${BUILD_PATH}/${FIRMWARE}.hex}} verify reset; shutdown"
@@ -39,11 +38,10 @@ focus:
 	${FOCUS} --port ${DEVICE_PORT}
 
 backup:
-	${BACKUP} --backup --port ${DEVICE_PORT}
+	${BACKUP} --filename matt --backup --port ${DEVICE_PORT}
 
 restore:
-	${BACKUP} --restore --port ${DEVICE_PORT}
-	${BACKUP} --custom --port ${DEVICE_PORT}
+	${BACKUP} --filename matt --restore --port ${DEVICE_PORT}
 
 size:
 	arm-none-eabi-size ${BUILD_PATH}/${FIRMWARE}.elf
