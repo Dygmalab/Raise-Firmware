@@ -35,6 +35,7 @@
 #include "Kaleidoscope-LED-Palette-Theme.h"
 #include "Kaleidoscope-LEDEffect-SolidColor.h"
 #include "Kaleidoscope-LEDEffect-Rainbow.h"
+#include "Kaleidoscope-LED-Stalker.h"
 #include "Raise-Focus.h"
 //#include "Kaleidoscope-AdjustableLatencyJitter.h"
 
@@ -203,6 +204,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
   ColormapEffect,
   solidRed,
   LEDRainbowEffect,
+  StalkerEffect,
   RaiseFocus,
   Focus
   );
@@ -218,35 +220,12 @@ void setup() {
   ColormapEffect.max_layers(3);
   LEDRainbowEffect.brightness(255);
   LEDRainbowWaveEffect.brightness(255);
+  StalkerEffect.variant = STALKER(BlazingTrail);
   //solidRed.activate();
   LEDRainbowEffect.activate();
 
   // If you want to add more plugins using EEPROM, add their config steps here
 
-#if 0
-  // Tell the keyboard to listen for Focus events that Chrysalis will send
-  Focus.addHook(FOCUS_HOOK_HELP);
-  Focus.addHook(FOCUS_HOOK_VERSION);
-  Focus.addHook(FOCUS_HOOK_KEYMAP);
-  Focus.addHook(FOCUS_HOOK_KEYMAP_LAYER);
-  Focus.addHook(FOCUS_HOOK_EEPROM);
-  Focus.addHook(FOCUS_HOOK_SETTINGS);
-  Focus.addHook(FOCUS_HOOK_HARDWARE);
-
-  Focus.addHook(FOCUS_HOOK_ADJUSTABLELATENCYJITTER);
-//  Focus.addHook(FOCUS_HOOK_LEDPALETTETHEME);
-//  Focus.addHook(FOCUS_HOOK_COLORMAP);
-//  Focus.addHook(FOCUS_HOOK_COLORMAP_LAYER);
-
-#endif
-
-/*
-  // If the settings have changed, re-transfer the keymap to EEPROM
-  if (EEPROMSettings.version() != CHRYSALIS_EEPROM_VERSION) {
-    EEPROMKeymap.focusKeymapTransfer("keymap.transfer");
-    EEPROMSettings.version(CHRYSALIS_EEPROM_VERSION);
-  }
-  */
 }
 
 /** loop is the second of the standard Arduino sketch functions.
