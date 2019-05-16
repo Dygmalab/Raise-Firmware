@@ -35,6 +35,7 @@
 #include "Kaleidoscope-LED-Palette-Theme.h"
 #include "Kaleidoscope-LEDEffect-SolidColor.h"
 #include "Kaleidoscope-LEDEffect-Rainbow.h"
+#include "Kaleidoscope-LED-Stalker.h"
 #include "Raise-Focus.h"
 //#include "Kaleidoscope-AdjustableLatencyJitter.h"
 
@@ -186,6 +187,8 @@ const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
 }
 
 static kaleidoscope::plugin::LEDSolidColor solidRed(255, 0, 0);
+static kaleidoscope::plugin::LEDSolidColor solidGreen(0, 255, 0);
+static kaleidoscope::plugin::LEDSolidColor solidWhite(255, 255, 255);
 
 /** The 'setup' function is one of the two standard Arduino sketch functions.
   * It's called when your keyboard first powers up. This is where you set up
@@ -201,7 +204,8 @@ KALEIDOSCOPE_INIT_PLUGINS(
   LEDControl,
   LEDPaletteTheme,
   ColormapEffect,
-  solidRed,
+  solidRed, solidGreen, solidWhite,
+  StalkerEffect,
   LEDRainbowEffect,
   RaiseFocus,
   Focus
@@ -218,8 +222,11 @@ void setup() {
   ColormapEffect.max_layers(3);
   LEDRainbowEffect.brightness(255);
   LEDRainbowWaveEffect.brightness(255);
+  StalkerEffect.variant = STALKER(BlazingTrail);
   //solidRed.activate();
-  LEDRainbowEffect.activate();
+   //  LEDRainbowEffect.activate();
+  //StalkerEffect.activate();
+  solidGreen.activate();
 
   // If you want to add more plugins using EEPROM, add their config steps here
 
