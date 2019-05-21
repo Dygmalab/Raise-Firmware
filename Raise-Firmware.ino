@@ -1,5 +1,5 @@
 // -*- mode: c++ -*-
-// Copyright 2016 Keyboardio, inc. <jesse@keyboard.io>
+// Copyright 2019 DygmaLab, SE. <matt@dygma.com>
 // See "LICENSE" for license details
 
 #ifndef BUILD_INFORMATION
@@ -10,7 +10,7 @@
 
 /**
  * These #include directives pull in the Kaleidoscope firmware core,
- * as well as the Kaleidoscope plugins we use in the Model 01's firmware
+ * as well as the Kaleidoscope plugins we use in the Raise's firmware
  */
 
 
@@ -41,7 +41,7 @@
 //#include "Kaleidoscope-AdjustableLatencyJitter.h"
 
 
-/** This 'enum' is a list of all the macros used by the Model 01's firmware
+/** This 'enum' is a list of all the macros used by the Raise's firmware
   * The names aren't particularly important. What is important is that each
   * is unique.
   *
@@ -55,12 +55,10 @@
   */
 
 enum { MACRO_VERSION_INFO,
-       MACRO_ANY
      };
 
 
-
-/** The Model 01's key layouts are defined as 'keymaps'. By default, there are three
+/** The Raise's key layouts are defined as 'keymaps'. By default, there are three
   * keymaps: The standard QWERTY keymap, the "Function layer" keymap and the "Numpad"
   * keymap.
   *
@@ -123,7 +121,7 @@ KEYMAPS(
   Key_Enter, ___, Key_S, Key_V, Key_UpArrow, Key_Comma,                   Key_1, Key_2, Key_3, Key_KeypadSubtract, Key_KeypadDivide, XXX, ___, 
   Key_LeftShift, ___, Key_Z, Key_X, Key_LeftArrow, Key_DownArrow, Key_RightArrow,                    Key_0, XXX, XXX, XXX, Key_UpArrow, Key_RightShift, 
   ___, ___, ___, ___, ___,                                                  XXX, XXX, Key_LeftArrow, Key_DownArrow, Key_RightArrow, ___,  
-                       ___, ___,                                            Key_Period, Key_Comma)
+                       ___, M(MACRO_VERSION_INFO),                                            Key_Period, Key_Comma)
 );
 
 
@@ -138,28 +136,10 @@ KEYMAPS(
 
 static void versionInfoMacro(uint8_t keyState) {
   if (keyToggledOn(keyState)) {
-    Macros.type(PSTR("Keyboardio Model 01 - Kaleidoscope "));
+    Macros.type(PSTR("Dygma Raise - Kaleidoscope "));
     Macros.type(PSTR(BUILD_INFORMATION));
   }
 }
-
-/** anyKeyMacro is used to provide the functionality of the 'Any' key.
- *
- * When the 'any key' macro is toggled on, a random alphanumeric key is
- * selected. While the key is held, the function generates a synthetic
- * keypress event repeating that randomly selected key.
- *
- */
-
-static void anyKeyMacro(uint8_t keyState) {
-  static Key lastKey;
-  if (keyToggledOn(keyState))
-    lastKey.keyCode = Key_A.keyCode + (uint8_t)(millis() % 36);
-
-  if (keyIsPressed(keyState))
-    kaleidoscope::hid::pressKey(lastKey);
-}
-
 
 /** macroAction dispatches keymap events that are tied to a macro
     to that macro. It takes two uint8_t parameters.
@@ -179,15 +159,12 @@ const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
   case MACRO_VERSION_INFO:
     versionInfoMacro(keyState);
     break;
-
-  case MACRO_ANY:
-    anyKeyMacro(keyState);
-    break;
   }
   return MACRO_NONE;
 }
 
 static kaleidoscope::plugin::LEDSolidColor solidRed(255, 0, 0);
+static kaleidoscope::plugin::LEDSolidColor solidBluez(0, 0, 255); // calling it solidBlue prevents the keyboard from even starting!
 static kaleidoscope::plugin::LEDSolidColor solidGreen(0, 255, 0);
 static kaleidoscope::plugin::LEDSolidColor solidWhite(255, 255, 255);
 
@@ -205,13 +182,14 @@ KALEIDOSCOPE_INIT_PLUGINS(
   LEDControl,
   LEDPaletteTheme,
   ColormapEffect,
-  solidRed, solidGreen, solidWhite,
+  solidRed, solidGreen, solidBluez, solidWhite,
   LEDRainbowEffect,
   LEDJointEffect,
   StalkerEffect,
   RaiseFocus,
   Focus
   );
+
 void setup() {
   // First, call Kaleidoscope's internal setup function
   SerialUSB.begin(9600);
