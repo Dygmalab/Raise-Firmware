@@ -35,6 +35,7 @@
 #include "Kaleidoscope-LED-Palette-Theme.h"
 #include "Kaleidoscope-LEDEffect-SolidColor.h"
 #include "Kaleidoscope-LEDEffect-Rainbow.h"
+#include "Kaleidoscope-LEDEffect-Joint.h"
 #include "Kaleidoscope-LED-Stalker.h"
 #include "Raise-Focus.h"
 //#include "Kaleidoscope-AdjustableLatencyJitter.h"
@@ -107,13 +108,13 @@ enum { QWERTY, NUMPAD, _LAYER_MAX }; // layers
  */
 // *INDENT-OFF*
 
-const Key keymaps[][ROWS][COLS] PROGMEM = {
+KEYMAPS(
 [QWERTY] = KEYMAP_60 
 ( Key_Escape, Key_1, Key_2, Key_3, Key_4, Key_5, Key_6,                     Key_7, Key_8, Key_9, Key_0, Key_Minus, Key_Equals, Key_Backspace, 
   Key_Tab, Key_Q, Key_W, Key_E, Key_R, Key_T,                               Key_Y, Key_U, Key_I, Key_O, Key_P, Key_LeftBracket, Key_RightBracket, Key_Enter, 
   Key_CapsLock, Key_A , Key_S, Key_D, Key_F, Key_G,                            Key_H, Key_J, Key_K, Key_L, Key_Semicolon, Key_Quote, Key_Backslash, 
   Key_LeftShift, Key_Backslash, Key_Z, Key_X, Key_C, Key_V, Key_B,                    Key_N, Key_M, Key_Comma, Key_Period, Key_Slash, Key_RightShift,
-  Key_LeftControl,Key_LEDEffectNext, Key_LeftAlt,Key_Enter, Key_Spacebar,   Key_Spacebar, Key_RightShift, Key_RightAlt, Key_Keymap1_Momentary, Key_Menu, Key_RightControl,
+  Key_LeftControl,Key_LEDEffectNext, Key_LeftAlt,Key_Enter, Key_Spacebar,   Key_Spacebar, Key_RightShift, Key_RightAlt, Key_Keymap1_Momentary, Key_LEDEffectNext, Key_RightControl,
                      Key_Backspace, Key_Delete,                             Key_LeftArrow, Key_RightArrow),
 
 [NUMPAD] = KEYMAP_60 
@@ -123,7 +124,7 @@ const Key keymaps[][ROWS][COLS] PROGMEM = {
   Key_LeftShift, ___, Key_Z, Key_X, Key_LeftArrow, Key_DownArrow, Key_RightArrow,                    Key_0, XXX, XXX, XXX, Key_UpArrow, Key_RightShift, 
   ___, ___, ___, ___, ___,                                                  XXX, XXX, Key_LeftArrow, Key_DownArrow, Key_RightArrow, ___,  
                        ___, ___,                                            Key_Period, Key_Comma)
-};
+);
 
 
 
@@ -206,6 +207,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
   ColormapEffect,
   solidRed, solidGreen, solidWhite,
   LEDRainbowEffect,
+  LEDJointEffect,
   StalkerEffect,
   RaiseFocus,
   Focus
