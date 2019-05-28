@@ -37,6 +37,7 @@
 #include "Kaleidoscope-LEDEffect-Rainbow.h"
 #include "Kaleidoscope-LEDEffect-Joint.h"
 #include "Kaleidoscope-LED-Stalker.h"
+#include "Kaleidoscope-IdleLEDs.h"
 #include "Raise-Focus.h"
 //#include "Kaleidoscope-AdjustableLatencyJitter.h"
 
@@ -180,10 +181,12 @@ KALEIDOSCOPE_INIT_PLUGINS(
   FocusSettingsCommand,
   FocusEEPROMCommand,
   LEDControl,
+  FocusLEDCommand,
   LEDPaletteTheme,
   ColormapEffect,
   solidRed, solidGreen, solidBluez, solidWhite,
   LEDRainbowEffect,
+  IdleLEDs,
   LEDJointEffect,
   StalkerEffect,
   RaiseFocus,
@@ -204,7 +207,9 @@ void setup() {
   LEDRainbowWaveEffect.brightness(255);
   StalkerEffect.variant = STALKER(BlazingTrail);
 
-  solidGreen.activate();
+  IdleLEDs.idle_time_limit = 600; // 10 minutes
+
+//  solidGreen.activate();
 
   // If you want to add more plugins using EEPROM, add their config steps here
 
