@@ -183,12 +183,8 @@ KALEIDOSCOPE_INIT_PLUGINS(
   LEDControl,
   FocusLEDCommand,
   LEDPaletteTheme,
-  ColormapEffect,
-  solidRed, solidGreen, solidBluez, solidWhite,
-  LEDRainbowEffect,
+  solidRed, solidGreen, solidBluez, solidWhite, LEDRainbowEffect, LEDJointEffect, StalkerEffect, ColormapEffect,
   IdleLEDs,
-  LEDJointEffect,
-  StalkerEffect,
   RaiseFocus,
   Focus
   );
@@ -209,9 +205,7 @@ void setup() {
 
   IdleLEDs.idle_time_limit = 600; // 10 minutes
 
-//  solidGreen.activate();
-
-  // If you want to add more plugins using EEPROM, add their config steps here
+//  LEDRainbowEffect.activate();
 
 }
 
@@ -222,12 +216,6 @@ void setup() {
   * call Kaleidoscope.loop(); and not do anything custom here.
   */
 
-unsigned long last_print = 0;
 void loop() {
   Kaleidoscope.loop();
-  if(millis() > last_print + 1000)
-  {
-      //SerialUSB.println(LEDControl.paused);
-      last_print = millis();
-  }
 }

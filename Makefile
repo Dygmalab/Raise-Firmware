@@ -2,7 +2,7 @@ DEVICE_PORT=/dev/ttyACM0
 ARDUINO_PATH=~/arduino-1.8.6
 DYGMADIR=/home/matt/Arduino/hardware/dygma/samd
 BACKUP=~/raise-keymaps/focus/backup.py
-FOCUS=${DYGMADIR}/libraries/off/Kaleidoscope-Focus/extras/kaleidoscope-focus.py
+FOCUS=${DYGMADIR}/../../../off/Kaleidoscope-Focus/extras/kaleidoscope-focus.py
 BOOTLOADER=${DYGMADIR}/bootloaders/zero/samd21_sam_ba.bin
 ICECFG=${DYGMADIR}/variants/arduino_zero/openocd_scripts/arduino_zero.cfg
 LAST_PROG=$(shell \ls /tmp/arduino_*/*.ino.hex --sort=time  | head -1)
@@ -12,7 +12,8 @@ FIRMWARE=Raise-Firmware.ino
 # arduino command line arguments
 # https://github.com/arduino/Arduino/blob/master/build/shared/manpage.adoc
 
-fuse-openocd:
+fuse:
+#	openocd -f ${ICECFG} -c "telnet_port disabled; init; halt; at91samd nvmuserrow; at91samd nvmuserrow 0xFFFFFC5DD8E0C788; shutdown"
 	openocd -f ${ICECFG} -c "telnet_port disabled; init; halt; at91samd nvmuserrow; at91samd nvmuserrow 0xFFFFFC5DD8E0C78A; shutdown"
 
 bootloader:
