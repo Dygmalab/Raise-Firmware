@@ -183,12 +183,8 @@ KALEIDOSCOPE_INIT_PLUGINS(
   LEDControl,
   FocusLEDCommand,
   LEDPaletteTheme,
-  ColormapEffect,
-  solidRed, solidGreen, solidBluez, solidWhite,
-  LEDRainbowEffect,
+  solidRed, solidGreen, solidBluez, solidWhite, LEDRainbowEffect, LEDJointEffect, StalkerEffect, ColormapEffect,
   IdleLEDs,
-  LEDJointEffect,
-  StalkerEffect,
   RaiseFocus,
   Focus
   );
