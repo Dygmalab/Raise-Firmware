@@ -1,7 +1,7 @@
 DEVICE_PORT=/dev/ttyACM0
 ARDUINO_PATH=~/arduino-1.8.6
 DYGMADIR=/home/matt/Arduino/hardware/dygma/samd
-BACKUP=../../keymaps/focus/backup.py
+BACKUP=~/raise-keymaps/focus/backup.py
 FOCUS=${DYGMADIR}/libraries/off/Kaleidoscope-Focus/extras/kaleidoscope-focus.py
 BOOTLOADER=${DYGMADIR}/bootloaders/zero/samd21_sam_ba.bin
 ICECFG=${DYGMADIR}/variants/arduino_zero/openocd_scripts/arduino_zero.cfg
