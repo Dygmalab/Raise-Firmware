@@ -9,6 +9,7 @@ ICECFG=${DYGMADIR}/variants/arduino_zero/openocd_scripts/arduino_zero.cfg
 LAST_PROG=$(shell \ls /tmp/arduino_*/*.ino.hex --sort=time  | head -1)
 BUILD_PATH=./output
 FIRMWARE=Raise-Firmware.ino
+RAISE_COMMIT= $(shell git log --pretty=format:'%h' -n1)
 
 all: build
 
@@ -24,6 +25,7 @@ bootloader:
 
 build:
 	python ${DYGMADIR}/libraries/Kaleidoscope-Hardware-Raise/extras/hex_to_atmega.py 
+	python ${DYGMADIR}/libraries/Kaleidoscope-Hardware-Raise/extras/add_git_version.py ${RAISE_COMMIT}
 	${ARDUINO_PATH}/arduino  --pref build.path=${BUILD_PATH} --preserve-temp-files --verbose --verify --board dygma:samd:raise_native ${FIRMWARE} 
 	#${ARDUINO_PATH}/arduino  --pref build.path=${BUILD_PATH} --preserve-temp-files --verbose --verify --board keyboardio:samd:raise_native ${FIRMWARE}
 
