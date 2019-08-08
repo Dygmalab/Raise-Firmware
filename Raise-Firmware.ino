@@ -191,7 +191,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
 
 void setup() {
   // First, call Kaleidoscope's internal setup function
-  SerialUSB.begin(9600);
+  //SerialUSB.begin(9600);
   Kaleidoscope.setup();
 
   // Reserve space in the keyboard's EEPROM for the keymaps
