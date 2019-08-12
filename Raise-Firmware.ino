@@ -202,9 +202,6 @@ void setup() {
   LEDRainbowEffect.brightness(255);
   LEDRainbowWaveEffect.brightness(255);
   StalkerEffect.variant = STALKER(BlazingTrail);
-
-  IdleLEDs.idle_time_limit = 600; // 10 minutes
-
 //  LEDRainbowEffect.activate();
 
 }
