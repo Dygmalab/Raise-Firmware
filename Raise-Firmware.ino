@@ -195,10 +195,10 @@ void setup() {
   Kaleidoscope.setup();
 
   // Reserve space in the keyboard's EEPROM for the keymaps
-  EEPROMKeymap.setup(3);
+  EEPROMKeymap.setup(10);
 
   // Reserve space for the number of Colormap layers we will use
-  ColormapEffect.max_layers(3);
+  ColormapEffect.max_layers(10);
   LEDRainbowEffect.brightness(255);
   LEDRainbowWaveEffect.brightness(255);
   StalkerEffect.variant = STALKER(BlazingTrail);
