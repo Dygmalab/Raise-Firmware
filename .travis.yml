@@ -1,0 +1,16 @@
+language: c
+before_install:
+  - wget http://downloads.arduino.cc/arduino-1.8.10-linux64.tar.xz
+  - tar xf arduino-1.8.10-linux64.tar.xz
+  - sudo mv arduino-1.8.10 /usr/local/share/arduino
+  - sudo ln -s /usr/local/share/arduino/arduino /usr/local/bin/arduino
+  - mkdir -p ~/Arduino/hardware/dygma
+  - git clone --recursive https://github.com/Dygmalab/Kaleidoscope-Bundle-Dygma ~/Arduino/hardware/dygma/samd
+install:
+  - arduino --install-boards arduino:samd
+script:
+  - arduino -v --verify --board dygma:samd:raise_native Raise-Firmware.ino
+notifications:
+  email:
+    on_success: change
+    on_failure: change
