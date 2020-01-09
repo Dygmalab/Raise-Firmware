@@ -18,52 +18,13 @@
 #ifdef ARDUINO_SAMD_RAISE
 
 #include "RaiseIdleLEDs.h"
-#include <Kaleidoscope-EEPROM-Settings.h>
-#include <Kaleidoscope-FocusSerial.h>
+#include <Kaleidoscope-IdleLEDs.h>
 
 namespace kaleidoscope {
 namespace plugin {
 
-uint16_t RaiseIdleLEDs::settings_base_;
-
-void RaiseIdleLEDs::setup() {
-  settings_base_ = ::EEPROMSettings.requestSlice(sizeof(uint16_t));
-
-  // If idleTime is max, assume that EEPROM is uninitialized, and store the
-  // defaults.
-  uint16_t idle_time;
-  Kaleidoscope.storage().get(settings_base_, idle_time);
-  if (idle_time == 0xffff) {
-    idle_time = idle_time_limit;
-  }
-  setIdleTimeoutSeconds(idle_time);
-}
-
-void RaiseIdleLEDs::setIdleTimeoutSeconds(uint32_t new_limit) {
-  IdleLEDs::setIdleTimeoutSeconds(new_limit);
-
-  uint16_t stored_limit = (uint16_t)new_limit;
-  Kaleidoscope.storage().put(settings_base_, stored_limit);
-  Kaleidoscope.storage().commit();
-}
-
-EventHandlerResult RaiseIdleLEDs::onFocusEvent(const char *command) {
-  const char *cmd = PSTR("idleleds.time_limit");
-
-  if (::Focus.handleHelp(command, cmd))
-    return EventHandlerResult::OK;
-
-  if (strcmp_P(command, cmd) != 0)
-    return EventHandlerResult::OK;
-
-  if (::Focus.isEOL()) {
-    ::Focus.send(idleTimeoutSeconds());
-  } else {
-    uint16_t idle_time;
-    ::Focus.read(idle_time);
-    setIdleTimeoutSeconds(idle_time);
-  }
-  return EventHandlerResult::EVENT_CONSUMED;
+EventHandlerResult RaiseIdleLEDs::onKeyswitchEvent(Key &mapped_key, KeyAddr key_addr, uint8_t key_state) {
+  return ::PersistentIdleLEDs.onKeyswitchEvent(mapped_key, key_addr, key_state);
 }
 
 }

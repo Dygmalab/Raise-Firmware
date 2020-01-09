@@ -23,14 +23,17 @@
  * ship with have a variant of IdleLEDs that stores its settings in EEPROM, but
  * the plugin is at the end of the plugin list. Kaleidoscope has
  * PersistentIdleLEDs, which does the same thing. The problem is, that we need
- * to move IdleLEDs to the top of the list, but that would rearrange the EEPROM
- * layout. Since we want to remain compatible with the initial version of the
- * factory firmware, we can't do that.
+ * to move IdleLEDs to the top of the list, so it can catch all key events
+ * before they get consumed by other plugins, but that would rearrange the
+ * EEPROM layout. Since we want to remain compatible with the initial version of
+ * the factory firmware, we can't do that.
  *
- * So this plugin is here as a workaround: it allocates EEPROM when
- * `RaiseIdleLEDs.setup()` is called from the firmware sketch, instead of doing
- * so in `onSetup()`. This allows us to place the plugin early, but allocate
- * space later, without having to resort to allocating in a per-cycle hook.
+ * So this plugin is here as a workaround: we keep PersistentIdleLEDs at the
+ * same position the old IdleLEDs plugin was, but we add this plugin at the top.
+ * All it does, is catch key events and proxy them to PersistentIdleLEDs, thus
+ * making sure it sees everything. It does mean that PersistentIdleLEDs will act
+ * twice on most key presses, but thankfully, that has no ill side effects. At
+ * most, we'll set the start time twice, but that's a very cheap operation.
  */
 
 #pragma once
@@ -38,19 +41,13 @@
 #ifdef ARDUINO_SAMD_RAISE
 
 #include <Kaleidoscope.h>
-#include <Kaleidoscope-IdleLEDs.h>
 
 namespace kaleidoscope {
 namespace plugin {
 
-class RaiseIdleLEDs : public IdleLEDs {
+class RaiseIdleLEDs : public kaleidoscope::Plugin {
  public:
-  void setup();
-  EventHandlerResult onFocusEvent(const char *command);
-
-  static void setIdleTimeoutSeconds(uint32_t new_limit);
- private:
-  static uint16_t settings_base_;
+  EventHandlerResult onKeyswitchEvent(Key &mapped_key, KeyAddr key_addr, uint8_t key_state);
 };
 
 }

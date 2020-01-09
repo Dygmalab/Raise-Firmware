@@ -27,6 +27,7 @@
 #include "Kaleidoscope-FocusSerial.h"
 #include "Kaleidoscope-EEPROM-Settings.h"
 #include "Kaleidoscope-EEPROM-Keymap.h"
+#include "Kaleidoscope-IdleLEDs.h"
 #include "Kaleidoscope-Colormap.h"
 #include "Kaleidoscope-LED-Palette-Theme.h"
 #include "Kaleidoscope-LEDEffect-Rainbow.h"
@@ -159,6 +160,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
   LEDPaletteTheme,
   LEDOff,
   LEDRainbowEffect, LEDRainbowWaveEffect, LEDJointEffect, StalkerEffect, ColormapEffect,
+  PersistentIdleLEDs,
   RaiseFocus,
   TapDance,
   DynamicTapDance,
@@ -174,7 +176,6 @@ KALEIDOSCOPE_INIT_PLUGINS(
 void setup() {
   Kaleidoscope.serialPort().begin(9600);
   Kaleidoscope.setup();
-  RaiseIdleLEDs.setup();
 
   // Reserve space in the keyboard's EEPROM for the keymaps
   EEPROMKeymap.setup(10);
