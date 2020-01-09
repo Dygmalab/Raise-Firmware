@@ -188,9 +188,6 @@ void setup() {
 
   DynamicTapDance.setup(0, 1024);
   DynamicMacros.reserve_storage(2048);
-
-  LEDOff.activate();
-  LEDControl.set_all_leds_to(CRGB(255, 0, 0));
 }
 
 void loop() {
