@@ -38,6 +38,7 @@
 #include "Kaleidoscope-DynamicMacros.h"
 #include "Kaleidoscope-MagicCombo.h"
 #include "Kaleidoscope-USB-Quirks.h"
+#include "Kaleidoscope-LayerFocus.h"
 #include "RaiseIdleLEDs.h"
 #include "kaleidoscope/device/dygma/raise/Focus.h"
 #include "kaleidoscope/device/dygma/raise/SideFlash.h"
@@ -170,7 +171,8 @@ KALEIDOSCOPE_INIT_PLUGINS(
   MouseKeys,
   OneShot,
   EscapeOneShot,
-  Qukeys
+  Qukeys,
+  LayerFocus
 );
 
 void setup() {
