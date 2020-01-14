@@ -21,7 +21,7 @@ namespace kaleidoscope {
 namespace plugin {
 
 KeyAddr LEDCapsLockLight::caps_address_ = UnknownKeyswitchLocation;
-uint8_t LEDCapsLockLight::highlight_hue_ = 170;
+uint8_t LEDCapsLockLight::highlight_hue_ = 0;
 bool LEDCapsLockLight::caps_was_on_;
 
 EventHandlerResult LEDCapsLockLight::onSetup() {
@@ -36,7 +36,6 @@ EventHandlerResult LEDCapsLockLight::beforeReportingState() {
   if (!caps_address_.isValid())
     return EventHandlerResult::OK;
 
-  //bool caps_is_on = !!(kaleidoscope::hid::getKeyboardLEDs() & LED_CAPS_LOCK);
   bool caps_is_on = !!(Runtime.hid().keyboard().getKeyboardLEDs() & LED_CAPS_LOCK);
 
   if (!caps_is_on && caps_was_on_) {
