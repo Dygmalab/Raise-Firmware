@@ -49,6 +49,8 @@
 #include "LED-CapsLockLight.h"
 #include "EEPROMPadding.h"
 
+#include "EEPROMUpgrade.h"
+
 #include "attiny_firmware.h"
 
 enum { QWERTY, NUMPAD, _LAYER_MAX }; // layers
@@ -148,6 +150,7 @@ USE_MAGIC_COMBOS(
 kaleidoscope::plugin::EEPROMPadding JointPadding(8);
 
 KALEIDOSCOPE_INIT_PLUGINS(
+  EEPROMUpgradePrep,
   USBQuirks,
   MagicCombo,
   RaiseIdleLEDs,
@@ -174,7 +177,8 @@ KALEIDOSCOPE_INIT_PLUGINS(
   OneShot,
   EscapeOneShot,
   Qukeys,
-  LayerFocus
+  LayerFocus,
+  EEPROMUpgrade
 );
 
 void setup() {
@@ -192,6 +196,9 @@ void setup() {
 
   DynamicTapDance.setup(0, 1024);
   DynamicMacros.reserve_storage(2048);
+
+  EEPROMUpgrade.reserveStorage();
+  EEPROMUpgrade.upgrade();
 }
 
 void loop() {
