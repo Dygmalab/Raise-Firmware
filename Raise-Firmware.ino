@@ -31,7 +31,6 @@
 #include "Kaleidoscope-Colormap.h"
 #include "Kaleidoscope-LED-Palette-Theme.h"
 #include "Kaleidoscope-LEDEffect-Rainbow.h"
-#include "Kaleidoscope-LEDEffect-Joint.h"
 #include "Kaleidoscope-LED-Stalker.h"
 #include "Kaleidoscope-TapDance.h"
 #include "Kaleidoscope-DynamicTapDance.h"
@@ -42,13 +41,13 @@
 #include "RaiseIdleLEDs.h"
 #include "kaleidoscope/device/dygma/raise/Focus.h"
 #include "kaleidoscope/device/dygma/raise/SideFlash.h"
-//#include "Kaleidoscope-AdjustableLatencyJitter.h"
 
 #include "Kaleidoscope-OneShot.h"
 #include "Kaleidoscope-Qukeys.h"
 #include "Kaleidoscope-Escape-OneShot.h"
 
 #include "LED-CapsLockLight.h"
+#include "EEPROMPadding.h"
 
 #include "attiny_firmware.h"
 
@@ -146,6 +145,8 @@ USE_MAGIC_COMBOS(
     }
 );
 
+kaleidoscope::plugin::EEPROMPadding JointPadding(8);
+
 KALEIDOSCOPE_INIT_PLUGINS(
   USBQuirks,
   MagicCombo,
@@ -159,7 +160,9 @@ KALEIDOSCOPE_INIT_PLUGINS(
   PersistentLEDMode,
   FocusLEDCommand,
   LEDPaletteTheme,
-  LEDRainbowWaveEffect, LEDRainbowEffect, LEDJointEffect, StalkerEffect, ColormapEffect,
+  JointPadding,
+  ColormapEffect,
+  LEDRainbowWaveEffect, LEDRainbowEffect, StalkerEffect,
   PersistentIdleLEDs,
   RaiseFocus,
   TapDance,
