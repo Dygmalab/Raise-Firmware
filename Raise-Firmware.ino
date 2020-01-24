@@ -75,7 +75,7 @@ KEYMAPS(
    ,Key_H               ,Key_J      ,Key_K        ,Key_L        ,Key_Semicolon     ,Key_Quote        ,Key_Backslash
    ,Key_N               ,Key_M      ,Key_Comma    ,Key_Period   ,Key_Slash         ,Key_RightShift
    ,Key_Space           ,Key_Space  ,Key_RightAlt ,Key_RightGui ,Key_LEDEffectNext ,Key_RightControl
-   ,LockLayer(NUMPAD)   ,Key_Delete
+   ,MoveToLayer(NUMPAD) ,Key_Delete
 ),
 
 [NUMPAD] = KEYMAP_STACKED
@@ -92,7 +92,7 @@ KEYMAPS(
    ,Key_KeypadAdd       ,Key_4     ,Key_5         ,Key_6         ,Key_KeypadMultiply ,XXX     ,Key_Backslash
    ,Key_KeypadDot       ,Key_1     ,Key_2         ,Key_3         ,Key_UpArrow        ,Key_RightShift
    ,Key_0               ,Key_Space ,Key_LeftArrow ,Key_DownArrow ,Key_RightArrow     ,Key_RightControl
-   ,UnlockLayer(NUMPAD) ,Key_Delete
+   ,MoveToLayer(QWERTY) ,Key_Delete
  )
 );
 
