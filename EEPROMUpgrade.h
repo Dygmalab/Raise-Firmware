@@ -22,13 +22,7 @@
 namespace kaleidoscope {
 namespace plugin {
 
-class EEPROMUpgradePrep: public Plugin {
- public:
-  EventHandlerResult onSetup();
-};
-
 class EEPROMUpgrade: public Plugin {
-  friend class EEPROMUpgradePrep;
  public:
   EventHandlerResult onFocusEvent(const char *command);
 
@@ -38,13 +32,9 @@ class EEPROMUpgrade: public Plugin {
  private:
   static uint16_t settings_base_;
   static uint8_t version_;
-
- protected:
-  static uint8_t led_mode_index_;
 };
 
 }
 }
 
-extern kaleidoscope::plugin::EEPROMUpgradePrep EEPROMUpgradePrep;
 extern kaleidoscope::plugin::EEPROMUpgrade EEPROMUpgrade;

@@ -150,7 +150,6 @@ USE_MAGIC_COMBOS(
 kaleidoscope::plugin::EEPROMPadding JointPadding(8);
 
 KALEIDOSCOPE_INIT_PLUGINS(
-  EEPROMUpgradePrep,
   USBQuirks,
   MagicCombo,
   RaiseIdleLEDs,

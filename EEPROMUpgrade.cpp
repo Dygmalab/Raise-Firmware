@@ -27,11 +27,6 @@ namespace plugin {
 
 uint16_t EEPROMUpgrade::settings_base_;
 uint8_t EEPROMUpgrade::version_;
-uint8_t EEPROMUpgrade::led_mode_index_;
-
-EventHandlerResult EEPROMUpgradePrep::onSetup() {
-  Runtime.storage().get(4, EEPROMUpgrade::led_mode_index_);
-}
 
 void EEPROMUpgrade::reserveStorage() {
   settings_base_ = ::EEPROMSettings.requestSlice(sizeof(version_));
@@ -55,33 +50,9 @@ void EEPROMUpgrade::upgrade() {
       }
 
       /*
-       * With the 0->1 upgrade, we removed a number of LED effects. If the user
-       * had any of these selected, select Colormap instead. If they had any of
-       * the still existing ones selected, adjust the index.
+       * With the 0->1 upgrade, we removed a number of LED effects. For simplicity's sake, set the mode to Colormap.
        */
-      switch (led_mode_index_) {
-        case 0: // solidBlue
-        case 1: // solidGreen
-        case 2: // solidRed
-        case 3: // solidWhite
-        case 6: // Joint
-          led_mode_index_ = 0;
-          break;
-        case 4: // Rainbow => RainbowWave
-          led_mode_index_ = 1;
-          break;
-        case 5: // RainbowWave => Rainbow
-          led_mode_index_ = 2;
-          break;
-        case 7: // Stalker
-          led_mode_index_ = 3;
-          break;
-        case 8: // Colormap
-        default: // everything else...
-          led_mode_index_ = 0;
-          break;
-      }
-      ::LEDControl.set_mode(led_mode_index_);
+      ::LEDControl.set_mode(0);
 
       version_++;
       break;
@@ -102,7 +73,6 @@ EventHandlerResult EEPROMUpgrade::onFocusEvent(const char *command) {
   }
 
   ::Focus.read(version_);
-  ::EEPROMUpgradePrep.onSetup();
   upgrade();
 
   return EventHandlerResult::EVENT_CONSUMED;
@@ -112,4 +82,3 @@ EventHandlerResult EEPROMUpgrade::onFocusEvent(const char *command) {
 }
 
 kaleidoscope::plugin::EEPROMUpgrade EEPROMUpgrade;
-kaleidoscope::plugin::EEPROMUpgradePrep EEPROMUpgradePrep;
