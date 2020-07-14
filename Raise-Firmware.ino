@@ -45,6 +45,7 @@
 #include "Kaleidoscope-OneShot.h"
 #include "Kaleidoscope-Qukeys.h"
 #include "Kaleidoscope-Escape-OneShot.h"
+#include "Kaleidoscope-Macros.h"
 
 #include "LED-CapsLockLight.h"
 #include "EEPROMPadding.h"
@@ -54,6 +55,7 @@
 #include "attiny_firmware.h"
 
 enum { QWERTY, NUMPAD, _LAYER_MAX }; // layers
+enum { _V }; // macros
 
 /* This comment temporarily turns off astyle's indent enforcement so we can make
  * the keymaps actually resemble the physical key layout better
@@ -83,7 +85,7 @@ KEYMAPS(
     Key_Escape      ,Key_F1        ,Key_F2        ,Key_F3         ,Key_F4 ,Key_F5 ,Key_F6
    ,Key_Tab         ,XXX           ,Key_UpArrow   ,XXX            ,XXX    ,XXX
    ,Key_CapsLock    ,Key_LeftArrow ,Key_DownArrow ,Key_RightArrow ,XXX    ,XXX
-   ,Key_LeftShift   ,Key_Backslash ,XXX           ,XXX            ,XXX    ,XXX    ,XXX
+   ,Key_LeftShift   ,Key_Backslash ,XXX           ,XXX            ,XXX    ,M(_V)  ,XXX
    ,Key_LeftControl ,Key_LeftGui   ,Key_LeftAlt   ,Key_Space      ,Key_Space
                                                   ,Key_Backspace  ,Key_Enter
 
@@ -169,6 +171,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
   RaiseFocus,
   TapDance,
   DynamicTapDance,
+  Macros,
   DynamicMacros,
   SideFlash,
   Focus,
@@ -179,6 +182,25 @@ KALEIDOSCOPE_INIT_PLUGINS(
   LayerFocus,
   EEPROMUpgrade
 );
+
+static void versionInfoMacro(uint8_t keyState) {
+  if (keyToggledOn(keyState)) {
+    Macros.type(PSTR("Dygma Raise - Kaleidoscope "));
+    Macros.type(PSTR(KALEIDOSCOPE_GITREV));
+    Macros.type(PSTR(" / Raise-Firmware "));
+    Macros.type(PSTR(GIT_REV));
+  }
+}
+
+const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
+  switch (macroIndex) {
+
+    case _V:
+      versionInfoMacro(keyState);
+      break;
+  }
+  return MACRO_NONE;
+}
 
 void setup() {
   Kaleidoscope.serialPort().begin(9600);

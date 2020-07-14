@@ -17,8 +17,11 @@ BACKUP_FILE=eeprom.dump
 
 all: build
 
+GIT_REV="$(shell git describe --tags --always --dirty)"
+KALEIDOSCOPE_GITREV="$(shell cd ${BOARD_HARDWARE_PATH}/libraries/Kaleidoscope && git rev-parse --short HEAD)"
+
 build:
-	${ARDUINO} --pref build.path=${BUILD_PATH} --preserve-temp-files --verbose --verify --board dygma:samd:raise_native ${FIRMWARE}
+	${ARDUINO} --pref build.path=${BUILD_PATH} --pref build.git_flags="-DGIT_REV=\"${GIT_REV}\" -DKALEIDOSCOPE_GITREV=\"${KALEIDOSCOPE_GITREV}\"" --preserve-temp-files --verbose --verify --board dygma:samd:raise_native ${FIRMWARE}
 
 flash: backup prompt do_flash restore
 
@@ -34,7 +37,7 @@ do_flash:
 	sleep 3
 
 restore:
-	@DEVICE=${DEVICE_PORT} ${FOCUS_TOOL} eeprom.contents $(shell cat ${BACKUP_FILE})
+	@DEVICE=${DEVICE_PORT} ${FOCUS_TOOL} "eeprom.contents $(shell cat ${BACKUP_FILE})"
 	@rm -f ${BACKUP_FILE}
 
 size:
