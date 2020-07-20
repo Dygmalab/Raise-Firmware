@@ -9,7 +9,7 @@ before_install:
 install:
   - arduino --install-boards arduino:samd
 script:
-  - arduino -v --verify --board dygma:samd:raise_native Raise-Firmware.ino
+  - make build
 notifications:
   email:
     on_success: change
