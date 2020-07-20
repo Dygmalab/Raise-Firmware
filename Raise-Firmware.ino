@@ -39,6 +39,7 @@
 #include "Kaleidoscope-USB-Quirks.h"
 #include "Kaleidoscope-LayerFocus.h"
 #include "RaiseIdleLEDs.h"
+#include "RaiseFirmwareVersion.h"
 #include "kaleidoscope/device/dygma/raise/Focus.h"
 #include "kaleidoscope/device/dygma/raise/SideFlash.h"
 
@@ -150,6 +151,7 @@ USE_MAGIC_COMBOS(
 kaleidoscope::plugin::EEPROMPadding JointPadding(8);
 
 KALEIDOSCOPE_INIT_PLUGINS(
+  FirmwareVersion,
   USBQuirks,
   MagicCombo,
   RaiseIdleLEDs,
