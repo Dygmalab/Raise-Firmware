@@ -1,24 +1,68 @@
-DEVICE_PORT =/dev/ttyACM0
-BUILD_PATH=./output
-FIRMWARE=Raise-Firmware.ino
-
-ARDUINO_PATH=
-ifdef ARDUINO_PATH
-ARDUINO=${ARDUINO_PATH}/arduino
+# Makefile Operative System detection for multi-OS compilation and path adjustment
+ifeq ($(OS),Windows_NT)
+    PLATFORM = WIN
+    ARDUINO_PATH="C:\Program Files (x86)\Arduino"
 else
-ARDUINO=arduino
+    UNAME_S := $(shell uname -s)
+    ifeq ($(UNAME_S),Linux)
+        PLATFORM = LINUX
+        ARDUINO_PATH=
+    endif
+    ifeq ($(UNAME_S),Darwin)
+        PLATFORM = DARWIN
+        ARDUINO_PATH=/Applications/Arduino.app/Contents/Resources/Java
+    endif
 endif
 
-BOARD_HARDWARE_PATH=${HOME}/Arduino/hardware/dygma/samd
-FOCUS_TOOL=${BOARD_HARDWARE_PATH}/libraries/Kaleidoscope/bin/focus-test
-BOSSAC=${HOME}/.arduino15/packages/arduino/tools/bossac/1.7.0*/bossac
+# Arduino path configuration
+ifdef ARDUINO_PATH
+    ifeq ($(PLATFORM),WIN)
+        ARDUINO=${ARDUINO_PATH}/arduino
+    else
+        ARDUINO=${ARDUINO_PATH}\arduino
+else
+    ARDUINO=arduino
+endif
 
+#device configuration (WIN uses COM ports, MAC&LIN \dev\tty, MAC additionaly uses \dev\co)
+ifeq ($(PLATFORM),WIN)
+    DEVICE_PORT =COM4
+    BACKUP_PORT =COM4
+endif
+ifeq ($(PLATFORM),LINUX)
+    DEVICE_PORT =/dev/ttyACM0
+    BACKUP_PORT =/dev/ttyACM0
+endif
+ifeq ($(PLATFORM),DARWIN)
+    DEVICE_PORT =/dev/ttyACM0
+    BACKUP_PORT =/dev/coACM0
+endif
+
+# Library & build target configuration
+ifeq ($(PLATFORM),WIN)
+    BOARD_HARDWARE_PATH=${HOME}\Arduino\hardware\dygma\samd
+    FOCUS_TOOL=${BOARD_HARDWARE_PATH}\libraries\Kaleidoscope\bin\focus-test
+    BOSSAC=${HOME}\.arduino15\packages\arduino\tools\bossac\1.7.0*\bossac
+    BUILD_PATH=.\output
+    FIRMWARE_SHA="$(shell git describe --tags --always --dirty)"
+    KALEIDOSCOPE_SHA="$(shell cd ${BOARD_HARDWARE_PATH}\libraries\Kaleidoscope && git rev-parse --short HEAD)"
+else
+    BOARD_HARDWARE_PATH=${HOME}/Arduino/hardware/dygma/samd
+    FOCUS_TOOL=${BOARD_HARDWARE_PATH}/libraries/Kaleidoscope/bin/focus-test
+    BOSSAC=${HOME}/.arduino15/packages/arduino/tools/bossac/1.7.0*/bossac
+    BUILD_PATH=./output
+    FIRMWARE_SHA="$(shell git describe --tags --always --dirty)"
+    KALEIDOSCOPE_SHA="$(shell cd ${BOARD_HARDWARE_PATH}/libraries/Kaleidoscope && git rev-parse --short HEAD)"
+endif
+
+FIRMWARE=Raise-Firmware.ino
 BACKUP_FILE=eeprom.dump
 
 all: build
 
-FIRMWARE_SHA="$(shell git describe --tags --always --dirty)"
-KALEIDOSCOPE_SHA="$(shell cd ${BOARD_HARDWARE_PATH}/libraries/Kaleidoscope && git rev-parse --short HEAD)"
+print_config:
+	# TODO: Print all config
+	@echo ${OS}
 
 build:
 	${ARDUINO} --pref build.path=${BUILD_PATH} --pref build.version_flags="-DFIRMWARE_SHA=\"${FIRMWARE_SHA}\" -DKALEIDOSCOPE_SHA=\"${KALEIDOSCOPE_SHA}\" -DBAZECOR_VERSION=\"${BAZECOR_VERSION}\"" --preserve-temp-files --verbose --verify --board dygma:samd:raise_native ${FIRMWARE}
