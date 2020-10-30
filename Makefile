@@ -29,7 +29,7 @@ else
     endif
     ifeq ($(UNAME_S),Darwin)
         PLATFORM = DARWIN
-        ARDUINO_PATH=/Applications/Arduino.app/Contents/Resources/Java
+        ARDUINO_PATH=/Applications/Arduino.app/Contents/MacOS
 		ARDUINO=${ARDUINO_PATH}/arduino
     endif
 endif
@@ -49,8 +49,8 @@ ifeq ($(PLATFORM),LINUX)
     BACKUP_PORT =/dev/ttyACM0
 endif
 ifeq ($(PLATFORM),DARWIN)
-    DEVICE_PORT =/dev/ttyACM0
-    BACKUP_PORT =/dev/coACM0
+    DEVICE_PORT =/dev/tty.usbmodem14201
+    BACKUP_PORT =/dev/cu.usbmodem14201
 endif
 
 # Library & build target configuration
@@ -75,7 +75,7 @@ endif
 ifeq ($(PLATFORM),DARWIN)
     BOARD_HARDWARE_PATH=${HOME}/Documents/Arduino/hardware/dygma/samd
     FOCUS_TOOL=${BOARD_HARDWARE_PATH}/libraries/Kaleidoscope/bin/focus-test
-    BOSSAC=${HOME}/.arduino15/packages/arduino/tools/bossac/1.7.0*/bossac
+    BOSSAC=${HOME}/Library/Arduino15/packages/arduino/tools/bossac/1.7.0-arduino3/bossac
     BUILD_PATH=./output
     FIRMWARE=/Raise-Firmware.ino
     FIRMWARE_SHA="$(shell git describe --tags --always --dirty)"
