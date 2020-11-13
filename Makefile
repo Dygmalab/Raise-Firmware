@@ -3,6 +3,7 @@ ifeq ($(OS),Windows_NT)
 RM = rmdir /S /Q
 CP = copy /Y
 PS = pause
+NL = @echo.
 ifdef ComSpec
 SHELL := $(ComSpec)
 endif
@@ -13,6 +14,7 @@ else
 RM = rm -rf
 CP = cp -f
 PS = read a
+NL = @echo ''
 endif
 
 # Makefile Operative System detection for multi-OS compilation and path adjustment
@@ -49,8 +51,8 @@ ifeq ($(PLATFORM),LINUX)
     BACKUP_PORT =/dev/ttyACM0
 endif
 ifeq ($(PLATFORM),DARWIN)
-    DEVICE_PORT =/dev/tty.usbmodem14201
-    BACKUP_PORT =/dev/cu.usbmodem14201
+    DEVICE_PORT =/dev/tty.usbmodem14501
+    BACKUP_PORT =/dev/cu.usbmodem14501
 endif
 
 # Library & build target configuration
@@ -68,7 +70,7 @@ ifeq ($(PLATFORM),LINUX)
     FOCUS_TOOL=${BOARD_HARDWARE_PATH}/libraries/Kaleidoscope/bin/focus-test
     BOSSAC=${HOME}/.arduino15/packages/arduino/tools/bossac/1.7.0*/bossac
     BUILD_PATH=./output
-    FIRMWARE=/Raise-Firmware.ino
+    FIRMWARE=Raise-Firmware.ino
     FIRMWARE_SHA="$(shell git describe --tags --always --dirty)"
     KALEIDOSCOPE_SHA="$(shell cd ${BOARD_HARDWARE_PATH}/libraries/Kaleidoscope && git rev-parse --short HEAD)"
 endif
@@ -76,36 +78,36 @@ ifeq ($(PLATFORM),DARWIN)
     BOARD_HARDWARE_PATH=${HOME}/Documents/Arduino/hardware/dygma/samd
     FOCUS_TOOL=${BOARD_HARDWARE_PATH}/libraries/Kaleidoscope/bin/focus-test
     BOSSAC=${HOME}/Library/Arduino15/packages/arduino/tools/bossac/1.7.0-arduino3/bossac
-    BUILD_PATH=./output
-    FIRMWARE=/Raise-Firmware.ino
+    BUILD_PATH=./output/
+    FIRMWARE=Raise-Firmware.ino
     FIRMWARE_SHA="$(shell git describe --tags --always --dirty)"
     KALEIDOSCOPE_SHA="$(shell cd ${BOARD_HARDWARE_PATH}/libraries/Kaleidoscope && git rev-parse --short HEAD)"
 endif
 
 # User configurations
 BACKUP_FILE=eeprom.dump
-BAZECOR_VERSION=CustomFW
+BAZECOR_VERSION=v0.2.5
 
 # Build Commands
 all: build
 
 help:
-	@echo.
+	-$(NL)
 	@echo Help for Dygma's Raise Firmware's Makefile [Made By NeoDygma]
-	@echo.
+	-$(NL)
 	@echo This Makefile is O.S. agnostic, working for Windows and Unix based O.S. "Linux & MacOS"
 	@echo It uses GNU Makefile, Arduino command line tools and extra scripts to build, flash and
-	@echo backup/restore Dygma's Raise Keyboard.
-	@echo.
+	@echo backup/restore the Dygma Raise Keyboard.
+	-$(NL)
 	@echo The supported commands are:
-	@echo.
+	-$(NL)
 	@echo config           :  View your detected O.S., current configuration, Paths, etc.. so
 	@echo                     that you can review for needed changes.
 	@echo build            :  Launches the build process using the BUILD_PATH as target, the
 	@echo                     ARDUINO_PATH as tool and FIRMWARE_SHA, KALEIDOSCOPE_SHA &
 	@echo                     BAZECOR_VERSION as flags for the custom compiled firmware.
 	@echo flash            :  This commands launches the backup, prompt, do_flash and restore
-	@echo                     commands consecutively to automate the flash process (only Unix).
+	@echo                     commands consecutively to automate the flash process \(only Unix\).
 	@echo win_flash        :  Launches win_prompt and do_flash removing the backup/restore
 	@echo                     process due to not being yet compatible with Windows O.S.
 	@echo backup           :  Uses the FOCUS_TOOL to back up the current Raise layer configuration.
@@ -116,25 +118,27 @@ help:
 	@echo size             :  Command not yet functional, arm-none-eabi-size not working cross-O.S.
 	@echo clean            :  Deletes the current BUILD_PATH directory.
 	@echo backup           :  Uses the FOCUS_TOOL to back up the current Raise layer configuration.
-	@echo.
-	@echo Have a great Hacking time!, -=(Dygma)=-.
-	@echo.
+	-$(NL)
+	@echo Have a great Hacking time!, -=\(Dygma\)=-.
+	-$(NL)
 
 config:
-	@echo.
+	-$(NL)
 	@echo Current Makefile Configuration
-	@echo.
+	-$(NL)
 	@echo Platform         :  ${PLATFORM}
 	@echo Bossac Path      :  ${BOSSAC}
 	@echo Arduino Path     :  ${ARDUINO}
 	@echo Build Path       :  ${BUILD_PATH}
+	-$(NL)
 	@echo Device Port      :  ${DEVICE_PORT}
 	@echo Backup Port      :  ${BACKUP_PORT}
+	-$(NL)
 	@echo Focus-tool Path  :  ${FOCUS_TOOL}
 	@echo Firmware SHA     :  ${FIRMWARE_SHA}
 	@echo Kaleidoscope SHA :  ${KALEIDOSCOPE_SHA}
 	@echo Firmware Name    :  ${BAZECOR_VERSION}
-	@echo.
+	@echo Output Path      :  ${BUILD_PATH}${FIRMWARE}.bin
 
 build:
 	${ARDUINO} --pref build.path=${BUILD_PATH} --pref build.version_flags="-DFIRMWARE_SHA=\"${FIRMWARE_SHA}\" -DKALEIDOSCOPE_SHA=\"${KALEIDOSCOPE_SHA}\" -DBAZECOR_VERSION=\"${BAZECOR_VERSION}\"" --preserve-temp-files --verbose --verify --board dygma:samd:raise_native ${FIRMWARE}
