@@ -46,6 +46,16 @@ mkdir -p hardware/dygma
 git clone --recursive https://github.com/Dygmalab/Kaleidoscope-Bundle-Dygma.git hardware/dygma/samd
 ````
 
+Remember to keep updated the Kaleidoscope Bundle by running the following GIT commands in the samd folder before compiling each new version, not all the changes will be made in the Raise-FW repo.
+
+To do so, just run:
+
+```sh
+git pull
+git submodule sync
+git submodule update
+```
+
 ## Download the Raise Firmware
 
 ```sh
@@ -70,3 +80,6 @@ Open the sketch you wish to flash (for example, `Raise-Firmware.ino`).
 Click the Upload button or press `Ctrl-U`.
 
 Hold down the key in the top left corner of your keyboard (`Esc` by default), until the compile finishes and the upload begins.
+
+# Additional information
+[Focus API KeyMap]()
