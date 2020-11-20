@@ -66,14 +66,29 @@ git clone https://github.com/Dygmalab/Raise-Firmware.git
 
 Before you begin, make sure your Raise is connected to your computer.
 
-### Option 1: From the command line
+## Option 1: From the command line
+### The MakeFile
+The updated makefile now supports Windows, Mac & Linux
 
+#### Previous steps for Windows
+First install dependencies with [chocolately](https://chocolatey.org/install) using:
+```powershell
+choco install make
+```
+#### Configure the MakeFile
+```sh
+make config
+```
+Will show the current configuration of the makefile.
+
+Modify it to fit your current environment.
+
+#### Run the make file
 ```sh
 cd Raise-Firmware
 make flash
 ```
-
-### Option 2: From the Arduino IDE
+## Option 2: From the Arduino IDE
 
 Open the sketch you wish to flash (for example, `Raise-Firmware.ino`).
 
@@ -82,4 +97,5 @@ Click the Upload button or press `Ctrl-U`.
 Hold down the key in the top left corner of your keyboard (`Esc` by default), until the compile finishes and the upload begins.
 
 # Additional information
-[Focus API KeyMap]()
+[Focus API KeyMap](https://github.com/Dygmalab/Raise-Firmware/blob/master/FOCUS_API.MD)
+[MakeFile documentation](https://github.com/Dygmalab/Raise-Firmware/blob/master/MAKEFILE.MD)

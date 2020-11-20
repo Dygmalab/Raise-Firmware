@@ -1,4 +1,4 @@
-# OS specific definitions for windows tools
+# OS specific definitions tools
 ifeq ($(OS),Windows_NT)
 RM = rmdir /S /Q
 CP = copy /Y
