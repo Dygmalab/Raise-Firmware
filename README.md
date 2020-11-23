@@ -98,4 +98,5 @@ Hold down the key in the top left corner of your keyboard (`Esc` by default), un
 
 # Additional information
 [Focus API KeyMap](https://github.com/Dygmalab/Raise-Firmware/blob/master/FOCUS_API.MD)
+
 [MakeFile documentation](https://github.com/Dygmalab/Raise-Firmware/blob/master/MAKEFILE.MD)
