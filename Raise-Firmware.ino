@@ -43,6 +43,9 @@
 #include "kaleidoscope/device/dygma/raise/Focus.h"
 #include "kaleidoscope/device/dygma/raise/SideFlash.h"
 
+// Support for host power management (suspend & wakeup)
+#include "Kaleidoscope-HostPowerManagement.h"
+
 #include "Kaleidoscope-OneShot.h"
 #include "Kaleidoscope-Qukeys.h"
 #include "Kaleidoscope-Escape-OneShot.h"
@@ -107,6 +110,30 @@ void tapDanceAction(uint8_t tap_dance_index, KeyAddr key_addr,
                     uint8_t tap_count,
                     kaleidoscope::plugin::TapDance::ActionType tap_dance_action) {
   DynamicTapDance.dance(tap_dance_index, key_addr, tap_count, tap_dance_action);
+}
+
+/** toggleLedsOnSuspendResume toggles the LEDs off when the host goes to sleep,
+ * and turns them back on when it wakes up.
+ */
+void toggleLedsOnSuspendResume(kaleidoscope::plugin::HostPowerManagement::Event event) {
+  switch (event) {
+  case kaleidoscope::plugin::HostPowerManagement::Suspend:
+    LEDControl.disable();
+    break;
+  case kaleidoscope::plugin::HostPowerManagement::Resume:
+    LEDControl.enable();
+    break;
+  case kaleidoscope::plugin::HostPowerManagement::Sleep:
+    break;
+  }
+}
+
+/** hostPowerManagementEventHandler dispatches power management events (suspend,
+ * resume, and sleep) to other functions that perform action based on these
+ * events.
+ */
+void hostPowerManagementEventHandler(kaleidoscope::plugin::HostPowerManagement::Event event) {
+  toggleLedsOnSuspendResume(event);
 }
 
 enum {
@@ -179,7 +206,8 @@ KALEIDOSCOPE_INIT_PLUGINS(
   EscapeOneShot,
   Qukeys,
   LayerFocus,
-  EEPROMUpgrade
+  EEPROMUpgrade,
+  HostPowerManagement
 );
 
 void setup() {
