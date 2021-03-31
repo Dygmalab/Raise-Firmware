@@ -196,6 +196,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
     LEDRainbowWaveEffect, LEDRainbowEffect, StalkerEffect,
     PersistentIdleLEDs,
     RaiseFocus,
+    Qukeys,
     TapDance,
     DynamicTapDance,
     DynamicMacros,
@@ -204,7 +205,6 @@ KALEIDOSCOPE_INIT_PLUGINS(
     MouseKeys,
     OneShot,
     EscapeOneShot,
-    Qukeys,
     LayerFocus,
     EEPROMUpgrade,
     HostPowerManagement
