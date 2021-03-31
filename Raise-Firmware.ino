@@ -259,13 +259,6 @@ void setup()
 
   EEPROMUpgrade.reserveStorage();
   EEPROMUpgrade.upgrade();
-
-  // Custom parameters for Mouse plugin
-  MouseKeys.speed = 25;
-  MouseKeys.speedDelay = 1;
-  MouseKeys.accelSpeed = 75;
-  MouseKeys.accelDelay = 400;
-  MouseKeys.setSpeedLimit(176);
 }
 
 void loop()

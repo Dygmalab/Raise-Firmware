@@ -43,8 +43,8 @@ endif
 
 #device configuration (WIN uses COM ports, MAC&LIN \dev\tty, MAC additionaly uses \dev\cu)
 ifeq ($(PLATFORM),WIN)
-    DEVICE_PORT =COM7
-    BACKUP_PORT =COM7
+    DEVICE_PORT =COM11
+    BACKUP_PORT =COM11
 endif
 ifeq ($(PLATFORM),LINUX)
     DEVICE_PORT =/dev/ttyACM0
@@ -87,7 +87,7 @@ endif
 
 # User configurations
 BACKUP_FILE=eeprom.dump
-BAZECOR_VERSION=v0.2.7
+BAZECOR_VERSION=v0.2.8
 
 # Build Commands
 all: build
@@ -146,7 +146,7 @@ build:
 
 flash: backup prompt do_flash restore
 
-win_flash: win_prompt do_flash
+win_flash: win_prompt do_flash_win
 
 backup:
 	@DEVICE=${DEVICE_PORT} ${FOCUS_TOOL} eeprom.contents >${BACKUP_FILE}
@@ -162,6 +162,10 @@ win_prompt:
 
 do_flash:
 	${BOSSAC} -i -d --port=${DEVICE_PORT} -e -w ${BUILD_PATH}${FIRMWARE}.bin -R
+	sleep 3
+
+do_flash_win:
+	${BOSSAC} -i -d --port=${DEVICE_PORT} -e -w ${BUILD_PATH}\${FIRMWARE}.bin -R
 	sleep 3
 
 restore:
