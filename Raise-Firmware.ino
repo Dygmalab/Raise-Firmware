@@ -32,8 +32,7 @@
 #include "Kaleidoscope-LED-Palette-Theme.h"
 #include "Kaleidoscope-LEDEffect-Rainbow.h"
 #include "Kaleidoscope-LED-Stalker.h"
-#include "Kaleidoscope-TapDance.h"
-#include "Kaleidoscope-DynamicTapDance.h"
+#include "Kaleidoscope-DynamicSuperKeys.h"
 #include "Kaleidoscope-DynamicMacros.h"
 #include "Kaleidoscope-MagicCombo.h"
 #include "Kaleidoscope-USB-Quirks.h"
@@ -104,12 +103,6 @@ KEYMAPS(
 // *INDENT-ON*
 
 kaleidoscope::device::dygma::raise::SideFlash<ATTinyFirmware> SideFlash;
-
-void tapDanceAction(uint8_t tap_dance_index, KeyAddr key_addr,
-                    uint8_t tap_count,
-                    kaleidoscope::plugin::TapDance::ActionType tap_dance_action) {
-  DynamicTapDance.dance(tap_dance_index, key_addr, tap_count, tap_dance_action);
-}
 
 /** toggleLedsOnSuspendResume toggles the LEDs off when the host goes to sleep,
  * and turns them back on when it wakes up.
@@ -197,8 +190,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
     PersistentIdleLEDs,
     RaiseFocus,
     Qukeys,
-    TapDance,
-    DynamicTapDance,
+    DynamicSuperKeys,
     DynamicMacros,
     SideFlash,
     Focus,
@@ -254,7 +246,7 @@ void setup()
   LEDRainbowWaveEffect.brightness(255);
   StalkerEffect.variant = STALKER(BlazingTrail);
 
-  DynamicTapDance.setup(0, 1024);
+  DynamicSuperKeys.setup(0, 1024);
   DynamicMacros.reserve_storage(2048);
 
   EEPROMUpgrade.reserveStorage();
