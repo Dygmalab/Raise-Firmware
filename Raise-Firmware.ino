@@ -228,7 +228,7 @@ void setup()
   while (GCLK->STATUS.bit.SYNCBUSY)
     ; // Wait for synchronization
 
-  REG_WDT_CONFIG = WDT_CONFIG_PER_1K; // Set the WDT reset timeout to 2 second
+  REG_WDT_CONFIG = WDT_CONFIG_PER_4K; // Set the WDT reset timeout to 4 second
   while (WDT->STATUS.bit.SYNCBUSY)
     ;                             // Wait for synchronization
   REG_WDT_CTRL = WDT_CTRL_ENABLE; // Enable the WDT in normal mode
