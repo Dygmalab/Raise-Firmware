@@ -62,40 +62,52 @@ enum { QWERTY, NUMPAD, _LAYER_MAX }; // layers
  * the keymaps actually resemble the physical key layout better
  */
 // *INDENT-OFF*
-
+  r0c0, r0c1, r0c2, r0c3, r0c4, r0c5,                       \
+  r1c0, r1c1, r1c2, r1c3, r1c4, r1c5, r1c6,                 \
+  r2c0, r2c1, r2c2, r2c3, r2c4, r2c5,                       \
+  r3c0, r3c1, r3c2, r3c3, r3c4, r3c5, r3c6,                 \
+  r4c0, r4c1, r4c2, r4c3,                                   \
+  r4c4, r4c6, r4c6, r4c7,                                   \
+                                                            \
+                r0c10, r0c11, r0c12, r0c13, r0c14, r0c15,   \
+          r1c9, r1c10, r1c11, r1c12, r1c13, r1c14, r1c15,   \
+                r2c10, r2c11, r2c12, r2c13, r2c14, r2c15,   \
+          r3c9, r3c10, r3c11, r3c12, r3c13, r3c14, r3c15,   \
+                              r4c12, r4c13, r4c14, r4c15,   \
+                                r4c8, r4c9, r4c10, r4c11,   \
 KEYMAPS(
 [QWERTY] = KEYMAP_STACKED
 (
-    Key_Escape      ,Key_1         ,Key_2       ,Key_3         ,Key_4     ,Key_5 ,Key_6
-   ,Key_Tab         ,Key_Q         ,Key_W       ,Key_E         ,Key_R     ,Key_T
-   ,Key_CapsLock    ,Key_A         ,Key_S       ,Key_D         ,Key_F     ,Key_G
-   ,Key_LeftShift   ,Key_Backslash ,Key_Z       ,Key_X         ,Key_C     ,Key_V ,Key_B
-   ,Key_LeftControl ,Key_LeftGui   ,Key_LeftAlt ,Key_Space     ,Key_Space
-                                                ,Key_Backspace ,Key_Enter
+    Key_1           ,Key_2         ,Key_3       ,Key_4         ,Key_5     ,Key_6
+   ,Key_Tab         ,Key_Q         ,Key_W       ,Key_E         ,Key_R     ,Key_T, Key_Escape
+   ,Key_Enter       ,Key_A         ,Key_S       ,Key_D         ,Key_F     ,Key_G
+   ,Key_LeftShift   ,Key_Z         ,Key_X       ,Key_C         ,Key_V     ,Key_B, Key_NoKey
+   ,Key_LeftControl ,Key_LeftGui   ,Key_LeftAlt ,Key_Space
+   ,Key_Space       ,Key_Backspace ,Key_Enter   ,Key_Delete
 
-   ,Key_7               ,Key_8      ,Key_9        ,Key_0        ,Key_Minus         ,Key_Equals       ,Key_Backspace
-   ,Key_Y               ,Key_U      ,Key_I        ,Key_O        ,Key_P             ,Key_LeftBracket  ,Key_RightBracket ,Key_Enter
-   ,Key_H               ,Key_J      ,Key_K        ,Key_L        ,Key_Semicolon     ,Key_Quote        ,Key_Backslash
-   ,Key_N               ,Key_M      ,Key_Comma    ,Key_Period   ,Key_Slash         ,Key_RightShift
-   ,Key_Space           ,Key_Space  ,Key_RightAlt ,Key_RightGui ,Key_LEDEffectNext ,Key_RightControl
-   ,MoveToLayer(NUMPAD) ,Key_Delete
+   ,Key_7               ,Key_8      ,Key_9        ,Key_0        ,Key_Minus         ,Key_Equals
+   ,Key_Enter           ,Key_Y      ,Key_U        ,Key_I        ,Key_O             ,Key_P            ,Key_LeftBracket
+   ,Key_H               ,Key_J      ,Key_K        ,Key_L        ,Key_Semicolon     ,Key_Quote
+   ,Key_Backslash       ,Key_N      ,Key_M        ,Key_Comma    ,Key_Period        ,Key_Slash        ,Key_RightShift
+   ,Key_Space           ,Key_Space  ,Key_RightAlt ,Key_RightGui
+   ,Key_LEDEffectNext   ,Key_RightControl         ,MoveToLayer(NUMPAD)             ,Key_Delete
 ),
 
 [NUMPAD] = KEYMAP_STACKED
 (
-    Key_Escape      ,Key_F1        ,Key_F2        ,Key_F3         ,Key_F4 ,Key_F5 ,Key_F6
-   ,Key_Tab         ,XXX           ,Key_UpArrow   ,XXX            ,XXX    ,XXX
+    Key_Escape      ,Key_F1        ,Key_F2        ,Key_F3         ,Key_F4 ,Key_F5
+   ,Key_Tab         ,XXX           ,Key_UpArrow   ,XXX            ,XXX    ,XXX,Key_F6
    ,Key_CapsLock    ,Key_LeftArrow ,Key_DownArrow ,Key_RightArrow ,XXX    ,XXX
    ,Key_LeftShift   ,Key_Backslash ,XXX           ,XXX            ,XXX    ,XXX    ,XXX
-   ,Key_LeftControl ,Key_LeftGui   ,Key_LeftAlt   ,Key_Space      ,Key_Space
-                                                  ,Key_Backspace  ,Key_Enter
+   ,Key_LeftControl ,Key_LeftGui   ,Key_LeftAlt   ,Key_Space
+   ,Key_Space       ,Key_Backspace ,Key_Enter     ,Key_Delete
 
-   ,Key_F7              ,Key_F8    ,Key_F9        ,Key_F10       ,Key_F11            ,Key_F12 ,Key_Backspace
-   ,Key_KeypadSubtract  ,Key_7     ,Key_8         ,Key_9         ,Key_KeypadDivide   ,XXX     ,XXX, Key_Enter
-   ,Key_KeypadAdd       ,Key_4     ,Key_5         ,Key_6         ,Key_KeypadMultiply ,XXX     ,Key_Backslash
-   ,Key_KeypadDot       ,Key_1     ,Key_2         ,Key_3         ,Key_UpArrow        ,Key_RightShift
-   ,Key_0               ,Key_Space ,Key_LeftArrow ,Key_DownArrow ,Key_RightArrow     ,Key_RightControl
-   ,MoveToLayer(QWERTY) ,Key_Delete
+   ,Key_F7              ,Key_F8    ,Key_F9        ,Key_F10       ,Key_F11            ,Key_F12
+   ,Key_KeypadSubtract  ,Key_7     ,Key_8         ,Key_9         ,Key_KeypadDivide   ,XXX     ,Key_Enter
+   ,Key_KeypadAdd       ,Key_4     ,Key_5         ,Key_6         ,Key_KeypadMultiply ,XXX
+   ,Key_KeypadDot       ,Key_1     ,Key_2         ,Key_3         ,Key_UpArrow        ,Key_RightShift ,Key_Backslash
+   ,Key_0               ,Key_Space ,Key_LeftArrow ,Key_DownArrow
+   ,Key_RightArrow      ,Key_RightControl         ,MoveToLayer(QWERTY)               ,Key_Delete
  )
 );
 
