@@ -20,7 +20,7 @@ endif
 # Makefile Operative System detection for multi-OS compilation and path adjustment
 ifeq ($(OS),Windows_NT)
     PLATFORM = WIN
-    ARDUINO_PATH=${ProgramFiles(x86)}\Arduino
+    ARDUINO_PATH=#${ProgramFiles(x86)}\Arduino
 	ARDUINO=${ARDUINO_PATH}\arduino
 else
     UNAME_S := $(shell uname -s)
@@ -43,16 +43,16 @@ endif
 
 #device configuration (WIN uses COM ports, MAC&LIN \dev\tty, MAC additionaly uses \dev\cu)
 ifeq ($(PLATFORM),WIN)
-    DEVICE_PORT =COM11
-    BACKUP_PORT =COM11
+    DEVICE_PORT =COM6
+    BACKUP_PORT =COM6
 endif
 ifeq ($(PLATFORM),LINUX)
     DEVICE_PORT =/dev/ttyACM0
     BACKUP_PORT =/dev/ttyACM0
 endif
 ifeq ($(PLATFORM),DARWIN)
-    DEVICE_PORT =/dev/tty.usbmodem14501
-    BACKUP_PORT =/dev/cu.usbmodem14501
+    DEVICE_PORT =/dev/tty.usbmodem14801
+    BACKUP_PORT =/dev/cu.usbmodem14801
 endif
 
 # Library & build target configuration
@@ -61,7 +61,6 @@ ifeq ($(PLATFORM),WIN)
     FOCUS_TOOL=${BOARD_HARDWARE_PATH}\libraries\Kaleidoscope\bin\focus-test
     BOSSAC=${LOCALAPPDATA}\Arduino15\packages\arduino\tools\bossac\1.7.0-arduino3\bossac.exe
 	BUILD_PATH=.\output
-	
     FIRMWARE=Raise-Firmware.ino
     FIRMWARE_SHA="$(shell git describe --tags --always --dirty)"
     KALEIDOSCOPE_SHA="$(shell cd ${BOARD_HARDWARE_PATH}\libraries\Kaleidoscope && git rev-parse --short HEAD)"
@@ -87,7 +86,7 @@ endif
 
 # User configurations
 BACKUP_FILE=eeprom.dump
-BAZECOR_VERSION=v0.3.2
+BAZECOR_VERSION=v1.0.0beta12
 
 # Build Commands
 all: build
