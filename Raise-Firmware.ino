@@ -32,15 +32,18 @@
 #include "Kaleidoscope-LED-Palette-Theme.h"
 #include "Kaleidoscope-LEDEffect-Rainbow.h"
 #include "Kaleidoscope-LED-Stalker.h"
-#include "Kaleidoscope-DynamicSuperKeys.h"
+//#include "Kaleidoscope-DynamicSuperKeys.h"
 #include "Kaleidoscope-DynamicMacros.h"
 #include "Kaleidoscope-MagicCombo.h"
 #include "Kaleidoscope-USB-Quirks.h"
 #include "Kaleidoscope-LayerFocus.h"
-#include "RaiseIdleLEDs.h"
+//#include "RaiseIdleLEDs.h"
+#include "Kaleidoscope-IdleLEDs.h"
 #include "RaiseFirmwareVersion.h"
-#include "kaleidoscope/device/dygma/raise/Focus.h"
-#include "kaleidoscope/device/dygma/raise/SideFlash.h"
+#include "Kaleidoscope-Hardware-Dygma-Raise.h"
+
+//#include "kaleidoscope/device/dygma/raise/Focus.h"
+//#include "kaleidoscope/device/dygma/raise/SideFlash.h"
 
 // Support for host power management (suspend & wakeup)
 #include "Kaleidoscope-HostPowerManagement.h"
@@ -102,7 +105,8 @@ KEYMAPS(
 /* Re-enable astyle's indent enforcement */
 // *INDENT-ON*
 
-kaleidoscope::device::dygma::raise::SideFlash<ATTinyFirmware> SideFlash;
+//kaleidoscope::plugin::Kaleidoscope-Hardware-Dygma-Raise::SideFlash<ATTinyFirmware> SideFlash;
+kaleidoscope::device::dygma::SideFlash<ATTinyFirmware> SideFlash;
 
 /** toggleLedsOnSuspendResume toggles the LEDs off when the host goes to sleep,
  * and turns them back on when it wakes up.
@@ -174,7 +178,8 @@ KALEIDOSCOPE_INIT_PLUGINS(
     FirmwareVersion,
     USBQuirks,
     MagicCombo,
-    RaiseIdleLEDs,
+//    RaiseIdleLEDs,
+    IdleLEDs,
     EEPROMSettings,
     EEPROMKeymap,
     FocusSettingsCommand,
@@ -190,7 +195,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
     PersistentIdleLEDs,
     RaiseFocus,
     Qukeys,
-    DynamicSuperKeys,
+//    DynamicSuperKeys,
     DynamicMacros,
     SideFlash,
     Focus,
@@ -246,8 +251,8 @@ void setup()
   LEDRainbowWaveEffect.brightness(255);
   StalkerEffect.variant = STALKER(BlazingTrail);
 
-  DynamicSuperKeys.setup(0, 1024);
-  DynamicMacros.reserve_storage(2048);
+//  DynamicSuperKeys.setup(0, 1024);
+//  DynamicMacros.reserve_storage(2048);
 
   EEPROMUpgrade.reserveStorage();
   EEPROMUpgrade.upgrade();
