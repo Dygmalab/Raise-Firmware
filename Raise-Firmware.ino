@@ -27,19 +27,21 @@
 #include "Kaleidoscope-FocusSerial.h"
 #include "Kaleidoscope-EEPROM-Settings.h"
 #include "Kaleidoscope-EEPROM-Keymap.h"
+#include "LED-CapsLockLight.h"
+#include "EEPROMPadding.h"
+#include "EEPROMUpgrade.h"
 #include "Kaleidoscope-IdleLEDs.h"
 #include "Kaleidoscope-Colormap.h"
 #include "Kaleidoscope-LED-Palette-Theme.h"
 #include "Kaleidoscope-LEDEffect-Rainbow.h"
 #include "Kaleidoscope-LED-Stalker.h"
-//#include "Kaleidoscope-DynamicSuperKeys.h"
+#include "Kaleidoscope-DynamicSuperKeys.h"
 #include "Kaleidoscope-DynamicMacros.h"
 #include "Kaleidoscope-MagicCombo.h"
 #include "Kaleidoscope-USB-Quirks.h"
 #include "Kaleidoscope-LayerFocus.h"
-//#include "RaiseIdleLEDs.h"
 #include "Kaleidoscope-IdleLEDs.h"
-#include "RaiseFirmwareVersion.h"
+#include "Kaleidoscope-Raise-Firmware-Version.h"
 #include "Kaleidoscope-Hardware-Dygma-Raise.h"
 
 //#include "kaleidoscope/device/dygma/raise/Focus.h"
@@ -52,10 +54,6 @@
 #include "Kaleidoscope-Qukeys.h"
 #include "Kaleidoscope-Escape-OneShot.h"
 
-#include "LED-CapsLockLight.h"
-#include "EEPROMPadding.h"
-
-#include "EEPROMUpgrade.h"
 
 #include "attiny_firmware.h"
 
@@ -106,7 +104,7 @@ KEYMAPS(
 // *INDENT-ON*
 
 //kaleidoscope::plugin::Kaleidoscope-Hardware-Dygma-Raise::SideFlash<ATTinyFirmware> SideFlash;
-kaleidoscope::device::dygma::SideFlash<ATTinyFirmware> SideFlash;
+//kaleidoscope::device::dygma::SideFlash<ATTinyFirmware> SideFlash;
 
 /** toggleLedsOnSuspendResume toggles the LEDs off when the host goes to sleep,
  * and turns them back on when it wakes up.
@@ -178,7 +176,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
     FirmwareVersion,
     USBQuirks,
     MagicCombo,
-//    RaiseIdleLEDs,
+    RaiseIdleLEDs,
     IdleLEDs,
     EEPROMSettings,
     EEPROMKeymap,
@@ -195,7 +193,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
     PersistentIdleLEDs,
     RaiseFocus,
     Qukeys,
-//    DynamicSuperKeys,
+    DynamicSuperKeys,
     DynamicMacros,
     SideFlash,
     Focus,
@@ -251,8 +249,8 @@ void setup()
   LEDRainbowWaveEffect.brightness(255);
   StalkerEffect.variant = STALKER(BlazingTrail);
 
-//  DynamicSuperKeys.setup(0, 1024);
-//  DynamicMacros.reserve_storage(2048);
+  DynamicSuperKeys.setup(0, 1024);
+  DynamicMacros.reserve_storage(2048);
 
   EEPROMUpgrade.reserveStorage();
   EEPROMUpgrade.upgrade();
