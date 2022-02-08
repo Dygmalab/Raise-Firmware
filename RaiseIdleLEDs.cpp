@@ -23,8 +23,8 @@
 namespace kaleidoscope {
 namespace plugin {
 
-EventHandlerResult RaiseIdleLEDs::onKeyswitchEvent(Key &mapped_key, KeyAddr key_addr, uint8_t key_state) {
-  return ::PersistentIdleLEDs.onKeyswitchEvent(mapped_key, key_addr, key_state);
+EventHandlerResult RaiseIdleLEDs::onKeyEvent(KeyEvent &event){
+  return ::PersistentIdleLEDs.onKeyEvent(event);
 }
 
 }

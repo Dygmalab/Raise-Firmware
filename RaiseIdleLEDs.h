@@ -47,7 +47,7 @@ namespace plugin {
 
 class RaiseIdleLEDs : public kaleidoscope::Plugin {
  public:
-  EventHandlerResult onKeyswitchEvent(Key &mapped_key, KeyAddr key_addr, uint8_t key_state);
+  EventHandlerResult onKeyEvent(KeyEvent &event);
 };
 
 }
