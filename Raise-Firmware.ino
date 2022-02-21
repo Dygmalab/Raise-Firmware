@@ -21,7 +21,7 @@
 
 #include "Kaleidoscope.h"
 
-// #include "Kaleidoscope-MouseKeys.h"
+#include "Kaleidoscope-MouseKeys.h"
 #include "Kaleidoscope-LEDControl.h"
 #include "Kaleidoscope-PersistentLEDMode.h"
 #include "Kaleidoscope-FocusSerial.h"
@@ -32,7 +32,10 @@
 #include "Kaleidoscope-LED-Palette-Theme.h"
 #include "Kaleidoscope-LEDEffect-Rainbow.h"
 #include "Kaleidoscope-LED-Stalker.h"
-#include "Kaleidoscope-DynamicSuperKeys.h"
+#include "Kaleidoscope-LED-Wavepool.h"
+#include "Kaleidoscope-Heatmap.h"
+#include "Kaleidoscope-LEDEffect-DigitalRain.h"
+// #include "Kaleidoscope-DynamicSuperKeys.h"
 #include "Kaleidoscope-DynamicMacros.h"
 #include "Kaleidoscope-MagicCombo.h"
 #include "Kaleidoscope-USB-Quirks.h"
@@ -41,6 +44,7 @@
 #include "RaiseFirmwareVersion.h"
 #include "kaleidoscope/device/dygma/raise/Focus.h"
 #include "kaleidoscope/device/dygma/raise/SideFlash.h"
+#include "Kaleidoscope-LEDEffect-BootGreeting.h"
 
 // Support for host power management (suspend & wakeup)
 #include "Kaleidoscope-HostPowerManagement.h"
@@ -105,30 +109,6 @@ KEYMAPS(
 
 kaleidoscope::device::dygma::raise::SideFlash<ATTinyFirmware> SideFlash;
 
-/** toggleLedsOnSuspendResume toggles the LEDs off when the host goes to sleep,
- * and turns them back on when it wakes up.
- */
-void toggleLedsOnSuspendResume(kaleidoscope::plugin::HostPowerManagement::Event event) {
-  switch (event) {
-  case kaleidoscope::plugin::HostPowerManagement::Suspend:
-    LEDControl.disable();
-    break;
-  case kaleidoscope::plugin::HostPowerManagement::Resume:
-    LEDControl.enable();
-    break;
-  case kaleidoscope::plugin::HostPowerManagement::Sleep:
-    break;
-  }
-}
-
-/** hostPowerManagementEventHandler dispatches power management events (suspend,
- * resume, and sleep) to other functions that perform action based on these
- * events.
- */
-void hostPowerManagementEventHandler(kaleidoscope::plugin::HostPowerManagement::Event event) {
-  toggleLedsOnSuspendResume(event);
-}
-
 enum {
   COMBO_TOGGLE_NKRO_MODE
 };
@@ -171,6 +151,34 @@ USE_MAGIC_COMBOS(
 
 kaleidoscope::plugin::EEPROMPadding JointPadding(8);
 
+cRGB heat_colors[] = {
+  {  0,   0,   0}, // black
+  {255,  25,  25}, // blue
+  { 25, 255,  25}, // green
+  { 25,  25, 255}  // red
+};
+
+void toggleLedsOnSuspendResume(kaleidoscope::plugin::HostPowerManagement::Event event) {
+  switch (event) {
+  case kaleidoscope::plugin::HostPowerManagement::Suspend:
+    LEDControl.disable();
+    break;
+  case kaleidoscope::plugin::HostPowerManagement::Resume:
+    LEDControl.enable();
+    break;
+  case kaleidoscope::plugin::HostPowerManagement::Sleep:
+    break;
+  }
+}
+
+/** hostPowerManagementEventHandler dispatches power management events (suspend,
+ * resume, and sleep) to other functions that perform action based on these
+ * events.
+ */
+void hostPowerManagementEventHandler(kaleidoscope::plugin::HostPowerManagement::Event event) {
+  toggleLedsOnSuspendResume(event);
+}
+
 KALEIDOSCOPE_INIT_PLUGINS(
     FirmwareVersion,
     USBQuirks,
@@ -187,15 +195,16 @@ KALEIDOSCOPE_INIT_PLUGINS(
     LEDPaletteTheme,
     JointPadding,
     ColormapEffect,
-    LEDRainbowWaveEffect, LEDRainbowEffect, StalkerEffect,
+    LEDRainbowWaveEffect, LEDRainbowEffect, StalkerEffect, HeatmapEffect, LEDDigitalRainEffect, WavepoolEffect,
+    BootGreetingEffect,
     PersistentIdleLEDs,
     RaiseFocus,
     Qukeys,
-    DynamicSuperKeys,
+    // DynamicSuperKeys,
     DynamicMacros,
     SideFlash,
     Focus,
-    // MouseKeys,
+    MouseKeys,
     OneShot,
     EscapeOneShot,
     LayerFocus,
@@ -209,8 +218,8 @@ void setup()
   Kaleidoscope.serialPort().begin(9600);
 
   // Start my new hardware serial
-  Serial1.begin(9600);
-  Serial1.write("hello");
+  // Serial1.begin(9600);
+  // Serial1.write("hello");
 
   Kaleidoscope.setup();
 
@@ -222,17 +231,22 @@ void setup()
   LEDRainbowEffect.brightness(255);
   LEDRainbowWaveEffect.brightness(255);
   StalkerEffect.variant = STALKER(BlazingTrail);
+  HeatmapEffect.heat_colors = heat_colors;
+  HeatmapEffect.heat_colors_length = 4;
+  LEDDigitalRainEffect.DROP_MS = 100; // Make the rain fall faster
+  LEDDigitalRainEffect.activate();
+  WavepoolEffect.activate();
 
-  DynamicSuperKeys.setup(0, 1024);
+  // DynamicSuperKeys.setup(0, 1024);
   DynamicMacros.reserve_storage(2048);
 
   EEPROMUpgrade.reserveStorage();
   EEPROMUpgrade.upgrade();
 }
-
+ 
 void loop()
 {
   Kaleidoscope.loop();
-  Serial1.write(1);
+  // Serial1.write(1);
   protocolBreathe();
 }

@@ -43,8 +43,8 @@ endif
 
 #device configuration (WIN uses COM ports, MAC&LIN \dev\tty, MAC additionaly uses \dev\cu)
 ifeq ($(PLATFORM),WIN)
-    DEVICE_PORT =COM6
-    BACKUP_PORT =COM6
+    DEVICE_PORT =COM11
+    BACKUP_PORT =COM11
 endif
 ifeq ($(PLATFORM),LINUX)
     DEVICE_PORT =/dev/ttyACM0
@@ -66,7 +66,7 @@ ifeq ($(PLATFORM),WIN)
     KALEIDOSCOPE_SHA="$(shell cd ${BOARD_HARDWARE_PATH}\libraries\Kaleidoscope && git rev-parse --short HEAD)"
 endif
 ifeq ($(PLATFORM),LINUX)
-    BOARD_HARDWARE_PATH=${HOME}/Arduino/hardware/dygma/samd
+    BOARD_HARDWARE_PATH=/mnt/c/Users/Alex/Documents/Arduino/hardware/dygma/samd
     FOCUS_TOOL=${BOARD_HARDWARE_PATH}/libraries/Kaleidoscope/bin/focus-test
     BOSSAC=${HOME}/.arduino15/packages/arduino/tools/bossac/1.7.0*/bossac
     BUILD_PATH=./output/
