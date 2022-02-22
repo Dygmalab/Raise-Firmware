@@ -107,7 +107,7 @@ KEYMAPS(
 /* Re-enable astyle's indent enforcement */
 // *INDENT-ON*
 
-kaleidoscope::device::dygma::raise::SideFlash<ATTinyFirmware> SideFlash;
+kaleidoscope::device::keyboardio::raise::SideFlash<ATTinyFirmware> SideFlash;
 
 enum {
   COMBO_TOGGLE_NKRO_MODE
