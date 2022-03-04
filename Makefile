@@ -43,8 +43,8 @@ endif
 
 #device configuration (WIN uses COM ports, MAC&LIN \dev\tty, MAC additionaly uses \dev\cu)
 ifeq ($(PLATFORM),WIN)
-    DEVICE_PORT =COM11
-    BACKUP_PORT =COM11
+    DEVICE_PORT =COM6
+    BACKUP_PORT =COM6
 endif
 ifeq ($(PLATFORM),LINUX)
     DEVICE_PORT =/dev/ttyACM0

@@ -27,6 +27,8 @@
 #include "Kaleidoscope-FocusSerial.h"
 #include "Kaleidoscope-EEPROM-Settings.h"
 #include "Kaleidoscope-EEPROM-Keymap.h"
+#include "EEPROMPadding.h"
+#include "EEPROMUpgrade.h"
 #include "Kaleidoscope-IdleLEDs.h"
 #include "Kaleidoscope-Colormap.h"
 #include "Kaleidoscope-LED-Palette-Theme.h"
@@ -35,7 +37,10 @@
 #include "Kaleidoscope-LED-Wavepool.h"
 #include "Kaleidoscope-Heatmap.h"
 #include "Kaleidoscope-LEDEffect-DigitalRain.h"
+#include "Kaleidoscope-LEDEffect-BootGreeting.h"
 // #include "Kaleidoscope-DynamicSuperKeys.h"
+// Support for host power management (suspend & wakeup)
+#include "Kaleidoscope-HostPowerManagement.h"
 #include "Kaleidoscope-DynamicMacros.h"
 #include "Kaleidoscope-MagicCombo.h"
 #include "Kaleidoscope-USB-Quirks.h"
@@ -44,23 +49,13 @@
 #include "RaiseFirmwareVersion.h"
 #include "kaleidoscope/device/dygma/raise/Focus.h"
 #include "kaleidoscope/device/dygma/raise/SideFlash.h"
-#include "Kaleidoscope-LEDEffect-BootGreeting.h"
-
-// Support for host power management (suspend & wakeup)
-#include "Kaleidoscope-HostPowerManagement.h"
-
 #include "Kaleidoscope-OneShot.h"
 #include "Kaleidoscope-Qukeys.h"
 #include "Kaleidoscope-Escape-OneShot.h"
-
 #include "LED-CapsLockLight.h"
-#include "EEPROMPadding.h"
-
-#include "EEPROMUpgrade.h"
-
 #include "attiny_firmware.h"
-#include "wiring_private.h"
- 
+// #include "wiring_private.h"
+
 enum { QWERTY, NUMPAD, _LAYER_MAX }; // layers
 
 /* This comment temporarily turns off astyle's indent enforcement so we can make
