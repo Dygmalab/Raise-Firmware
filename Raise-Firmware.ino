@@ -54,7 +54,6 @@
 #include "Kaleidoscope-Escape-OneShot.h"
 #include "LED-CapsLockLight.h"
 #include "attiny_firmware.h"
-// #include "wiring_private.h"
 
 enum { QWERTY, NUMPAD, _LAYER_MAX }; // layers
 
@@ -211,10 +210,6 @@ void setup()
 {
   // First start the serial communications to avoid restarting unnecesarily
   Kaleidoscope.serialPort().begin(9600);
-
-  // Start my new hardware serial
-  // Serial1.begin(9600);
-  // Serial1.write("hello");
 
   Kaleidoscope.setup();
 

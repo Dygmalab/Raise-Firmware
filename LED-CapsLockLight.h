@@ -27,7 +27,7 @@ class LEDCapsLockLight: public Plugin {
  public:
   EventHandlerResult onSetup();
   EventHandlerResult onLayerChange();
-  EventHandlerResult beforeReportingState();
+  EventHandlerResult beforeReportingState(const KeyEvent &event);
 
  private:
   static KeyAddr caps_address_;
