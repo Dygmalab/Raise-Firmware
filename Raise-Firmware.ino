@@ -38,7 +38,7 @@
 #include "Kaleidoscope-Heatmap.h"
 #include "Kaleidoscope-LEDEffect-DigitalRain.h"
 #include "Kaleidoscope-LEDEffect-BootGreeting.h"
-// #include "Kaleidoscope-DynamicSuperKeys.h"
+#include "Kaleidoscope-DynamicSuperKeys.h"
 // Support for host power management (suspend & wakeup)
 #include "Kaleidoscope-HostPowerManagement.h"
 #include "Kaleidoscope-DynamicMacros.h"
@@ -194,7 +194,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
     PersistentIdleLEDs,
     RaiseFocus,
     Qukeys,
-    // DynamicSuperKeys,
+    DynamicSuperKeys,
     DynamicMacros,
     SideFlash,
     Focus,
@@ -227,7 +227,7 @@ void setup()
   LEDDigitalRainEffect.activate();
   WavepoolEffect.activate();
 
-  // DynamicSuperKeys.setup(0, 1024);
+  DynamicSuperKeys.setup(0, 1024);
   DynamicMacros.reserve_storage(2048);
 
   EEPROMUpgrade.reserveStorage();
@@ -237,6 +237,5 @@ void setup()
 void loop()
 {
   Kaleidoscope.loop();
-  // Serial1.write(1);
   protocolBreathe();
 }
