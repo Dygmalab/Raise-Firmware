@@ -38,7 +38,7 @@
 #include "Kaleidoscope-Heatmap.h"
 #include "Kaleidoscope-LEDEffect-DigitalRain.h"
 #include "Kaleidoscope-LEDEffect-BootGreeting.h"
-// #include "Kaleidoscope-DynamicSuperKeys.h"
+#include "Kaleidoscope-DynamicSuperKeys.h"
 // Support for host power management (suspend & wakeup)
 #include "Kaleidoscope-HostPowerManagement.h"
 #include "Kaleidoscope-DynamicMacros.h"
@@ -237,6 +237,5 @@ void setup()
 void loop()
 {
   Kaleidoscope.loop();
-  // Serial1.write(1);
   protocolBreathe();
 }
