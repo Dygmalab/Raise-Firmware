@@ -1,5 +1,5 @@
 /* -*- mode: c++ -*-
- * kaleidoscope::plugin::RaiseEEPROM -- Raise EEPROM upgrade helper
+ * kaleidoscope::plugin::wiredEEPROM -- Raise EEPROM upgrade helper
  * Copyright (C) 2020  Dygma Lab S.L.
  *
  * This program is free software: you can redistribute it and/or modify it under

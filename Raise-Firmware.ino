@@ -21,7 +21,7 @@
 
 #include "Kaleidoscope.h"
 
-#include "Kaleidoscope-MouseKeys.h"
+// #include "Kaleidoscope-MouseKeys.h"
 #include "Kaleidoscope-LEDControl.h"
 #include "Kaleidoscope-PersistentLEDMode.h"
 #include "Kaleidoscope-FocusSerial.h"
@@ -102,7 +102,7 @@ KEYMAPS(
 /* Re-enable astyle's indent enforcement */
 // *INDENT-ON*
 
-kaleidoscope::device::dygma::raise::SideFlash<ATTinyFirmware> SideFlash;
+kaleidoscope::device::dygma::wired::SideFlash<ATTinyFirmware> SideFlash;
 
 /** toggleLedsOnSuspendResume toggles the LEDs off when the host goes to sleep,
  * and turns them back on when it wakes up.
@@ -194,7 +194,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
     DynamicMacros,
     SideFlash,
     Focus,
-    MouseKeys,
+    // MouseKeys,
     OneShot,
     EscapeOneShot,
     LayerFocus,

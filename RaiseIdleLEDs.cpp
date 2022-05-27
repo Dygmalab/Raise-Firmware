@@ -1,5 +1,5 @@
 /* -*- mode: c++ -*-
- * kaleidoscope::plugin::RaiseIdleLeds -- IdleLEDs with a workaround for the Raise
+ * kaleidoscope::plugin::wiredIdleLeds -- IdleLEDs with a workaround for the Raise
  * Copyright (C) 2019  Dygma Lab S.L.
  *
  * This program is free software: you can redistribute it and/or modify it under
@@ -30,6 +30,6 @@ EventHandlerResult RaiseIdleLEDs::onKeyswitchEvent(Key &mapped_key, KeyAddr key_
 }
 }
 
-kaleidoscope::plugin::RaiseIdleLEDs RaiseIdleLEDs;
+kaleidoscope::plugin::wiredIdleLEDs RaiseIdleLEDs;
 
 #endif

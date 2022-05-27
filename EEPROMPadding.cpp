@@ -24,6 +24,7 @@ namespace plugin {
 
 EventHandlerResult EEPROMPadding::onSetup() {
   ::EEPROMSettings.requestSlice(size_);
+  return EventHandlerResult::OK;
 }
 
 }

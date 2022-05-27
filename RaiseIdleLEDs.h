@@ -1,5 +1,5 @@
 /* -*- mode: c++ -*-
- * kaleidoscope::plugin::RaiseIdleLeds -- IdleLEDs with a workaround for the Raise
+ * kaleidoscope::plugin::wiredIdleLeds -- IdleLEDs with a workaround for the Raise
  * Copyright (C) 2019  Dygma Lab S.L.
  *
  * This program is free software: you can redistribute it and/or modify it under
@@ -53,6 +53,6 @@ class RaiseIdleLEDs : public kaleidoscope::Plugin {
 }
 }
 
-extern kaleidoscope::plugin::RaiseIdleLEDs RaiseIdleLEDs;
+extern kaleidoscope::plugin::wiredIdleLEDs RaiseIdleLEDs;
 
 #endif
