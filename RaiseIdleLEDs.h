@@ -38,7 +38,7 @@
 
 #pragma once
 
-#ifdef ARDUINO_RASPBERRY_PI_PICO
+#ifdef ARDUINO_SAMD_RAISE
 
 #include <Kaleidoscope.h>
 
@@ -53,6 +53,6 @@ class RaiseIdleLEDs : public kaleidoscope::Plugin {
 }
 }
 
-extern kaleidoscope::plugin::wiredIdleLEDs RaiseIdleLEDs;
+extern kaleidoscope::plugin::RaiseIdleLEDs RaiseIdleLEDs;
 
 #endif

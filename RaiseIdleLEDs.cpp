@@ -15,7 +15,7 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifdef ARDUINO_RASPBERRY_PI_PICO
+#ifdef ARDUINO_SAMD_RAISE
 
 #include "RaiseIdleLEDs.h"
 #include <Kaleidoscope-IdleLEDs.h>
@@ -30,6 +30,6 @@ EventHandlerResult RaiseIdleLEDs::onKeyswitchEvent(Key &mapped_key, KeyAddr key_
 }
 }
 
-kaleidoscope::plugin::wiredIdleLEDs RaiseIdleLEDs;
+kaleidoscope::plugin::RaiseIdleLEDs RaiseIdleLEDs;
 
 #endif
