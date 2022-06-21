@@ -15,7 +15,7 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifdef ARDUINO_SAMD_RAISE
+#ifdef ARDUINO_RASPBERRY_PI_PICO
 
 #include "RaiseIdleLEDs.h"
 #include <Kaleidoscope-IdleLEDs.h>

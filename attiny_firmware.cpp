@@ -18,7 +18,7 @@
 
 // TODO(algernon): This file should be automatically generated.
 
-#ifdef ARDUINO_SAMD_RAISE
+#ifdef ARDUINO_RASPBERRY_PI_PICO
 
 #include <Arduino.h>
 #include "attiny_firmware.h"

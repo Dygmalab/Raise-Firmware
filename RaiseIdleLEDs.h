@@ -38,7 +38,7 @@
 
 #pragma once
 
-#ifdef ARDUINO_SAMD_RAISE
+#ifdef ARDUINO_RASPBERRY_PI_PICO
 
 #include <Kaleidoscope.h>
 

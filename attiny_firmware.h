@@ -20,7 +20,7 @@
 
 #pragma once
 
-#ifdef ARDUINO_SAMD_RAISE
+#ifdef ARDUINO_RASPBERRY_PI_PICO
 
 struct ATTinyFirmware {
   static constexpr uint8_t pages = 46;
