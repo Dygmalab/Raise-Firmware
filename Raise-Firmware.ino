@@ -246,8 +246,8 @@ void setup()
   LEDRainbowWaveEffect.brightness(255);
   StalkerEffect.variant = STALKER(BlazingTrail);
 
-  DynamicSuperKeys.setup(0, 2048);
-  DynamicMacros.reserve_storage(4086);
+  DynamicSuperKeys.setup(0, 1024);
+  DynamicMacros.reserve_storage(2048);
 
   EEPROMUpgrade.reserveStorage();
   EEPROMUpgrade.upgrade();
