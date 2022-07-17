@@ -38,19 +38,22 @@
 
 #pragma once
 
-#ifdef ARDUINO_SAMD_RAISE
+#ifdef ARDUINO_RASPBERRY_PI_PICO
 
 #include <Kaleidoscope.h>
 
-namespace kaleidoscope {
-namespace plugin {
+namespace kaleidoscope
+{
+  namespace plugin
+  {
 
-class RaiseIdleLEDs : public kaleidoscope::Plugin {
- public:
-  EventHandlerResult onKeyswitchEvent(Key &mapped_key, KeyAddr key_addr, uint8_t key_state);
-};
+    class RaiseIdleLEDs : public kaleidoscope::Plugin
+    {
+    public:
+      EventHandlerResult onKeyswitchEvent(Key &mapped_key, KeyAddr key_addr, uint8_t key_state);
+    };
 
-}
+  }
 }
 
 extern kaleidoscope::plugin::RaiseIdleLEDs RaiseIdleLEDs;

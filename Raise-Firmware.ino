@@ -39,8 +39,8 @@
 #include "Kaleidoscope-LayerFocus.h"
 #include "RaiseIdleLEDs.h"
 #include "RaiseFirmwareVersion.h"
-#include "kaleidoscope/device/dygma/raise/Focus.h"
-#include "kaleidoscope/device/dygma/raise/SideFlash.h"
+#include "kaleidoscope/device/dygma/wired/Focus.h"
+#include "kaleidoscope/device/dygma/wired/SideFlash.h"
 
 // Support for host power management (suspend & wakeup)
 #include "Kaleidoscope-HostPowerManagement.h"
@@ -56,7 +56,12 @@
 
 #include "attiny_firmware.h"
 
-enum { QWERTY, NUMPAD, _LAYER_MAX }; // layers
+enum
+{
+  QWERTY,
+  NUMPAD,
+  _LAYER_MAX
+}; // layers
 
 /* This comment temporarily turns off astyle's indent enforcement so we can make
  * the keymaps actually resemble the physical key layout better
@@ -64,51 +69,30 @@ enum { QWERTY, NUMPAD, _LAYER_MAX }; // layers
 // *INDENT-OFF*
 
 KEYMAPS(
-[QWERTY] = KEYMAP_STACKED
-(
-    Key_Escape      ,Key_1         ,Key_2       ,Key_3         ,Key_4     ,Key_5 ,Key_6
-   ,Key_Tab         ,Key_Q         ,Key_W       ,Key_E         ,Key_R     ,Key_T
-   ,Key_CapsLock    ,Key_A         ,Key_S       ,Key_D         ,Key_F     ,Key_G
-   ,Key_LeftShift   ,Key_Backslash ,Key_Z       ,Key_X         ,Key_C     ,Key_V ,Key_B
-   ,Key_LeftControl ,Key_LeftGui   ,Key_LeftAlt ,Key_Space     ,Key_Space
-                                                ,Key_Backspace ,Key_Enter
+    [QWERTY] = KEYMAP_STACKED(
+        Key_Escape, Key_1, Key_2, Key_3, Key_4, Key_5, Key_6, Key_Tab, Key_Q, Key_W, Key_E, Key_R, Key_T, Key_CapsLock, Key_A, Key_S, Key_D, Key_F, Key_G, Key_LeftShift, Key_Backslash, Key_Z, Key_X, Key_C, Key_V, Key_B, Key_LeftControl, Key_LeftGui, Key_LeftAlt, Key_Space, Key_Space, Key_Backspace, Key_Enter
 
-   ,Key_7               ,Key_8      ,Key_9        ,Key_0        ,Key_Minus         ,Key_Equals       ,Key_Backspace
-   ,Key_Y               ,Key_U      ,Key_I        ,Key_O        ,Key_P             ,Key_LeftBracket  ,Key_RightBracket ,Key_Enter
-   ,Key_H               ,Key_J      ,Key_K        ,Key_L        ,Key_Semicolon     ,Key_Quote        ,Key_Backslash
-   ,Key_N               ,Key_M      ,Key_Comma    ,Key_Period   ,Key_Slash         ,Key_RightShift
-   ,Key_Space           ,Key_Space  ,Key_RightAlt ,Key_RightGui ,Key_LEDEffectNext ,Key_RightControl
-   ,MoveToLayer(NUMPAD) ,Key_Delete
-),
+        ,
+        Key_7, Key_8, Key_9, Key_0, Key_Minus, Key_Equals, Key_Backspace, Key_Y, Key_U, Key_I, Key_O, Key_P, Key_LeftBracket, Key_RightBracket, Key_Enter, Key_H, Key_J, Key_K, Key_L, Key_Semicolon, Key_Quote, Key_Backslash, Key_N, Key_M, Key_Comma, Key_Period, Key_Slash, Key_RightShift, Key_Space, Key_Space, Key_RightAlt, Key_RightGui, Key_LEDEffectNext, Key_RightControl, MoveToLayer(NUMPAD), Key_Delete),
 
-[NUMPAD] = KEYMAP_STACKED
-(
-    Key_Escape      ,Key_F1        ,Key_F2        ,Key_F3         ,Key_F4 ,Key_F5 ,Key_F6
-   ,Key_Tab         ,XXX           ,Key_UpArrow   ,XXX            ,XXX    ,XXX
-   ,Key_CapsLock    ,Key_LeftArrow ,Key_DownArrow ,Key_RightArrow ,XXX    ,XXX
-   ,Key_LeftShift   ,Key_Backslash ,XXX           ,XXX            ,XXX    ,XXX    ,XXX
-   ,Key_LeftControl ,Key_LeftGui   ,Key_LeftAlt   ,Key_Space      ,Key_Space
-                                                  ,Key_Backspace  ,Key_Enter
+    [NUMPAD] = KEYMAP_STACKED(
+        Key_Escape, Key_F1, Key_F2, Key_F3, Key_F4, Key_F5, Key_F6, Key_Tab, XXX, Key_UpArrow, XXX, XXX, XXX, Key_CapsLock, Key_LeftArrow, Key_DownArrow, Key_RightArrow, XXX, XXX, Key_LeftShift, Key_Backslash, XXX, XXX, XXX, XXX, XXX, Key_LeftControl, Key_LeftGui, Key_LeftAlt, Key_Space, Key_Space, Key_Backspace, Key_Enter
 
-   ,Key_F7              ,Key_F8    ,Key_F9        ,Key_F10       ,Key_F11            ,Key_F12 ,Key_Backspace
-   ,Key_KeypadSubtract  ,Key_7     ,Key_8         ,Key_9         ,Key_KeypadDivide   ,XXX     ,XXX, Key_Enter
-   ,Key_KeypadAdd       ,Key_4     ,Key_5         ,Key_6         ,Key_KeypadMultiply ,XXX     ,Key_Backslash
-   ,Key_KeypadDot       ,Key_1     ,Key_2         ,Key_3         ,Key_UpArrow        ,Key_RightShift
-   ,Key_0               ,Key_Space ,Key_LeftArrow ,Key_DownArrow ,Key_RightArrow     ,Key_RightControl
-   ,MoveToLayer(QWERTY) ,Key_Delete
- )
-);
+        ,
+        Key_F7, Key_F8, Key_F9, Key_F10, Key_F11, Key_F12, Key_Backspace, Key_KeypadSubtract, Key_7, Key_8, Key_9, Key_KeypadDivide, XXX, XXX, Key_Enter, Key_KeypadAdd, Key_4, Key_5, Key_6, Key_KeypadMultiply, XXX, Key_Backslash, Key_KeypadDot, Key_1, Key_2, Key_3, Key_UpArrow, Key_RightShift, Key_0, Key_Space, Key_LeftArrow, Key_DownArrow, Key_RightArrow, Key_RightControl, MoveToLayer(QWERTY), Key_Delete));
 
 /* Re-enable astyle's indent enforcement */
 // *INDENT-ON*
 
- kaleidoscope::device::dygma::wired::SideFlash<ATTinyFirmware> SideFlash;
+kaleidoscope::device::dygma::wired::SideFlash<ATTinyFirmware> SideFlash;
 
 /** toggleLedsOnSuspendResume toggles the LEDs off when the host goes to sleep,
  * and turns them back on when it wakes up.
  */
-void toggleLedsOnSuspendResume(kaleidoscope::plugin::HostPowerManagement::Event event) {
-  switch (event) {
+void toggleLedsOnSuspendResume(kaleidoscope::plugin::HostPowerManagement::Event event)
+{
+  switch (event)
+  {
   case kaleidoscope::plugin::HostPowerManagement::Suspend:
     LEDControl.disable();
     break;
@@ -124,11 +108,13 @@ void toggleLedsOnSuspendResume(kaleidoscope::plugin::HostPowerManagement::Event 
  * resume, and sleep) to other functions that perform action based on these
  * events.
  */
-void hostPowerManagementEventHandler(kaleidoscope::plugin::HostPowerManagement::Event event) {
+void hostPowerManagementEventHandler(kaleidoscope::plugin::HostPowerManagement::Event event)
+{
   toggleLedsOnSuspendResume(event);
 }
 
-enum {
+enum
+{
   COMBO_TOGGLE_NKRO_MODE
 };
 
@@ -188,7 +174,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
     ColormapEffect,
     LEDRainbowWaveEffect, LEDRainbowEffect, StalkerEffect,
     PersistentIdleLEDs,
-    RaiseFocus,
+    WiredFocus,
     Qukeys,
     DynamicSuperKeys,
     DynamicMacros,
@@ -199,8 +185,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
     EscapeOneShot,
     LayerFocus,
     EEPROMUpgrade,
-    HostPowerManagement
-  );
+    HostPowerManagement);
 
 void setup()
 {

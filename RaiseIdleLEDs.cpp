@@ -15,19 +15,22 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifdef ARDUINO_SAMD_RAISE
+#ifdef ARDUINO_RASPBERRY_PI_PICO
 
 #include "RaiseIdleLEDs.h"
 #include <Kaleidoscope-IdleLEDs.h>
 
-namespace kaleidoscope {
-namespace plugin {
+namespace kaleidoscope
+{
+  namespace plugin
+  {
 
-EventHandlerResult RaiseIdleLEDs::onKeyswitchEvent(Key &mapped_key, KeyAddr key_addr, uint8_t key_state) {
-  return ::PersistentIdleLEDs.onKeyswitchEvent(mapped_key, key_addr, key_state);
-}
+    EventHandlerResult RaiseIdleLEDs::onKeyswitchEvent(Key &mapped_key, KeyAddr key_addr, uint8_t key_state)
+    {
+      return ::PersistentIdleLEDs.onKeyswitchEvent(mapped_key, key_addr, key_state);
+    }
 
-}
+  }
 }
 
 kaleidoscope::plugin::RaiseIdleLEDs RaiseIdleLEDs;
