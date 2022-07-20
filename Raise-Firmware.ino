@@ -32,6 +32,7 @@
 #include "Kaleidoscope-LED-Palette-Theme.h"
 #include "Kaleidoscope-LEDEffect-Rainbow.h"
 #include "Kaleidoscope-LED-Stalker.h"
+#include "Kaleidoscope-LEDEffect-SolidColor.h"
 #include "Kaleidoscope-DynamicSuperKeys.h"
 #include "Kaleidoscope-DynamicMacros.h"
 #include "Kaleidoscope-MagicCombo.h"
@@ -69,18 +70,40 @@ enum
 // *INDENT-OFF*
 
 KEYMAPS(
-    [QWERTY] = KEYMAP_STACKED(
-        Key_Escape, Key_1, Key_2, Key_3, Key_4, Key_5, Key_6, Key_Tab, Key_Q, Key_W, Key_E, Key_R, Key_T, Key_CapsLock, Key_A, Key_S, Key_D, Key_F, Key_G, Key_LeftShift, Key_Backslash, Key_Z, Key_X, Key_C, Key_V, Key_B, Key_LeftControl, Key_LeftGui, Key_LeftAlt, Key_Space, Key_Space, Key_Backspace, Key_Enter
+[QWERTY] = KEYMAP_STACKED
+(
+    Key_Escape      ,Key_1         ,Key_2       ,Key_3         ,Key_4     ,Key_5, Key_6
+   ,Key_Tab         ,Key_Q         ,Key_W       ,Key_E         ,Key_R     ,Key_T, Key_VolumeUp
+   ,Key_CapsLock    ,Key_A         ,Key_S       ,Key_D         ,Key_F     ,Key_G, Key_VolumeDown
+   ,Key_Backslash   ,Key_Z         ,Key_X       ,Key_C         ,Key_V     ,Key_B
+   ,Key_LeftControl ,Key_LeftGui   ,Key_Backspace,Key_Delete
+   ,Key_LeftShift   ,Key_LeftAlt   ,Key_Enter   ,Key_Space
 
-        ,
-        Key_7, Key_8, Key_9, Key_0, Key_Minus, Key_Equals, Key_Backspace, Key_Y, Key_U, Key_I, Key_O, Key_P, Key_LeftBracket, Key_RightBracket, Key_Enter, Key_H, Key_J, Key_K, Key_L, Key_Semicolon, Key_Quote, Key_Backslash, Key_N, Key_M, Key_Comma, Key_Period, Key_Slash, Key_RightShift, Key_Space, Key_Space, Key_RightAlt, Key_RightGui, Key_LEDEffectNext, Key_RightControl, MoveToLayer(NUMPAD), Key_Delete),
+   ,Key_7               ,Key_8      ,Key_9        ,Key_0        ,Key_Minus         ,Key_Equals       ,Key_Backspace
+   ,Key_Y               ,Key_U      ,Key_I        ,Key_O        ,Key_P             ,Key_LeftBracket  ,Key_RightBracket
+   ,Key_H               ,Key_J      ,Key_K        ,Key_L        ,Key_Semicolon     ,Key_Quote        ,Key_RightShift
+   ,Key_N               ,Key_M      ,Key_Comma    ,Key_Period   ,Key_Slash         ,Key_RightShift
+   ,Key_LEDEffectNext   ,Key_Home   ,Key_UpArrow  ,Key_End
+   ,Key_RightArrow      ,Key_DownArrow            ,Key_LeftArrow,Key_Enter
+),
 
-    [NUMPAD] = KEYMAP_STACKED(
-        Key_Escape, Key_F1, Key_F2, Key_F3, Key_F4, Key_F5, Key_F6, Key_Tab, XXX, Key_UpArrow, XXX, XXX, XXX, Key_CapsLock, Key_LeftArrow, Key_DownArrow, Key_RightArrow, XXX, XXX, Key_LeftShift, Key_Backslash, XXX, XXX, XXX, XXX, XXX, Key_LeftControl, Key_LeftGui, Key_LeftAlt, Key_Space, Key_Space, Key_Backspace, Key_Enter
+[NUMPAD] = KEYMAP_STACKED
+(
+    Key_Escape      ,Key_F1        ,Key_F2        ,Key_F3         ,Key_F4       ,Key_F5       ,Key_F6
+   ,Key_Tab         ,Key_NoKey     ,Key_UpArrow   ,Key_NoKey      ,Key_NoKey    ,Key_NoKey    ,Key_NoKey
+   ,Key_CapsLock    ,Key_LeftArrow ,Key_DownArrow ,Key_RightArrow ,Key_NoKey    ,Key_NoKey    ,Key_NoKey
+   ,Key_LeftShift   ,Key_Backslash ,Key_NoKey     ,Key_NoKey      ,Key_NoKey    ,Key_NoKey
+   ,Key_LeftControl ,Key_LeftGui   ,Key_LeftAlt   ,Key_Space
+   ,Key_Space       ,Key_Backspace ,Key_Enter     ,Key_Delete
 
-        ,
-        Key_F7, Key_F8, Key_F9, Key_F10, Key_F11, Key_F12, Key_Backspace, Key_KeypadSubtract, Key_7, Key_8, Key_9, Key_KeypadDivide, XXX, XXX, Key_Enter, Key_KeypadAdd, Key_4, Key_5, Key_6, Key_KeypadMultiply, XXX, Key_Backslash, Key_KeypadDot, Key_1, Key_2, Key_3, Key_UpArrow, Key_RightShift, Key_0, Key_Space, Key_LeftArrow, Key_DownArrow, Key_RightArrow, Key_RightControl, MoveToLayer(QWERTY), Key_Delete));
-
+   ,Key_F7              ,Key_F8    ,Key_F9        ,Key_F10       ,Key_F11            ,Key_F12         ,Key_Backspace
+   ,Key_KeypadSubtract  ,Key_7     ,Key_8         ,Key_9         ,Key_KeypadDivide   ,Key_NoKey       ,Key_Enter
+   ,Key_KeypadAdd       ,Key_4     ,Key_5         ,Key_6         ,Key_KeypadMultiply ,Key_NoKey       ,Key_Backslash
+   ,Key_KeypadDot       ,Key_1     ,Key_2         ,Key_3         ,Key_UpArrow        ,Key_RightShift
+   ,Key_0               ,Key_Space ,Key_LeftArrow ,Key_DownArrow
+   ,Key_RightArrow      ,Key_RightControl         ,Key_Delete    ,MoveToLayer(QWERTY)
+ )
+);
 /* Re-enable astyle's indent enforcement */
 // *INDENT-ON*
 
@@ -155,6 +178,9 @@ USE_MAGIC_COMBOS(
      .keys = {R4C0, R3C0, R4C2, R0C6}});
 
 kaleidoscope::plugin::EEPROMPadding JointPadding(8);
+static kaleidoscope::plugin::LEDSolidColor solidRed(255, 0, 0);
+static kaleidoscope::plugin::LEDSolidColor solidGreen(0, 255, 0);
+static kaleidoscope::plugin::LEDSolidColor solidBlue(0, 0, 255);
 
 KALEIDOSCOPE_INIT_PLUGINS(
     FirmwareVersion,
@@ -172,7 +198,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
     LEDPaletteTheme,
     JointPadding,
     ColormapEffect,
-    LEDRainbowWaveEffect, LEDRainbowEffect, StalkerEffect,
+    LEDRainbowWaveEffect, LEDRainbowEffect, StalkerEffect, solidRed, solidGreen, solidBlue,
     PersistentIdleLEDs,
     WiredFocus,
     Qukeys,
