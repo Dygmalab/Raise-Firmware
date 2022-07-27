@@ -20,15 +20,18 @@
 #include "RaiseFirmwareVersion.h"
 
 #ifndef BAZECOR_VERSION
-#define BAZECOR_VERSION "<unknown>"
+//#define BAZECOR_VERSION "<unknown>"
+#define BAZECOR_VERSION "v1.0.9beta"
 #endif
 
 #ifndef KALEIDOSCOPE_SHA
-#define KALEIDOSCOPE_SHA "<unknown>"
+//#define KALEIDOSCOPE_SHA "<unknown>"
+#define KALEIDOSCOPE_SHA "5ecc2faf"
 #endif
 
 #ifndef FIRMWARE_SHA
-#define FIRMWARE_SHA "<unknown>"
+//#define FIRMWARE_SHA "<unknown>"
+#define FIRMWARE_SHA "6f2ca51"
 #endif
 
 namespace kaleidoscope {
