@@ -20,7 +20,7 @@
 #endif
 
 #include "Kaleidoscope.h"
-
+#include "hardware/watchdog.h"
 #include "Kaleidoscope-MouseKeys.h"
 #include "Kaleidoscope-LEDControl.h"
 #include "Kaleidoscope-PersistentLEDMode.h"
@@ -234,6 +234,7 @@ void setup()
 
   EEPROMUpgrade.reserveStorage();
   EEPROMUpgrade.upgrade();
+  watchdog_enable(2000, 1);
 }
 
 void loop()
@@ -241,4 +242,5 @@ void loop()
   // Application code goes here...
   Kaleidoscope.loop();
   protocolBreathe();
+  watchdog_update();
 }
