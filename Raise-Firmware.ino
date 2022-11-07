@@ -55,7 +55,7 @@
 
 #include "EEPROMUpgrade.h"
 
-#include "attiny_firmware.h"
+#include "RP2040_firmware.h"
 
 enum
 {
@@ -107,7 +107,7 @@ KEYMAPS(
 /* Re-enable astyle's indent enforcement */
 // *INDENT-ON*
 
-kaleidoscope::device::dygma::wired::SideFlash<ATTinyFirmware> SideFlash;
+kaleidoscope::device::dygma::wired::SideFlash<RP2040Firmware> SideFlash;
 
 /** toggleLedsOnSuspendResume toggles the LEDs off when the host goes to sleep,
  * and turns them back on when it wakes up.
@@ -217,7 +217,6 @@ void setup()
 {
   // First start the serial communications to avoid restarting unnecesarily
   Kaleidoscope.serialPort().begin(9600);
-
   Kaleidoscope.setup();
 
   // Reserve space in the keyboard's EEPROM for the keymaps
