@@ -228,7 +228,7 @@ void setup()
   WavepoolEffect.activate();
 
   // DynamicSuperKeys.setup(0, 1024);
-  DynamicMacros.reserve_storage(2048);
+  DynamicMacros.reserve_storage(3072);
 
   EEPROMUpgrade.reserveStorage();
   EEPROMUpgrade.upgrade();

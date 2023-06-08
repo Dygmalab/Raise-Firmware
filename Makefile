@@ -51,8 +51,8 @@ ifeq ($(PLATFORM),LINUX)
     BACKUP_PORT =/dev/ttyACM0
 endif
 ifeq ($(PLATFORM),DARWIN)
-    DEVICE_PORT =/dev/tty.usbmodem14801
-    BACKUP_PORT =/dev/cu.usbmodem14801
+    DEVICE_PORT =/dev/tty.usbmodem11201
+    BACKUP_PORT =/dev/cu.usbmodem11201
 endif
 
 # Library & build target configuration
@@ -86,7 +86,7 @@ endif
 
 # User configurations
 BACKUP_FILE=eeprom.dump
-BAZECOR_VERSION=v0.3.5
+BAZECOR_VERSION=v0.3.6
 
 # Build Commands
 all: build
@@ -141,7 +141,7 @@ config:
 	@echo Output Path      :  ${BUILD_PATH}${FIRMWARE}.bin
 
 build:
-	${ARDUINO} --pref build.path=${BUILD_PATH} --pref build.version_flags="-DFIRMWARE_SHA=\"${FIRMWARE_SHA}\" -DKALEIDOSCOPE_SHA=\"${KALEIDOSCOPE_SHA}\" -DBAZECOR_VERSION=\"${BAZECOR_VERSION}\"" --preserve-temp-files --verbose --verify --board dygma:samd:raise_native ${FIRMWARE}
+	${ARDUINO} --pref build.path=${BUILD_PATH} --pref build.version_flags="-DFIRMWARE_SHA=\"${FIRMWARE_SHA}\" -DKALEIDOSCOPE_SHA=\"${KALEIDOSCOPE_SHA}\" -DBAZECOR_VERSION=\"${BAZECOR_VERSION}\"" --preserve-temp-files --verbose --verify --board updatedDygma:samd:raise_native ${FIRMWARE}
 
 flash: backup prompt do_flash restore
 
