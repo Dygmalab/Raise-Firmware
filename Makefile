@@ -51,8 +51,8 @@ ifeq ($(PLATFORM),LINUX)
     BACKUP_PORT =/dev/ttyACM0
 endif
 ifeq ($(PLATFORM),DARWIN)
-    DEVICE_PORT =/dev/tty.usbmodem11201
-    BACKUP_PORT =/dev/cu.usbmodem11201
+    DEVICE_PORT =/dev/tty.usbmodem11401
+    BACKUP_PORT =/dev/cu.usbmodem11401
 endif
 
 # Library & build target configuration
@@ -86,7 +86,7 @@ endif
 
 # User configurations
 BACKUP_FILE=eeprom.dump
-BAZECOR_VERSION=v0.3.6
+BAZECOR_VERSION=v0.3.7
 
 # Build Commands
 all: build
