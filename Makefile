@@ -43,8 +43,8 @@ endif
 
 #device configuration (WIN uses COM ports, MAC&LIN \dev\tty, MAC additionaly uses \dev\cu)
 ifeq ($(PLATFORM),WIN)
-    DEVICE_PORT =COM6
-    BACKUP_PORT =COM6
+    DEVICE_PORT =COM5
+    BACKUP_PORT =COM5
 endif
 ifeq ($(PLATFORM),LINUX)
     DEVICE_PORT =/dev/ttyACM0
@@ -86,7 +86,7 @@ endif
 
 # User configurations
 BACKUP_FILE=eeprom.dump
-BAZECOR_VERSION=v1.0.9beta
+BAZECOR_VERSION=v1.0.11-beta
 
 # Build Commands
 all: build
