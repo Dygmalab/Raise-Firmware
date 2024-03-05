@@ -86,7 +86,7 @@ endif
 
 # User configurations
 BACKUP_FILE=eeprom.dump
-BAZECOR_VERSION=v0.3.7
+BAZECOR_VERSION=v0.3.8
 
 # Build Commands
 all: build
