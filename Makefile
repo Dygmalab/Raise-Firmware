@@ -151,7 +151,7 @@ backup:
 	@DEVICE=${DEVICE_PORT} ${FOCUS_TOOL} eeprom.contents >${BACKUP_FILE}
 
 prompt:
-	@echo "Please double-press the reset button on the Neuron, then press ENTER"
+	@echo "Please put you Raise in flashing mode by disconnecting the neuron, pressing and holding the ESC key while reconnecting the keyboard without releasing ESC. Wait for a blue led effect to appear in the Neuron. Then continue."
 	-$(PS)
 
 win_prompt:

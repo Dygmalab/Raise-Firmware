@@ -81,12 +81,18 @@ make config
 ```
 Will show the current configuration of the makefile.
 
-Modify it to fit your current environment.
+Modify it to fit your current environment, you probably need to change the `DEVICE_PORT`.
 
 #### Run the make file
 ```sh
 cd Raise-Firmware
+
+# Now put you Raise in flashing mode by disconnecting the neuron from the PC, pressing ESC physical key
+# and then reconnecting the keyboard to the PC without releasing ESC, lastly wait for a blue led effect 
+# to appear in the Neuron.
+
 make flash
+# Disconnect the keyboard and plug it in again (just to be safe, should not be necessary).
 ```
 ## Option 2: From the Arduino IDE
 
