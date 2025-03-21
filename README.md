@@ -41,9 +41,12 @@ cd $HOME/Arduino
 arduino --install-boards arduino:samd
 
 mkdir -p hardware/dygma
+mkdir -p hardware/updatedDygma
 
 ## then clone the hardware definitions to make them available to the arduino environment
 git clone --recursive https://github.com/Dygmalab/Kaleidoscope-Bundle-Dygma.git hardware/dygma/samd
+## This second hardware is here to support the stableRelease branch needed to compile the v0.3.8 tag and onwards for the fw with a newer kaleidoscope version and more LED effects.
+git clone https://github.com/Dygmalab/KaleidoscopeTest.git hardware/updatedDygma/samd
 ````
 
 Remember to keep updated the Kaleidoscope Bundle by running the following GIT commands in the samd folder before compiling each new version, not all the changes will be made in the Raise-FW repo.
